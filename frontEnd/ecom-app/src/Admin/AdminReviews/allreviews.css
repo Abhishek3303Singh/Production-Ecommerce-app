@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,700;1,400&family=Libre+Franklin:ital,wght@0,400;0,500;1,300&family=Poppins:ital,wght@0,300;0,500;0,700;1,400;1,500&family=Roboto+Slab:wght@300;400;500;700&family=Ysabeau+SC:wght@400;500;600&display=swap');
+
+.admin-reviews-container{
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    min-height: 40vmax;
+}
+.reviews-sidebar{
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+
+}
+.admin-reviews{
+    width: 98%;
+    margin: auto;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    margin-top: 0.5vmax;
+}
+.admin-reviews>header{
+    text-align: center;
+    padding: 1vmax;
+    background: linear-gradient(to right, #071423, #240224);
+    color: #fff;
+    letter-spacing: 2px;
+    font: 600 1.7vmax 'Lato', sans-serif;
+    text-transform: uppercase;
+}
+.product-review-input{
+
+    width: 40%;
+    margin: auto;
+    background-color: #071423;
+    margin-top: 0.5vmax;
+}
+.product-review-input>h3{
+    text-align: center;
+    color: #fff;
+    font: 500 1.5vmax 'Ysabeau SC', sans-serif;;
+
+}
+.product-review-input>div{
+    width: 80%;
+    margin: auto;
+    text-align: center;
+}
+.product-review-input>div>input{
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    offset: none;
+    outline: none;
+    border: none;
+    border: 1px solid black;
+    padding: 0.5vmax;
+    margin-bottom: 1vmax;
+    color: #0799fa;
+}
+.product-review-container>button{
+    width: 50%;
+    margin: auto;
+    margin-bottom: 1vmax ;
+    padding: 0.2vmax;
+    background: #07eafab0;
+    color: #fff;
+    border: none;
+    outline: none;
+    text-transform: uppercase;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.5s ease;
+}
+.product-review-container>button:hover{
+        /* transform: scalex(1vmax); */
+        transform: scale(1.2,1.1);
+  
+}
+.all-reviews-container{
+    margin-top: 1vmax;
+    width: 100%;
+}
+.all-reviews-container>table{
+    width: 100%;
+    margin: auto;
+}
+.all-reviews-container>table>thead{
+    overflow: hidden;
+    display: grid;
+    /* width: 90vw; */
+    width: 100%;
+    gap: 0.5vmax;
+    margin: auto;
+    grid-template-columns: 0.4fr 1.6fr 0.7fr 3fr 0.5fr 0.5fr;
+}
+.all-reviews-container>table>thead>th{
+    border: 1px solid rgba(0, 0, 0, 0.703);
+    background-color: #071423;
+    color: #fff;
+    text-transform: uppercase;
+    font: 600 1.2vmax 'Lato', sans-serif;
+}
+
+.reviews-table-row{
+    overflow: hidden;
+    display: grid;
+    /* width: 90vw; */
+    width: 100%;
+    gap: 0.5vmax;
+    margin: auto;
+    grid-template-columns: 0.4fr 1.6fr 0.7fr 3fr 0.5fr 0.5fr;
+}
+.reviews-table-row>td{
+    border: 1px solid black;
+    text-align: center;
+    margin: 0.2vmax 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font: 500 1vmax 'Roboto Slab', serif;
+    color: rgba(0, 0, 0, 0.76);
+}
+.rev-del-btn{
+    border: none;
+    outline: none;
+    offset: none;
+    color:red;
+    background-color: black;
+    width: 100%;
+    padding: 0.2vmax 0;
+    cursor: pointer;
+
+}
+.rev-del-btn>svg{
+    font-size: 1vmax;
+}
+.rev-del-btn:hover{
+    background-color: #071423dd;
+}

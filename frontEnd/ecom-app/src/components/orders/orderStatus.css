@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,700;1,400&family=Libre+Franklin:ital,wght@0,400;0,500;1,300&family=Poppins:ital,wght@0,300;0,500;0,700;1,400;1,500&family=Roboto+Slab:wght@300;400;500;700&family=Ysabeau+SC:wght@400;500;600&display=swap');
+
+.MuiStepConnector-alternativeLabel-line {
+    display: none !important;
+}
+
+.MuiStepConnector-root {
+    /* height: 2px; */
+    background-color: rgb(248, 74, 0);
+}
+.MuiStepConnector-active,
+.MuiStepConnector-completed {
+    background-color: rgb(9, 211, 9);
+    height: 0.3vmax;
+}
+.MuiStepConnector-horizontal, .MuiStepConnector-alternativeLabel, .Mui-disabled{
+    height: 0.3vmax;
+}
+
+.activeIcon {
+    color: rgb(9, 211, 9);
+    font: 500 1vmax 'Ysabeau SC', sans-serif;
+
+}
+
+.inActiveIcon {
+    color: rgb(248, 74, 0);
+    font: 500 1vmax 'Ysabeau SC', sans-serif;
+    ;
+}
+
+.activeIcon1 {
+    color: rgb(9, 211, 9);
+    font: 500 2vmax 'Ysabeau SC', sans-serif;
+
+}
+
+.inActiveIcon1 {
+    color: rgb(248, 74, 0);
+    font: 500 2vmax 'Roboto Slab', serif;
+}
+
+@media screen and (max-width:768px) {
+    .MuiStepConnector-root {
+        height: 1px;
+        background-color: rgb(248, 74, 0);
+    }
+
+    .MuiStepConnector-active,
+    .MuiStepConnector-completed {
+        background-color: rgb(18, 230, 3);
+    }
+
+    .activeIcon {
+        color: rgb(9, 211, 9);
+        font: 500 1.5vmax 'Ysabeau SC', sans-serif;
+
+    }
+
+    .inActiveIcon {
+        color: rgb(248, 74, 0);
+        font: 400 1.5vmax 'Roboto Slab', serif;
+        ;
+    }
+
+    .activeIcon1 {
+        color: rgb(9, 211, 9);
+        font: 500 3vmax 'Ysabeau SC', sans-serif;
+    
+    }
+    
+    .inActiveIcon1 {
+        color: rgb(248, 74, 0);
+        font: 500 3vmax 'Roboto Slab', serif;
+    }
+
+
+    .MuiPaper-root, .MuiStepper-root, 
+    .MuiStepper-horizontal, .MuiStepper-alternativeLabel, .MuiPaper-elevation0{
+        padding: 2vmax 0;
+    }
+}

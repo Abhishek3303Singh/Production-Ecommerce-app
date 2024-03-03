@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,700;1,400&family=Libre+Franklin:ital,wght@0,400;0,500;1,300&family=Poppins:ital,wght@0,300;0,500;0,700;1,400;1,500&family=Roboto+Slab:wght@300;400;500;700&family=Ysabeau+SC:wght@400;500;600&display=swap');
+
+.admin-create-product-main-container{
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    gap: 0.5vmax;
+}
+.admin-add-product-container{
+    width: 98%;
+    margin: auto;
+    min-height: 50vmax;
+}
+.admin-create-product-sidebar{
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+.admin-add-product-container>header{
+    text-align: center;
+    padding: 1vmax;
+    background: linear-gradient(to right, #071423, #240224);
+    color: #fff;
+    margin: 1vmax auto;
+    font: 600 1.7vmax 'Lato', sans-serif;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+.admin-input-container{
+    width: 50%;
+    margin: auto;
+    margin-bottom: 1vmax;
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+}
+.add-product-form{
+    width: 90%;
+    margin: auto;
+    padding: 1vmax;
+}
+
+.add-product-form div label{
+    color: red;
+    margin-top: 1vmax;
+    font:500 1.2vmax 'Roboto Slab', serif;
+    color: rgba(0, 0, 0, 0.56);
+    
+}
+.add-product-form div input{
+    width: 100%;
+    margin: auto;
+    outline: none;
+    padding: 0.5vmax;
+    margin-bottom: 1.2vmax;
+    border: none;
+    border: 1px solid rgba(0, 0, 0, 0.56);
+    padding-left: 0.5vmax;
+}
+.half-input-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2em;
+}
+.half-input-container select{
+    width: 100%;
+    padding: 0.5vmax;
+    border: none;
+    background: black;
+    color:#fff;
+}
+#descriptions{
+    resize: none;
+    width: 100%;
+    outline: none;
+    padding-left: 1vmax;
+}
+.product-submit-btn{
+    width: 40%;
+    margin: auto;
+    /* border: 1px solid black; */
+    
+}
+.product-submit-btn>button{
+    background-color: black;
+    color: #fff;
+    width: 100%;
+    font: 500 1vmax 'Lato', sans-serif;
+    padding: 0.7vmax;
+    letter-spacing: 1px;
+    
+    outline: 1.5px solid  #2874f0;
+    outline-offset: -3px;
+    border: none;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: 0.3s ease all;
+}
+.product-submit-btn>button:hover{
+    color: #fff;
+    width: 100%;
+    outline-offset: 3px;
+
+}
+.product-image-preview{
+    width: 100%;
+    overflow:auto;
+}

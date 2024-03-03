@@ -1,0 +1,128 @@
+body{
+    background-color: #eef8ff;
+    /* position: relative; */
+}
+footer{
+    width: 100%;
+    position: absolute;
+   
+    background: black;
+    color: #fff;
+    padding: 100px 0 30px;
+    /* border-top-left-radius: 125px; */
+    font-size: 13px;
+    line-height:20px;
+    /* bottom: 0px; */
+    
+}
+.row{
+    width: 85%;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+.col {
+    flex-basis: 25%;
+    padding: 10px;
+}
+.col:nth-child(2), .col:nth-child(3){
+    flex-basis: 15%;
+}
+.logo-footer{
+    width: 90px;
+    margin-bottom: 30px;
+    background: -webkit-linear-gradient(rgb(137, 14, 230), rgb(255, 86, 1));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.col h3{
+    width: fit-content;
+    margin-bottom: 40px;
+    position: relative;
+}
+.email-id{
+    width: fit-content;
+    border-bottom: 1px solid #ccc;
+    margin: 20px 0;
+}
+ul li{
+    margin-bottom: 12px;
+    list-style: none;
+}
+.social-icon{
+    display: flex;
+}
+.social-icon p img{
+    width: 30px;
+    height: 35px;
+    border-radius: 10%;
+    /* font-size: 20px;  */
+    text-align: center;
+    line-height: 40PX;
+    color: #000;
+    background: #020202;
+    margin-right: 10px;
+    cursor: pointer;
+
+}
+
+
+hr{
+    width: 90%;
+    border: 0;
+    border-bottom: 1px solid #ccc;
+    margin: 20px auto;
+}
+.copyright{
+    text-align: center;
+    color: red;
+}
+.underline{
+    width: 100%;
+    height: 5px;
+    background: #00ffee;
+    border-radius: 3px;
+    position: absolute;
+    top: 25px;
+    left: 0;
+    overflow: hidden;
+}
+.underline span{
+    width: 15px;
+    height: 100%;
+    background: rgb(248, 2, 2);
+    border-radius: 3px;
+    position: absolute;
+    top: 0;
+    left: 10px;
+    animation: moves 2s linear infinite;
+}
+@keyframes moves{
+    0%{
+        left: -20px;
+    }
+    100%{
+        left: 100%;
+    }
+}
+
+/* // responsive */
+
+@media (max-width:700px) {
+    footer{
+        position: relative;
+        /* margin-top: 2vmax; */
+        bottom: unset;
+        bottom: 0px;
+    }
+    .col {
+        flex-basis: 100%;
+        padding: 10px;
+    }
+    .col:nth-child(2), .col:nth-child(3){
+        flex-basis: 100%;
+    }
+    
+}

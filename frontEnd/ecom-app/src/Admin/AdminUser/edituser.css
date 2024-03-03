@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,700;1,400&family=Libre+Franklin:ital,wght@0,400;0,500;1,300&family=Poppins:ital,wght@0,300;0,500;0,700;1,400;1,500&family=Roboto+Slab:wght@300;400;500;700&family=Ysabeau+SC:wght@400;500;600&display=swap');
+
+.admin-user-main-container{
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    gap: 0.5vmax;
+    min-height: 40vmax;
+}
+.user-sidebar{
+    width: 100%;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+
+}
+.admin-user-container{
+    width: 99%;
+    margin: auto;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    margin-top: 1vmax;
+
+
+}
+.admin-user-container>header{
+    text-align: center;
+    padding: 1vmax;
+    color: #fff;
+    background: linear-gradient(to right, #071423, #240224);
+    letter-spacing: 2px;
+    font: 600 1.7vmax 'Lato', sans-serif;
+
+    text-transform: uppercase;
+    
+}
+.admin-user-details-container{
+    display: grid;
+    grid-template-columns: 4fr 2fr;
+    gap:0.5vmax;
+
+}
+
+.user-container{
+    
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+
+    
+}
+.user-profile-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.user-profile-container>span{
+    border: 2px solid black;
+    font: 600 3.5vmax 'Lato', sans-serif;
+    padding: 1rem 1.5rem;
+    border-radius: 100%;
+    background:linear-gradient(to right, #071423, #240224);
+   
+    color: #fff;
+}
+.user-detail{
+    padding: 1vmax;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.user-detail>h3{
+    padding: 0.5vmax 0;
+    font:600 1.2vmax 'Lato', sans-serif;
+    letter-spacing: 1px;
+    color: rgba(0, 0, 0, 0.7);
+    background-color: #071423b1;
+    color: #fff;
+    /* padding-left: 1vmax; */
+    
+}
+.user-detail>p{
+    font:600 1.2vmax 'Libre Franklin', sans-serif;
+    letter-spacing: 1px;
+    color: rgba(0, 0, 0, 0.7);
+    /* padding-left: 1vmax; */
+}
+
+.update-user-container{
+    width: 100%;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.update-user-container>h2{
+text-align: center;
+padding: 0.5vmax;
+background:linear-gradient(to right, #071423, #240224);
+background: #0799fa;
+color: #fff;
+margin: 1vmax 0;
+text-transform: uppercase;
+}
+.update-user-container>input{
+    width: 80%;
+    margin: auto;
+    padding: 0.5vmax;
+    border: none;
+    outline: none;
+    border: 1px solid #071423cc;
+    /* margin: 0.5vmax auto; */
+    color: #0799fa;
+    font:500 1.2vmax 'Libre Franklin', sans-serif;
+}
+.update-user-container>label{
+    width: 80%;
+    margin: auto;
+    margin-top: 0.7vmax;
+    font:600 1.2vmax 'Libre Franklin', sans-serif;
+    color: #071423cc;;
+
+}
+.update-user-container>select{
+    border: none;
+    outline: none;
+    width: 80%;
+    margin: 1vmax auto;
+    text-align: center;
+   
+    padding: 0.5vmax;
+    background-color: #071423;
+    color: #0799fa;
+    /* color: red; */
+    font:600 1.2vmax 'Libre Franklin', sans-serif;
+    text-transform: uppercase;
+    
+}
+.update-user-btn{
+    width: 50%;
+    margin: auto;
+    margin:1vmax  auto;
+
+}
+.update-user-btn>button{
+    width: 100%;
+    text-align: center;
+    margin: auto;
+    border: none;
+    outline: 2px solid #0799fa;
+    outline-offset: -3px;
+    color: #fff;
+    background-color: #071423;
+    padding: 0.5vmax;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+
+}
+.update-user-btn>button:hover{
+ outline-offset: 3px;
+}

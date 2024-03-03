@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,700;1,400&family=Libre+Franklin:ital,wght@0,400;0,500;1,300&family=Poppins:ital,wght@0,300;0,500;0,700;1,400;1,500&family=Roboto+Slab:wght@300;400;500;700&family=Ysabeau+SC:wght@400;500;600&display=swap');
+
+.admin-product-main-container{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    gap: 0.2vmax;
+   
+}
+.admin-product-sidebar{
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    
+
+}
+.admin-products-container{
+    width: 98%;
+    margin: auto;
+    overflow: hidden;
+    margin-bottom: 1vmax;
+    min-height: 50vmax;
+}
+.admin-products-container>header{
+    text-align: center;
+    padding: 1vmax;
+    margin: 1vmax auto;
+    font: 600 1.7vmax 'Lato', sans-serif;
+    background: linear-gradient(to right, #071423, #240224);
+    color: #fff;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+.product-table-container{
+    width: 100%;
+    margin: auto;
+}
+.product-table-container>table{
+    width: 100%;
+    /* width: 90vw; */
+    margin: auto;
+    
+
+
+}
+.product-table-container>table>thead{
+    overflow: hidden;
+    display: grid;
+    /* width: 90vw; */
+    width: 100%;
+    gap: 0.5vmax;
+    margin: auto;
+    grid-template-columns: 1fr 1fr 2fr 1fr 1fr 1fr 1fr;
+    
+}
+.product-table-container>table>thead>th{
+    /* border: 1px solid black; */
+}
+.product-table-container>table>thead>th:first-child{
+    grid-column: 1/2;
+    background-color: rgb(0, 255, 174);
+}
+.product-table-container>table>thead>th:nth-child(2){
+    grid-column: 2/3;
+    background-color: rgb(2, 116, 255);
+}
+.product-table-container>table>thead>th:nth-child(3){
+    grid-column: 3/4;
+    background-color: rgb(200, 2, 255);
+}
+.product-table-container>table>thead>th:nth-child(4){
+    grid-column: 4/5;
+    background-color: rgb(2, 255, 40);
+}
+.product-table-container>table>thead>th:nth-child(5){
+    grid-column: 5/6;
+    background-color: rgb(255, 2, 242);
+}
+.product-table-container>table>thead>th:nth-child(6){
+    grid-column: 6/7;
+    background-color: rgb(255, 247, 2);
+}
+
+.product-table-container>table>thead>th:nth-child(7){
+    grid-column: 7/8;
+    background-color: rgb(255, 2, 40);
+}
+
+.table-row{
+    /* width: 90vw; */
+    width: 100%;
+    margin: auto;
+    gap: 0.5vmax;
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr 1fr 1fr 1fr 1fr;
+
+    justify-content: space-between;
+    align-items: center;
+    /* border: 1px solid black; */
+
+}
+.table-row td{
+    justify-content: center;
+    align-items: center;
+  
+    padding: 0.5vmax;
+    color: rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    text-align: center;
+    font: 500 1vmax 'Roboto Slab', serif;
+
+}
+.table-row td button{
+    color: red;
+    width: 100%;
+    padding: 0.2vmax;
+    border: none;
+    background-color: rgb(29, 31, 30);
+    text-transform: uppercase;
+    cursor: pointer;
+    color: aqua;
+    border-radius: 2px;
+
+}
+.table-row td button:hover{
+    background-color: rgb(174, 201, 205);
+    color: rgb(255, 0, 115);
+}
+.table-row td button svg{
+    height: 1vmax;
+}
+.table-row>td:first-child>img{
+    width: 40px;
+    height: 20px;
+}
+
+
+.table-row td .edit-admin-btn{
+    color: yellow;
+}

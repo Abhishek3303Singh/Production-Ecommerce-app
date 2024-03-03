@@ -1,0 +1,14 @@
+@import "../style/vaieables.scss";
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body{
+    width: 100%;
+    color: $dark;
+    font-family:$Roboto;
+}
+#root{
+    height: 100%;
+}

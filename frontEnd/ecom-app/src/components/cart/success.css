@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,700;1,400&family=Libre+Franklin:ital,wght@0,400;0,500;1,300&family=Poppins:ital,wght@0,300;0,500;0,700;1,400;1,500&family=Roboto+Slab:wght@300;400;500;700&family=Ysabeau+SC:wght@400;500;600&display=swap');
+
+* {
+    box-sizing: border-box;
+    padding: 0%;
+    margin: 0%;
+}
+
+.success-main-container {
+    background: url('../../images/back.png');
+    object-fit: contain;
+    height: 100vh;
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    position: relative;
+}
+
+.success-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    margin: 10vmax auto;
+    position: absolute;
+    width: 50%;
+    left: 25%;
+    padding: 3vmax 0;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+
+.success-img-container>img {
+    width: 70px;
+}
+
+.success-text-conatiner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.success-text-conatiner>h3 {
+    text-align: center;
+    padding: 0.5vmax 0 0 0;
+    text-transform: uppercase;
+    color: green;
+    font: 500 2vmax 'Roboto Slab', serif;
+    letter-spacing: 1px;
+}
+
+.success-text-conatiner>h4 {
+    text-align: center;
+    text-align: center;
+    font: 600 2vmax 'Ysabeau SC', sans-serif;
+
+}
+
+.success-text-conatiner>p {
+    text-align: center;
+    font: 500 1.5vmax 'Libre Franklin', sans-serif;
+    color: rgba(0, 0, 0, 0.8);
+    text-transform: uppercase;
+
+}
+
+.success-btn {
+    width: 30%;
+    padding: 1vmax 1.7vmax;
+    background-color: black;
+    color: #fff;
+    border: none;
+    margin-top: 1.5vmax;
+    border-radius: 2px;
+    font: 500 1vmax 'Lato', sans-serif;
+    ;
+    cursor: pointer;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+
+}
+
+.success-btn:hover {
+    background-color: rgb(56, 57, 57);
+}
+
+@media screen and (max-width:768px) {
+    .success-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: white;
+        margin: 10vmax auto;
+        position: absolute;
+        width: 90%;
+        left: 5%;
+        height: 50vh;
+        padding: 3vmax 0;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    }
+    .success-img-container>img {
+        width: 100px;
+    }
+
+    .success-text-conatiner>h3 {
+        text-align: center;
+        padding: 1.5vmax 0 0 0;
+        text-transform: uppercase;
+        color: green;
+        font: 500 3vmax 'Roboto Slab', serif;
+        letter-spacing: 1px;
+    }
+    .success-text-conatiner>h4 {
+        text-align: center;
+        text-align: center;
+        font: 600 3.5vmax 'Ysabeau SC', sans-serif;
+    
+    }
+    .success-text-conatiner>p {
+        text-align: center;
+        font: 500 2vmax 'Libre Franklin', sans-serif;
+        color: rgba(0, 0, 0, 0.8);
+        text-transform: uppercase;
+    
+    }
+
+    .success-btn {
+        width: 70%;
+        padding: 1.5vmax 1.5vmax;
+        background-color: black;
+        color: #fff;
+        border: none;
+        margin-top: 2.5vmax;
+        border-radius: 2px;
+        font: 500 1.7vmax 'Lato', sans-serif;
+        ;
+        cursor: pointer;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    
+    }
+
+
+
+
+}

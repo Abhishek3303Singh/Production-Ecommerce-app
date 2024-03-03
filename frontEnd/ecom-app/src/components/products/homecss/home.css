@@ -1,0 +1,296 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,700;1,400&family=Libre+Franklin:ital,wght@0,400;0,500;1,300&family=Poppins:ital,wght@0,300;0,500;0,700;1,400;1,500&family=Roboto+Slab:wght@300;400;500;700&family=Ysabeau+SC:wght@400;500;600&display=swap');
+
+*{
+    box-sizing: border-box;
+}
+.home-card{
+    width: 50%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    max-width: 650PX;
+    padding: 50px 3px 50px 20px;
+    background-color: #d71414;
+    border-radius: 24px;
+}
+.home-card img{
+    max-width: 280px;;
+    width: 35vw;
+    object-fit: cover;
+    object-position: center center;
+    height: 400px;
+    margin-left: -60px;
+    margin-right: 30px;
+    border-radius: 15px;
+    box-shadow: 0 60px 40px rgb(0 0 0 / 8%);
+}
+.home-card h3{
+    color: rgb(0 0 0 / 90%);
+}
+.home-card p{
+    color: rgb(0 0 0 / 70%);
+}
+.home-card button{
+    border: 0;
+    background: rgb(95, 18, 249);
+    color: #f8f8f8;
+    font-family: inherit;
+    padding: 16px 26px;
+    font-size: 16px;
+    border-radius: 40px;
+}
+
+.ProductHeading{
+    text-align: center;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 1.6vmax;
+    border-bottom: 1px solid rgb(80, 79, 79);
+    width: 20vmax;
+    padding: 1vmax;
+    margin: 5vmax auto;
+    color: rgba(22, 24, 29, 0.7);
+    ;
+}
+.containerProduct{
+    display: flex;
+    margin: 1.5vmax auto;
+    width: 80%;
+    margin: auto;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 100%;
+    margin-top: 0px;
+
+}
+
+body{
+    background:rgb(255, 255, 255)
+}
+
+/* Product card */
+.product-card{
+    position: relative;
+    width: 17vmax;
+    display: flex;
+    flex-direction: column;
+    color: rgb(45, 55, 55);
+    border-radius: 0.5rem;
+    margin: 1.2vmax;
+    transition: all 0.5s;
+    padding-bottom: 1dddgdddvmax ;
+    text-decoration: none;
+    transition: all 0.5s ease;
+    overflow: hidden;
+  /* box-shadow:
+    0 2.8px 2.2px rgba(162, 165, 165, 0.034),
+    0 6.7px 5.3px rgba(171, 215, 215, 0.048),
+    0 12.5px 10px rgba(147, 155, 161, 0.06),
+    0 22.3px 17.9px rgba(176, 161, 182, 0.072),
+    0 41.8px 33.4px rgba(174, 221, 189, 0.086),
+    0 100px 80px rgba(122, 127, 128, 0.12)
+  ; */
+  
+    
+   
+    /* border-bottom-left-radius: 25px; */
+}
+.product-card >img{
+    width: 70%;
+    margin: auto;
+    height: 40%;
+    mix-blend-mode: darken;
+    
+}
+.product-card >img:hover{
+    transform: perspective(900px) translate3d(0vmax, 0vmax, 5vmax);
+    transition:all 0.8s;
+    /* box-shadow: 0 0 5px red; */
+}
+.product-card> div{
+    margin: 0.5vmax;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+.star-ratings span{
+    /* text-align: center; */
+    font-size: 10px;
+}
+.product-card>div>span{
+    /* margin: 0.2vmax; */
+    font: 400 0.2vmax;
+}
+.product-card>span{
+    margin: 0.2vmax;
+    color: rgb(10, 10, 13);
+    font-family: 'Franklin Gothic Medium';
+    font-size: 1.5vmax;
+}
+.stars{
+
+    color: rgb(255, 115, 0);
+    margin-left: 22px;
+    margin-top: 2px;
+    font: 700 1.5vmax sans-serif;
+}
+.starVal{
+    font: 700 1.5vmax sans-serif;
+    margin-right: 0;
+    color: rgb(4, 159, 4);
+    padding: 1vmax 0 1vmax 1vmax;
+
+}
+.review{
+    font: 500 1.2vmax Roboto, sans-serif;
+    color: rgb(5, 197, 15);
+}
+.col ul li a{
+    text-decoration: none;
+    color: white;
+}
+.product-card:hover{
+
+    box-shadow: 0 14px 28px rgba(144, 151, 151, 0.25), 0 10px 10px rgba(128, 140, 142, 0.22);
+    /* transform: translateY(-0.1vmax); */
+    /* transform: rotate(-15deg); */
+}
+.char-limit{
+    overflow: hidden;
+    width: 50ch;
+    font: 400 1vmax 'Lato', sans-serif;
+    margin: 0.2vmax 0.5vmax;
+    max-width: 100%;
+    text-overflow: ellipsis;
+    width: fit-content;
+    white-space:nowrap;
+}
+.char-limit:hover{
+    color: rgb(55, 55, 253);
+}
+.starVal{
+    position: absolute;
+    position: absolute;
+    left: 0px;
+    top: -10px;
+   
+}
+.product-cart-btn{
+    border: none;
+    color: white;
+    height: 2.5vmax;
+    letter-spacing: 2px;
+    background-color: rgb(6, 189, 189) ;
+    transition: all 0.5s;
+    cursor: pointer;
+    
+}
+.product-cart-hide{
+    display: none;
+    transition: all 0.5s ease;
+}
+.product-price{
+    font: 600 1.5vmax 'Roboto Slab', serif;;
+    color: rgb(6, 189, 189) ;
+}
+.product-title{
+    text-align: center;
+    letter-spacing: 0.5px;
+    font: 600 1.3vmax 'Libre Franklin', sans-serif;;
+    margin: 0.5vmax 0.5vmax;
+}
+
+.peroff-badge{
+    position: absolute;
+    right: 3px;
+    top: 0px;
+    /* background: orangered; */
+    background:rgb(6, 189, 189) ;;
+    border-radius: 50%;
+    padding: 0.2vmax 0.5vmax;
+
+    width: 2.5vmax;
+    height: 2.5vmax;
+}
+.peroff-badge>span{
+    font-size: 1vmax;
+    position: absolute;
+    font-weight: 600;
+    color: #fff;
+    top: 5px;
+    left: 5px;
+}
+/* resppnsive */
+@media screen and (max-width:600px) {
+    .product-card{
+        width: 80%;
+    }
+
+    /* .product-card>p{
+        font-size: 1.7vmax;
+    } */
+    /* .product-card>div{
+        margin: 0vmax;
+        display: block;
+    } */
+    .product-card> div{
+        margin: 0.5vmax;
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        flex-direction: column;
+    
+    }
+    .stars{
+
+        color: rgb(255, 115, 0);
+        margin-left: 18px;
+        font: 700 2.5vmax sans-serif;
+    }
+    .starVal{
+      
+        font: 700 2.5vmax sans-serif;
+        margin-right: 0;
+        color: rgb(4, 159, 4);
+        padding: 1vmax 0 1vmax 1vmax;
+    }
+    .review{
+        font: 500 2vmax Roboto, sans-serif;
+        color: rgb(5, 197, 15);
+    }
+    .product-price{
+        font: 600 2.2vmax 'Libre Franklin', sans-serif;
+        color: rgb(6, 189, 189) ;
+    }
+    .product-title{
+        text-align: center;
+        letter-spacing: 2px;
+        font: 600 2.5vmax sans-serif;
+        margin: 0.5vmax 0.5vmax;
+    }
+    .char-limit{
+        font:500 2vmax Roboto;
+    }
+    .ProductHeading{
+        text-align: center;
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        font-size: 2.2vmax;
+        border-bottom: 1px solid rgb(80, 79, 79);
+        width: 20vmax;
+        padding: 1vmax;
+        margin: 5vmax auto;
+        color: rgba(22, 24, 29, 0.7);
+        ;
+    }
+    .peroff-badge{
+        position: absolute;
+        right: 2px;
+        background: orangered;
+        border-radius: 50%;
+        padding: 0.5vmax 0.7vmax;
+        font-size: 1vmax;
+        
+    }
+}

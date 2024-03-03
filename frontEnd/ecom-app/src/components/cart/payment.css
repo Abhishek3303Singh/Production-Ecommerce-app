@@ -1,0 +1,173 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,700;1,400&family=Libre+Franklin:ital,wght@0,400;0,500;1,300&family=Poppins:ital,wght@0,300;0,500;0,700;1,400;1,500&family=Roboto+Slab:wght@300;400;500;700&family=Ysabeau+SC:wght@400;500;600&display=swap');
+
+.payment-main-container {
+    width: 40%;
+    margin: auto;
+    border-radius: 2px 2px 0 0;
+    /* box-shadow: rgba(43, 43, 44, 0.4) 0px 2px 4px, rgba(51, 51, 52, 0.3) 0px 7px 13px -3px, rgba(37, 37, 37, 0.2) 0px -3px 0px inset; */
+    margin: 2vmax auto;
+    /* box-shadow: rgba(108, 108, 108, 0.56) 0px 22px 70px 4px; */
+    box-shadow: rgba(82, 81, 81, 0.132) 0px 54px 55px,
+     rgba(125, 127, 127, 0.12) 0px -12px 30px,
+      rgba(132, 132, 132, 0.12) 0px 4px 6px, rgba(96, 98, 97, 0.17) 0px 12px 13px,
+       rgba(85, 86, 86, 0.09) 0px -3px 5px;
+}
+
+.payment-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.payment-container>h3 {
+    text-align: center;
+    padding: 1vmax 0;
+    background: #2874f0;
+    color: #fff;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font: 600 1.5vmax 'Libre Franklin', sans-serif;
+}
+
+.payment-container>img {
+    width: 50%;
+    margin: auto;
+    object-fit: contain;
+    mix-blend-mode: darken;
+
+}
+
+.payment-form {
+    width: 70%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.payment-form>div {
+    width: 100%;
+    display: flex;
+    /* border: 1px solid rgba(0, 0, 0, 0.587); */
+    border-radius: 2px;
+    padding: 0.5vmax 0;
+    justify-content: flex-start;
+    align-items: center;
+    /* margin: 1vmax 0; */
+}
+
+.paymentInput {
+    padding: 1vmax 4vmax;
+    padding-right: 1vmax;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.267);
+    border-radius: 4px;
+    outline: none;
+    margin: 0.5vmax 0;
+}
+
+.payment-form>div svg {
+    color: rgba(66, 67, 67, 0.614);
+    width: 2.5vmax;
+    position: absolute;
+    transform: translateX(1vmax);
+    color: rgba(52, 54, 54, 0.7);
+}
+
+.payBtn {
+    width: 70%;
+    margin: auto;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border: none;
+    padding: 0.5vmax 1vmax;
+    font: 500 1.5vmax 'Roboto Slab', serif;
+    cursor: pointer;
+    border-radius: 4px;
+    outline: none;
+}
+.payBtn:hover{
+    background-color: rgba(31, 31, 31, 0.861);
+    border: none;
+}
+
+@media screen and (max-width:768px) {
+    .payment-main-container {
+        width: 90%;
+        margin: auto;
+        /* border: 1px solid black; */
+        border-radius: 2px 2px 0 0;
+        /* background: 'http://localhost:3000/payment/back.png'; */
+        box-shadow: rgba(43, 43, 44, 0.4) 0px 2px 4px, rgba(51, 51, 52, 0.3) 0px 7px 13px -3px, rgba(37, 37, 37, 0.2) 0px -3px 0px inset;
+        margin: 2vmax auto;
+    }
+
+    .payment-container>h3 {
+        text-align: center;
+        padding: 1vmax 0;
+        background: #2874f0;
+        color: #fff;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        font: 600 2.5vmax 'Libre Franklin', sans-serif;
+    }
+
+    .payment-container>img {
+        width: 70%;
+        margin: auto;
+        object-fit: contain;
+        mix-blend-mode: darken;
+
+    }
+
+    .payment-form {
+        width: 90%;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .payment-form>div {
+        width: 100%;
+        display: flex;
+        border-radius: 2px;
+        padding: 0.5vmax 0;
+        justify-content: flex-start;
+        align-items: center;
+
+    }
+
+    .paymentInput {
+        padding: 2.5vmax 4vmax;
+        padding-right: 1vmax;
+        width: 100%;
+        box-sizing: border-box;
+        border: 1px solid rgba(0, 0, 0, 0.429);
+        border-radius: 4px;
+        outline: none;
+        margin: 0.7vmax 0;
+    }
+    .payment-form>div svg {
+        color: rgba(66, 67, 67, 0.614);
+        width: 4vmax;
+        position: absolute;
+        transform: translateX(1vmax);
+        color: rgba(52, 54, 54, 0.7);
+        padding-right: 1.5vmax;
+    }
+
+    .payBtn {
+        width: 100%;
+        background-color: black;
+        color: #fff;
+        text-align: center;
+        border: none;
+        padding: 1.5vmax 2vmax;
+        font: 500 2vmax 'Roboto Slab', serif;
+        
+    }
+}

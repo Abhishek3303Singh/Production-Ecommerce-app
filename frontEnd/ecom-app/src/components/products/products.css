@@ -1,0 +1,419 @@
+.banner-container {
+    width: 95%;
+    margin: auto;
+    display: flex;
+    margin-top: 2vmax;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+@media screen and (max-width: 800px) {
+    .banner-container {
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 2vmax;
+
+    }
+
+
+}
+
+.banner-left {
+    width: 60%;
+    height: 30vmax;
+    display: flex;
+    background-color: rgb(124, 213, 213);
+    background: linear-gradient(to right, rgb(124, 213, 213), #fb94fb);
+    align-items: center;
+    justify-content: space-evenly;
+    /* margin-left: 10vmax; */
+    width: calc(60% - 10px);
+    height: calc(100% - 10px);
+
+    border-radius: 2rem;
+}
+
+@media screen and (max-width: 800px) {
+    .banner-left {
+        width: 80%;
+        margin: auto;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+
+    }
+
+
+}
+
+.inner-right {
+    width: 50%;
+    justify-content: flex-end;
+
+
+}
+
+.inner-right>img {
+    width: 15vmax;
+}
+
+.inner-left {
+    /* padding: 1vmax; */
+
+    padding-left: 1.5vmax;
+    font: 700 2.5vmax 'Roboto';
+    padding-top: 1vmax;
+
+}
+
+.inner-left>p {
+    font: 700 2.75vmax cursive;
+}
+
+@media screen and (max-width: 760px) {
+    .inner-right>img {
+        width: 5vmax;
+    }
+
+
+}
+
+.banner-right {
+    height: 30vmax;
+    width: 30%;
+    /* background-color: rgb(121 68 118 / 92%); */
+    background: linear-gradient(to right, #A9F1DF, #FFBBBB);
+    border-radius: 2rem;
+    /* box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px; */
+    /* box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset; */
+}
+
+@media screen and (max-width: 800px) {
+    .banner-right {
+        width: 80%;
+        margin: auto;
+
+    }
+
+
+}
+
+.banner-right>p {
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    /* height: 10vmax; */
+    /* position: absolute; */
+    margin: auto;
+    margin-bottom: 5vmax;
+    font: 700 1.5vmax "roboto";
+
+}
+
+.banner-right>img {
+    width: 25vmax;
+}
+
+.category-container {
+    height: 12vmax;
+    width: 90%;
+    margin: auto;
+    display: flex;
+    justify-content: space-evenly;
+    width: calc(90% - 10px);
+    height: calc(100% - 10px);
+
+    margin-top: 2vmax;
+    cursor: pointer;
+}
+
+.categ1 {
+    border-radius: 1rem;
+
+    background-color: #36486b;
+    background: linear-gradient(to right, #537895, #09203f);
+    width: 30%;
+    color: rgb(248, 248, 248);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+
+}
+
+.imgCategory>img {
+    width: 10vmax;
+    align-items: center;
+    justify-content: center;
+}
+
+.imgCategory>img:hover {
+    transform: perspective(900px) translate3d(0vmax, 0vmax, 10vmax);
+    transition: all 0.8s;
+}
+
+.text-category>h3 {
+    font: 600 1.5vmax cursive;
+}
+
+.categ2 {
+    border-radius: 1rem;
+    /* background-color: rgb(8, 8, 8); */
+    background: linear-gradient(to right, #434343, #000000);
+    width: 30%;
+    display: flex;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.categ3 {
+    border-radius: 1rem;
+    background-color: rgba(7, 2, 13, 0.63);
+    background: linear-gradient(to right, #868f96, #596164);
+    width: 30%;
+    display: flex;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* product container */
+
+
+
+
+/* css for Paginations */
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    margin: 2vmax auto;
+    width: 90%;
+    /* margin: auto; */
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    padding: 0;
+}
+
+.page-item {
+    background-color: #fff;
+    color: rgb(0, 0, 0);
+    list-style: none;
+    /* border: 1px solid rgb(221, 219, 221); */
+    box-shadow: rgba(66, 66, 72, 0.1) 0px 1px 0px, 
+    rgba(65, 65, 78, 0.1) 0px 8px 24px, rgba(75, 75, 93, 0.1) 
+    0px 16px 48px;
+    padding: 0.75vmax 1.5vmax;
+    transform: all 0.5s;
+    cursor: pointer;
+}
+
+.page-item>a {
+    color: rgb(0, 0, 0.5);
+    text-decoration: none;
+    font: 500 1.5vmax "Roboto";
+}
+
+.page-item:first-child {
+    border-radius: 0.2rem 0 0 0.2rem;
+}
+
+.page-item:last-child {
+    border-radius: 0 0.2rem 0.2rem 0;
+}
+
+.page-item:hover {
+    background-color:rgb(213, 213, 228);;
+}
+
+.activePageItem {
+    background-color:  #2874f0;
+}
+
+/* filter css */
+
+
+.filter-container {
+    top: 65vmax;
+    left: 1vmax;
+    height: 10vmax;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    border-radius: 0.2rem;
+    width: calc(25% - 10px);
+    height: calc(20% - 10px);
+    margin-bottom: 2vmax;
+    /* box-shadow:  0 0  5px rgb(149, 150, 151); */
+}
+
+.MuiSlider-root {
+    color: greenyellow;
+}
+
+.MuiSlider-thumb {
+    color: rgb(84, 84, 109);
+    width: 2vmax;
+}
+
+.MuiSlider-rail {
+    color: lightgreen;
+}
+
+.MuiSlider-track {
+    background: linear-gradient(to right, #01ceb6, #FFBBBB);
+    width: 20vmax;
+    height: 0.75vmax;
+}
+
+.box-slide {
+    width: 30vmax;
+}
+
+.box-text span {
+    font: 500 1vmax 'Roboto';
+    padding: 0.2rem;
+    border: 1px solid rgba(7, 2, 13, 0.63);
+    border-radius: 4px;
+}
+
+.categBox {
+    padding: 0%;
+}
+
+.categ-item:hover {
+    color: rgb(255, 0, 0);
+    transform: scale(1.1);
+}
+
+/* // ratings Filters */
+
+.filter-container>fieldset {
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+}
+
+
+
+.product-main-container {
+    margin: auto;
+    display: flex;
+    /* border: 1px solid black; */
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    flex-direction: row-reverse;
+    gap: 1vmax;
+}
+
+.filter-container {
+    width: 20%;
+    /* border: 2px solid red; */
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.price-filter {
+    width: 100%;
+    padding: 1vmax 2vmax;
+}
+
+.price-filter>h4 {
+    text-align: center;
+    font: 600 1.5vmax sans-serif;
+    letter-spacing: 2px;
+}
+
+.category-box {
+    /* border: 2px solid blue;
+     */
+    box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    padding: 1vmax 2vmax;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.category-box>h4 {
+    text-align: center;
+    font: 500 1.4vmax sans-serif;
+    letter-spacing: 2px;
+}
+
+.categBox {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.categ-item {
+    list-style: none;
+    color: rgba(0, 0, 0, 0.63);
+    font: 500 1.2vmax 'Roboto';
+    margin: 0.4vmax;
+    cursor: pointer;
+    transition: all 0.5s;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+fieldset{
+width: 80%;
+}
+
+@media screen and (max-width: 800px) {
+    .product-main-container {
+        display: block;
+    }
+
+    .filter-container {
+        width: 100%;
+        /* border: 2px solid red; */
+        margin: auto;
+        box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+
+    }
+
+    .box-slide {
+        width: 100%;
+    }
+    .box-text{
+        text-align: center;
+    }
+
+    .filter-container h4 {
+        font: 500 2.5vmax sans-serif;
+        padding: 1vmax 0;
+    }
+
+    .box-text span {
+        padding: 3px;
+        font: 500 2vmax 'Roboto';
+        padding: 0.2rem;
+        border: 1px solid rgba(7, 2, 13, 0.63);
+    }
+
+    .categ-item {
+        font: 500 2vmax 'Roboto';
+
+    }
+   
+
+
+
+}
