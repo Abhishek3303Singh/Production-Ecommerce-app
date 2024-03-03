@@ -1,0 +1,43 @@
+{
+  "files": {
+    "main.css": "/static/css/main.4f41ac0c.css",
+    "main.js": "/static/js/main.6d0ce02d.js",
+    "static/media/smartband.jpg": "/static/media/smartband.5c8ec14434ef0b814122.jpg",
+    "static/media/earpd.jpg": "/static/media/earpd.8f5915051e6e42f692a9.jpg",
+    "static/media/headphonegirl.jpg": "/static/media/headphonegirl.95ceb1ccadb0161b1824.jpg",
+    "static/media/mobilebanner.jpg": "/static/media/mobilebanner.9966f8b540d67a066c8c.jpg",
+    "static/media/fashion.png": "/static/media/fashion.cabd020ed8cca8235866.png",
+    "static/media/moblehandband.jpg": "/static/media/moblehandband.1a60b9f4fc3a535e5025.jpg",
+    "static/media/handband.jpg": "/static/media/handband.7cfb364f61caadf5f4d7.jpg",
+    "static/media/yogabanner.jpg": "/static/media/yogabanner.6071fe790236dd23b298.jpg",
+    "static/media/ear3.png": "/static/media/ear3.09dbb62f3873970cfc9d.png",
+    "static/media/electronics.png": "/static/media/electronics.c0ae29ab0ada62ae6439.png",
+    "static/media/sports1.png": "/static/media/sports1.9d7b50eb05f2e0ea467e.png",
+    "static/media/jump.png": "/static/media/jump.cd794c7c1771b27b43d7.png",
+    "static/media/watch4.png": "/static/media/watch4.71104656fcec0206e49c.png",
+    "static/media/insta.png": "/static/media/insta.e68e09c28dd6cbbbd109.png",
+    "static/media/bag.jpg": "/static/media/bag.22a3a8b8f98698278dfa.jpg",
+    "static/media/back.png": "/static/media/back.40a5888518237cdc8287.png",
+    "static/media/login1.jpg": "/static/media/login1.54e7caeee7f01bb19fef.jpg",
+    "static/media/cart1.png": "/static/media/cart1.e7b98e314ec80e4ae35f.png",
+    "static/media/cart4.png": "/static/media/cart4.36a1bdfbf103250140ce.png",
+    "static/media/bank.png": "/static/media/bank.e21da69489a585b89f8c.png",
+    "static/media/success.png": "/static/media/success.d82a56f3386cff50d7f2.png",
+    "static/media/whatsapp.png": "/static/media/whatsapp.463df82599bca8af2fef.png",
+    "static/media/prdAdd.jpg": "/static/media/prdAdd.1f3265159ec81d46788c.jpg",
+    "static/media/yoga.jpeg": "/static/media/yoga.aa3af9225e8eabcd3336.jpeg",
+    "static/media/facebook.png": "/static/media/facebook.04730c95cf3e75d59a80.png",
+    "static/media/in.png": "/static/media/in.8b89ce01929a419c5625.png",
+    "static/media/profile.png": "/static/media/profile.e5117e8e0cea57c9a92f.png",
+    "static/media/twitter.png": "/static/media/twitter.35c0bca4d432a0f41ad0.png",
+    "static/media/pcaso.jpg": "/static/media/pcaso.fe0c3e741ce4b11d7cb7.jpg",
+    "static/media/bnr.png": "/static/media/bnr.4e9fe29da1866129b4f8.png",
+    "index.html": "/index.html",
+    "main.4f41ac0c.css.map": "/static/css/main.4f41ac0c.css.map",
+    "main.6d0ce02d.js.map": "/static/js/main.6d0ce02d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4f41ac0c.css",
+    "static/js/main.6d0ce02d.js"
+  ]
+}
