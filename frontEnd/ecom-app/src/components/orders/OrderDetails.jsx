@@ -12,6 +12,8 @@ const OrderDetails = () => {
     const dispatch = useDispatch();
     const alert = useAlert()
     const { order, status, resError } = useSelector((state) => state.orderDetails)
+    const { user} = useSelector((state) => state.user)
+
     // console.log(order, 'order')
     useEffect(() => {
         if(resError){
@@ -52,7 +54,7 @@ const OrderDetails = () => {
             <div className="orderDetails-container">
                 <div className="left-orderDetails-container">
                     <div className="heading-orderDetails">
-                        <h3>Hi RAj !</h3>
+                        <h3>Hi {user&&user?.name}</h3>
                         {/* <p>Raj &#160; raj@gmail.com</p> */}
                     </div>
 

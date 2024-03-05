@@ -49,7 +49,7 @@
         z-index: 2;
     }
     .animate__animated.animate__bounceInRight{
-        --animate-duration: 2s;
+        --animate-duration: 1s;
     }
     .bottom-user-name{
         border: 1px solid white;

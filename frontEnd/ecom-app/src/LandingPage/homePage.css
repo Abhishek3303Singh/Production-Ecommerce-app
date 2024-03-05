@@ -727,6 +727,9 @@
     .image-silder{
         display: none;
     }
+    .mobile-image-slider-container{
+        display: block;
+    }
 
     .mobile-image-slider-container {
         position: relative;

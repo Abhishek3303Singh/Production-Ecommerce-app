@@ -11,7 +11,7 @@ const Profile = () => {
             <h1 className='heading'>My Profile</h1>
             <div className='main-container'>
                 <div className="left-container">
-                    <h1 className='user-name'>{user.name.split('')[0]}</h1>
+                    <h1 className='user-name'>{user&&user?.name?.split('')[0]}</h1>
                     <Link className='back-btn' to='/products'>Back To Home</Link>
 
 
