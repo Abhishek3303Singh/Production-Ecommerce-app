@@ -102,11 +102,7 @@ exports.register = async (req, res) => {
 };
 exports.login = async (req, res) => {
     try {
-        // res.cookie('cookie', 'jffjfjfjhfjhfjfjhfjhfjhfjhfjhfj')
         // console.log(secretKey, 'secret-key')
-    
-        // console.log(process.env.MONGO_DB_PORT, 'Mongo-Db-Port')
-
         const { email, password } = req.body;
         // console.log(password)
         let loginData = await UserModel.findOne({ email });
@@ -207,7 +203,7 @@ const resetTokengen = () => {
 exports.forgotPassword = async (req, res, next) => {
     const { email } = req.body;
     const testData = resetTokengen();
-    console.log(testData);
+    // console.log(testData);
     // console.log(email)
     const user = await UserModel.findOne({ email });
     // console.log(user);
@@ -321,7 +317,7 @@ exports.userDeatils = async (req, res) => {
 
 exports.changePassword = async (req, res) => {
     try {
-        console.log(req.body)
+        // console.log(req.body)
         const user = await UserModel.findById(req.user.id);
         if (user) {
             await bcrypt.compare(req.body.oldPassword, user.password, async (err, result) => {
@@ -418,7 +414,7 @@ exports.updateRole = async (req, res) => {
         //     phone:req.body.phone,
         //     role: req.body.role
         // }
-        console.log(req.body, req.body.role, 'req')
+        // console.log(req.body, req.body.role, 'req')
 
         // const user = await UserModel.findByIdAndUpdate(req.user.id, userData,{upsert:true})
         const user = await UserModel.findById(req.params.id)
