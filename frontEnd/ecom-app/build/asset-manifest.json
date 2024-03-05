@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.d410423a.css",
-    "main.js": "/static/js/main.72210a89.js",
+    "main.css": "/static/css/main.250908f6.css",
+    "main.js": "/static/js/main.f9388d1f.js",
     "static/media/smartband.jpg": "/static/media/smartband.5c8ec14434ef0b814122.jpg",
     "static/media/earpd.jpg": "/static/media/earpd.8f5915051e6e42f692a9.jpg",
     "static/media/headphonegirl.jpg": "/static/media/headphonegirl.95ceb1ccadb0161b1824.jpg",
@@ -33,11 +33,11 @@
     "static/media/pcaso.jpg": "/static/media/pcaso.fe0c3e741ce4b11d7cb7.jpg",
     "static/media/bnr.png": "/static/media/bnr.4e9fe29da1866129b4f8.png",
     "index.html": "/index.html",
-    "main.d410423a.css.map": "/static/css/main.d410423a.css.map",
-    "main.72210a89.js.map": "/static/js/main.72210a89.js.map"
+    "main.250908f6.css.map": "/static/css/main.250908f6.css.map",
+    "main.f9388d1f.js.map": "/static/js/main.f9388d1f.js.map"
   },
   "entrypoints": [
-    "static/css/main.d410423a.css",
-    "static/js/main.72210a89.js"
+    "static/css/main.250908f6.css",
+    "static/js/main.f9388d1f.js"
   ]
 }
