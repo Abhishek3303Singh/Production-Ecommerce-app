@@ -19,15 +19,12 @@ import Rating from "@mui/material/Rating";
 import CancelIcon from '@mui/icons-material/Cancel';
 import 'animate.css';
 import { addReview } from '../../store/addReviewSlice';
-import { addOptimisticReview } from '../../store/addReviewSlice';
 import ProductGallery from './ProductGallery';
 import AddToCart from './AddToCart';
-import { nanoid } from '@reduxjs/toolkit';
 
 
 
 const ProductDetails = () => {
-  const tempId = nanoid()
   const { id } = useParams()
   const { product, status } = useSelector((state) => state.productDetails)
   const { order, resError } = useSelector((state) => state.orderDetails)
@@ -103,18 +100,9 @@ const ProductDetails = () => {
     // dispatch(addReview({ id, feedback, ratings })).then(() => {
     //   dispatch(getProductDetails(id));
     // });
-    dispatch(addOptimisticReview({
-      tempId,
-      user:user.name,
-      rating: ratings,
-      comment: feedback,
-      isPending:true
-    }))
 
-    dispatch(addReview({
-      productId: id,
-      review : {ratings, feedback, tempId}
-    }))
+
+    dispatch(addReview(user.name, { ratings, feedback, id }))
 
     setShowTextarea(!showTextarea)
     alert.success('Thanku For Your Valuable Feedback!! ')
@@ -143,16 +131,16 @@ const ProductDetails = () => {
           <ProductGallery image={image} />
 
           <div className='img-list'>
-          {
-            product.Image && product.Image.map((item, i) => (
-              <img className='prdDetailsCard__detailsBlock1__3__image__slide' src={item.url}
-                key={item.url} alt={`${i} slide`} onMouseEnter={() => setImage(item)} />
-            ))
-          }
+            {
+              product.Image && product.Image.map((item, i) => (
+                <img className='prdDetailsCard__detailsBlock1__3__image__slide' src={item.url}
+                  key={item.url} alt={`${i} slide`} onMouseEnter={() => setImage(item)} />
+              ))
+            }
 
           </div>
 
-       
+
 
 
         </div>
@@ -238,15 +226,16 @@ const ProductDetails = () => {
       </div>
       <h3 className='reviweHeading'>Ratings & Reviews</h3>
 
-      {product.customerReview && product.customerReview[0] ? (
-        <div className='review'>
-          {/* {product.customerReview.map((revw) => <CustomerRevCard revw={revw} />)} */}
-          <CustomerRevCard revw={product.customerReview} />
-
+      {product.customerReview && product.customerReview.length > 0 ? (
+        <div className="review">
+          {product.customerReview.map((rev) => (
+            <CustomerRevCard key={rev._id} revw={rev} />
+          ))}
         </div>
       ) : (
-        <p className='noReview'>No Reviews Yet &#128532;</p>
+        <p className="noReview">No Reviews Yet 😔</p>
       )}
+
 
 
     </>

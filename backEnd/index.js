@@ -161,8 +161,10 @@ process.on('uncaughtException', (err)=>{
 
 
 /// listining port
-let server = app.listen(process.env.PORT, () => {
-    console.log(`Server is up on ${process.env.PORT} port`)
+
+const PORT = process.env.PORT || 8081;
+let server = app.listen(PORT, () => {
+    console.log(`Server is up on ${PORT} port`)
 })
 
 // Unhandled Promise Rejection
