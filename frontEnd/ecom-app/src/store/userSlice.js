@@ -55,11 +55,12 @@ export function login(email, password) {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
+        credentials:'include',
         body: JSON.stringify({
           email: email.email,
           password: password.password,
         }),
-        credentials:'include'
+       
       });
       const data = await loginResponse.json();
       // console.log("loginResponse", data);
