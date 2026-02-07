@@ -1,0 +1,515 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,700;1,400&family=Libre+Franklin:ital,wght@0,400;0,500;1,300&family=Poppins:ital,wght@0,300;0,500;0,700;1,400;1,500&family=Roboto+Slab:wght@300;400;500;700&family=Ysabeau+SC:wght@400;500;600&display=swap');
+.cartHeader{
+    text-align: center;
+    padding: 1vmax 0;
+    /* background-color: blue; */
+    box-shadow: #88a5bf7a 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+    color: #0799fadc;
+    font: 600 1.7vmax 'Roboto Slab', serif;
+    letter-spacing: 1px;
+}
+.cartMainContainer{
+    display: flex;
+    width: 95%;
+    margin: 2vmax auto;
+    gap: 2vmax;
+    margin-bottom: 8vmax;
+
+    
+}
+.product-cart-container{
+    width: 70%;
+    box-shadow: rgba(156, 165, 168, 0.155) 0px 19px 38px, rgba(197, 201, 203, 0.137) 0px 15px 12px;
+
+}
+.productContainer{
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+   display: flex;
+   margin: 0.5vmax 0;
+   align-items: flex-end;
+  
+}
+.price-container{
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    width: 40%;
+    max-height: 30vmax;
+   /* padding: 2vmax 0.5vmax; */
+    
+}
+.cart-iamgeContainer{
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+   
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 1vmax;
+   
+}
+.cart-image>img{
+    width: 10vmax;
+
+}
+.cart-quantity>input{
+    width: 2vmax;
+    
+    font: 500 1.5vmax "Roboto";
+    text-align: center;
+    border: none;
+    outline: none;
+    align-items: center;
+    color: rgba(0, 0,0, 0.9);
+}
+.cart-item-qunty{
+    background-color: rgba(black, 0.8);
+    border: none;
+    padding: 0.5vmax ;
+    cursor: pointer;
+    color: rgb(255, 0, 0);
+    transition: all 0.5s;
+    font-weight: 600;
+    font-size: 1.2vmax;
+    border-radius: 2px;
+
+}
+.cart-item-title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.title-limit{
+
+    width: 50ch;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 1vmax 0.5vmax;
+    font: 400 1vmax 'Lato', sans-serif;
+}
+.cart-item-title:hover{
+    color: blue;
+}
+.price-text{
+    margin: 0.5vmax 0.5vmax;
+}
+.price{
+    font: 500 1.3vmax Roboto;
+    text-decoration: line-through;
+    margin: 0.2vmax 0.5vmax;
+    color: rgba(0, 0,0, 0.5);
+
+}
+.offer-price{
+    font: 600 1.5vmax sans-serif;
+    margin: 0.2vmax 0.5vmax;
+}
+.perOff{
+    color:  green;
+    font: 500 1.2vmax 'Libre Franklin', sans-serif;
+}
+.price-text>.total-price-cart{
+    margin: 0.5vmax 0.5vmax;
+    font: 500 1.5vmax 'Lato', sans-serif;
+}
+.delivery-cart{
+    margin: 0.5vmax 0.5vmax;
+    font: 500 1.2vmax 'Libre Franklin', sans-serif ;
+}
+
+.free{
+    color: green;
+    padding: 0 0.5vmax;
+}
+.Delivery-cahge{
+    text-decoration: line-through;
+    color: rgba(0, 0, 0, 0.6);
+    font: 500 1.2vmax sans-serif;
+    /* padding: 0 1vmax; */
+}
+.remove>button{
+    margin: 0.5vmax 0.5vmax;
+    border: none;
+    padding: 0.5vmax 1vmax;
+    background-color: #ebebf1;
+    color: rgb(33, 70, 250);
+    /* color: red; */
+    font: 500 1vmax 'Roboto Slab', serif;
+    cursor: pointer;
+    transition: 0.5s all;
+    letter-spacing: 1px;
+
+}
+.remove>button:hover{
+    background-color: #ebebf1;
+    color: rgb(244, 15, 41);
+    
+}
+
+.order-place{
+    display: flex;
+    justify-content: flex-end;
+    
+}
+.order-place>button{
+    background: #fb641b;
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,.2);
+    border: none;
+    color: #fff;
+    padding: 1.5vmax 5vmax;
+    font: 600 1vmax 'Libre Franklin', sans-serif;
+    margin: 2vmax;
+    letter-spacing: 2px;
+    cursor: pointer;
+    border-radius: 2px;
+}
+.order-place>button:hover{
+    background: #eb5409;  
+}
+.order-place-mobile{
+    display: none;
+}
+.price-container>h3{
+    color: rgba(78, 76, 76, 0.457);
+    text-align: center;
+    padding: 1vmax 0;
+    /* box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    width: 100%;
+}
+.price-details{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.price-txt p{
+    margin: 1.5vmax 1vmax ;
+    font: 400 1.5vmax 'Roboto Slab', serif;
+    color: rgba(0, 0, 0, 0.8);
+
+}
+
+.amount p{
+    margin: 1.5vmax 1vmax ;
+    font: 400 1.5vmax 'Roboto Slab', serif;
+    color: rgba(0, 0, 0, 0.8);
+}
+.cart-total{
+    margin: 2vmax 1vmax;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    border-top: 1px solid rgba(0, 0, 0, 0.2);    
+}
+.Total-Amount>h2{
+    margin: 1.5vmax 0vmax ;
+    font: 600 2vmax 'Roboto Slab', serif;
+    color: rgba(0, 0, 0, 0.8);
+}
+
+.offer-text-cart{
+    color: green;
+    margin: 1.5vmax 1vmax ;
+    font: 500 1.3vmax 'Roboto Slab', serif;
+}
+
+.cart-image-container{
+    margin: 2vmax 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 2vmax;
+}
+.cart-image-container>img{
+    width: 20vmax;
+    filter:drop-shadow(10px 8px 6px #92bef8);
+}
+.cart-image-container>p{
+    font: 600 1.7vmax 'Libre Franklin', sans-serif;
+    color: rgba(0, 0, 0, 0.6 );
+}
+.cart-image-container>a{
+    text-decoration: none;
+    color: rgb(3, 140, 253);
+    background: #daebf7;
+    padding: 0.5vmax 1vmax;
+    border-radius: 5px;
+    letter-spacing: 1px;
+    font-family: 'Libre Franklin', sans-serif   ;
+}
+.cart-image-container>a:hover{
+    background: #daebf7;
+    color: red;
+}
+.safe-secure{
+    margin-top: 5vmax;
+    display: flex;
+
+    
+}
+.safe-secure>span{
+    /* padding: 1vmax; */
+    width: fit-content;
+    font: 500 1.2vmax 'Libre Franklin', sans-serif;
+    /* width: 80%;
+    margin: auto; */
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.29;
+    display: block;
+    /* margin-left: 20px; */
+    color: #878787;
+  
+
+}
+.safe-secure>img{
+    width: 29px;
+    height: 36px;
+    margin-right: 20px;
+    float: left;
+}
+.safe-secure-mobile{
+    display: none;
+}
+@media screen and (max-width:768px) {
+    .cartHeader{
+        text-align: center;
+        padding: 1vmax 0;
+        /* background-color: blue; */
+        box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+        color:#0799fadc;;
+        font: 600 2.5vmax 'Roboto Slab', serif;
+        letter-spacing: 1px;
+    }
+    .cartMainContainer{
+        display: flex;
+        width: 95%;
+        margin: 2vmax auto;
+        gap: 2vmax;
+        flex-direction: column;      
+    }
+
+    .product-cart-container{
+        width: 100%;
+        box-shadow: rgba(210, 216, 216, 0.135) 0px 19px 38px, rgba(200, 206, 206, 0.121) 0px 15px 12px;
+    
+    }
+
+    .productContainer{
+        /* box-shadow: rgba(177, 180, 183, 0.1) 0px 1px 3px 0px, rgba(204, 210, 210, 0.06) 0px 1px 2px 0px; */
+       display: flex;
+       margin: 0.5vmax 0;
+       align-items: flex-end;
+      
+    }
+    .price-container{
+        box-shadow: rgba(153, 168, 174, 0.055) 0px 2px 4px 0px, rgba(168, 173, 174, 0.205) 0px 2px 16px 0px;
+        width: 100%;
+        height: auto;
+    }
+    .cart-iamgeContainer{
+        width: 30%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding-bottom: 1vmax;
+       
+    }
+
+    .cart-image>img{
+        width: 12vmax;
+    
+    }
+    .cart-quantity>input{
+        width: 3vmax;
+        
+        font: 600 1.7vmax "Roboto";
+        text-align: center;
+        border: none;
+        outline: none;
+        align-items: center;
+        color: rgba(0, 0,0, 0.9);
+    }
+
+    .cart-item-qunty{
+        background-color: rgba(black, 0.8);
+        border: none;
+        padding: 0.5vmax 1vmax;
+        cursor: pointer;
+        color: rgb(255, 0, 0);
+        transition: all 0.5s;
+        font-weight: 600;
+        font-size: 2vmax;
+    }
+    .title-limit{
+        width: 30ch;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin: 1vmax 0.5vmax;
+        font: 400 1.7vmax 'Lato', sans-serif;
+    }
+    .price{
+        font: 500 1.5vmax Roboto;
+        text-decoration: line-through;
+        margin: 0.6vmax 0.5vmax;
+        color: rgba(0, 0,0, 0.5);
+    
+    }
+    .offer-price{
+        font: 600 2vmax sans-serif;
+        margin: 0.7vmax 0.5vmax;
+    }
+    .perOff{
+        color:  green;
+        font: 500 1.7vmax 'Libre Franklin', sans-serif;
+    }
+
+    .price-text>.total-price-cart{
+        margin: 0.7vmax 0.5vmax;
+        font: 500 2vmax 'Lato', sans-serif;
+    }
+    .delivery-cart{
+        margin: 0.7vmax 0.5vmax;
+        font: 500 1.7vmax 'Libre Franklin', sans-serif ;
+    }
+
+    .Delivery-cahge{
+        text-decoration: line-through;
+        color: rgba(0, 0, 0, 0.6);
+        font: 500 1.7vmax sans-serif;
+
+    }
+
+    .remove>button{
+        margin: 0.5vmax 0.5vmax;
+        border: none;
+        padding: 0.5vmax 1.5vmax;
+        background-color: #d7d7e6;
+        color: rgb(34, 35, 36);
+        font: 500 1.7vmax 'Roboto Slab', serif;
+        cursor: pointer;
+        transition: 0.5s all;
+    
+    }
+    .price-container>h3{
+        color: rgba(78, 76, 76, 0.457);
+        text-align: center;
+        padding: 1vmax 0;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        width: 100%;
+        font-size: 3vmax;
+    }
+
+    .price-txt p{
+        margin: 1.vmax 1vmax ;
+        font: 500 1.7vmax 'Roboto Slab', serif;
+        color: rgba(0, 0, 0, 0.8);
+    
+    }
+    
+    .amount p{
+        margin: 1.5vmax 1vmax ;
+        font: 500 1.7vmax 'Roboto Slab', serif;
+        color: rgba(0, 0, 0, 0.8);
+    }
+
+    .Total-Amount>h2{
+        margin: 1.5vmax 0vmax ;
+        font: 600 2.5vmax 'Roboto Slab', serif;
+        color: rgba(0, 0, 0, 0.8);
+    }
+    
+    .offer-text-cart{
+        color: green;
+        margin: 1.5vmax 1vmax ;
+        font: 500 1.7vmax 'Roboto Slab', serif;
+    }
+    .order-place{
+        display: none;
+    }
+    .order-place-mobile{
+        display: flex;
+        justify-content: flex-end;
+    }
+    /* .order-place-mobile>b */
+  
+   
+  
+    .order-place-mobile{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .order-place-mobile-btn{
+        width: 80%;
+        margin: auto;
+        background: #fb641b;
+        box-shadow: 0 1px 2px 0 rgba(0,0,0,.2);
+        border: none;
+        color: #fff;
+        padding: 1.7vmax 7vmax;
+        font: 600 1.5vmax 'Libre Franklin', sans-serif;
+        margin: 2vmax;
+        letter-spacing: 2px;
+        cursor: pointer;
+        border-radius: 2px;
+    }
+    .order-place-mobile{
+        visibility: visible;
+    }
+    .order-place-mobile-btn:hover{
+        background: #fa5706;
+    }
+    .cart-image-container>img{
+        width: 25vmax;
+       
+    }
+    .cart-image-container>p{
+        font: 600 2.5vmax 'Libre Franklin', sans-serif;
+        color: rgba(0, 0, 0, 0.6 );
+    }
+    .cart-image-container>a{
+        text-decoration: none;
+        color: rgb(3, 140, 253);
+        background: #daebf7;
+        padding: 1vmax 3vmax;
+        border-radius: 5px;
+        letter-spacing: 1px;    
+        font:600 2.5vmax 'Libre Franklin', sans-serif;
+    }
+    .cart-image-container>a{
+        background: #daebf7;
+        color: red; 
+    }
+    .safe-secure{
+        display: none;
+    }
+    .safe-secure-mobile{
+        margin-top: 1vmax;
+        display: flex;   
+        margin-bottom: 1vmax;
+        width: 90%;
+        margin: auto;
+    }
+    .safe-secure-mobile>span{
+        width: fit-content;
+        font: 500 1.2vmax 'Libre Franklin', sans-serif;
+        width: 80%;
+        margin: auto;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 1.29;
+        display: block;
+        color: #878787;
+    }
+    .safe-secure-mobile>img{
+        width: 29px;
+        height: 36px;
+        margin-right: 20px;
+        /* float: left; */
+
+    }
+}

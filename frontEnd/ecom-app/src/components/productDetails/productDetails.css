@@ -1,0 +1,415 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,700;1,400&family=Libre+Franklin:ital,wght@0,400;0,500;1,300&family=Poppins:ital,wght@0,300;0,500;0,700;1,400;1,500&family=Roboto+Slab:wght@300;400;500;700&family=Ysabeau+SC:wght@400;500;600&display=swap');
+.prdDetailsCard {
+    width: 100%;
+    padding: 2vmax;
+    margin: auto;
+    display: flex;
+    justify-content: space-evenly;
+    background: #fff;
+  }
+  
+  /* Image container */
+  .prdDetailsCard__imgcontainer {
+    width: 100%;
+    z-index: 2;
+  }
+  
+  /* Details block */
+  .prdDetailsCard__detailsBlock1 {
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    padding: 2vmax 4vmax;
+    margin: 0 2vmax;
+    overflow-y: auto;
+  }
+  
+  /* Title */
+  .prdDetailsCard__detailsBlock1__1 h2 {
+    font: 600 2.5vmax 'Libre Franklin', sans-serif;
+    
+  }
+  
+  .prdDetailsCard__detailsBlock1__1 p {
+    font: 500 1vmax cursive;
+  }
+  
+  /* Rating section */
+  .prdDetailsCard__detailsBlock1__2 {
+    width: 60%;
+    border-top: 1px solid #999;
+    border-bottom: 1px solid #999;
+    padding: .2vmax 0;
+  }
+  
+  .prdDetailsCard__detailsBlock1__2 span {
+    color: green;
+    font: 600 1vmax sans-serif;
+  }
+  
+  /* Price */
+  .prdDetailsCard__detailsBlock1__3 h1 {
+    font: 800 1.8vmax "Franklin Gothic Medium";
+  }
+  
+  .prdDetailsCard__detailsBlock1__3 h1 span {
+    text-decoration: line-through;
+    opacity: 0.6;
+  }
+  
+  .prdDetailsCard__detailsBlock1__3 h3 {
+    color: green;
+  }
+  
+  /* Thumbnail images */
+  .prdDetailsCard__detailsBlock1__3__image {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .prdDetailsCard__detailsBlock1__3__image__slide {
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+    border: 2px solid #2874f0;
+    margin-right: 1vmax;
+  }
+  
+  /* Quantity + Buttons */
+  .prdDetailsCard__detailsBlock1__3__1 {
+    display: flex;
+    align-items: center;
+    gap: 2vmax;
+    min-height: 3vmax;
+  }
+  .prdDetailsCard__detailsBlock1__3__1__1{
+    display: flex;
+  }
+
+  .inc-Qty{
+    padding: 4px;
+    background-color: red;
+    min-width: 1.5vmax;
+    border: none;
+    border-radius: 0px;
+    font-size: larger;
+    font-weight: 900;
+  }
+  .dec-Qty{
+    padding: 4px;
+    background-color: blue;
+    min-width: 1.5vmax;
+    border: none;
+    border-radius: 0px;
+    font-size: larger;
+    font-weight: 900;
+    color: white;
+  }
+  .Qty-text{
+    color: #2d2d2d;
+    /* font-family: 'Times New Roman', Times, serif; */
+    font: 800 1.8vmax "Franklin Gothic Medium"
+  }
+  .Qty{
+    width:1.5vmax;
+    outline: none;
+    border: none;
+    text-align: center;
+    font-size: medium;
+    font-weight: 500;
+  }
+  
+  .prdDetailsCard__detailsBlock1__3__1__add {
+    background: red;
+    color: #fff;
+    padding: 0.75vmax 1vmax;
+    border: none;
+    cursor: pointer;
+    font: 400 1vmax sans-serif
+  }
+  .cat-btn-cont{
+    display: flex;
+    gap: 2vmax;
+  }
+  
+  .prdDetailsCard__detailsBlock1__3__1__buy {
+    background: rgb(2, 197, 2);
+    color: #fff;
+    padding: 0.75vmax 1vmax;
+    border: none;
+    cursor: pointer;
+    font: 400 1vmax sans-serif
+    
+  }
+  
+  /* Description */
+  .prdDetailsCard__detailsBlock1__4 {
+    
+    font: 400 1.2vmax "Franklin Gothic Medium";
+    color: #2d2d2d;
+  }
+  
+  .prdDetailsCard__detailsBlock1__4 span {
+    color: blue;
+    cursor: pointer;
+  }
+  
+  /* Review modal */
+  .AddReviews {
+    
+    width: 90%;
+    margin: auto;
+    
+   
+  }
+  .AddReviews>h1{
+    text-align: center;
+    font: 400 2.5vmax 'Franklin Gothic Medium'
+  }
+  .AddReviews>textarea{
+    width: 100%;
+    overflow: hidden;
+    height: 50px;
+    font-size: large;
+  }
+  .AddReviews__ratingStars{
+    text-align: center;
+    font-size: larger;
+  }
+  .AddReviewsHide {
+    display: none;
+  }
+  
+  .reviweHeading {
+    text-align: center;
+    margin: 3vmax auto;
+  }
+  
+  .noReview {
+    text-align: center;
+  }
+  .img-container{
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+  }
+  .img-list{
+    display: flex;
+    flex-direction: column;
+  }
+  @media screen and (max-width: 800px) {
+    .prdDetailsCard{
+        display: flex;
+        flex-direction: column;
+    }
+    .img-container{
+      flex-direction: column;
+    }
+    .img-list{
+      flex-direction: row;
+    }
+    .prdDetailsCard__detailsBlock1{
+      width: 100%;
+      margin-left: 0px;
+    }
+    .prdDetailsCard__detailsBlock1__1 p{
+        font: 500 1.75vmax cursive;
+    }
+    .prdDetailsCard__detailsBlock1__2{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+
+ 
+    
+    .prdDetailsCard__detailsBlock1__2>div{
+        display: flex;
+        justify-content: center
+    }
+    .prdDetailsCard__detailsBlock1__2 span{
+       font: 400 2.2vmax "Franklin Gothic Medium";
+    }
+    .prdDetailsCard__detailsBlock1__3__image{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .prdDetailsCard__detailsBlock1__3__image__slide {
+      min-width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 6px;
+      margin: 1vmax 0.5vmax;
+    }
+    .proDetailsCard__detailsBlock1__3__image{
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .prdDetailsCard__detailsBlock1__3__1 {
+      display: flex;
+      align-items: center;
+      min-height: 3vmax;
+      flex-direction: column;
+      justify-content: space-between
+    }
+    .prdDetailsCard__detailsBlock1__3__1__1{
+      display: flex;
+      align-items: center;
+      width: 100%;
+      justify-content: center;
+    }
+    .inc-Qty {
+      min-width: 3vmax;
+      padding: 4px 8px;
+    }
+    .dec-Qty{
+      min-width: 3vmax;
+      padding: 4px 8px;
+    }
+    .Qty{
+      min-width: 3.5vmax;
+    }
+    .cat-btn-cont{
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2vmax;
+    }
+    .prdDetailsCard__detailsBlock1__3__1__add {
+      font: 400 2vmax sans-serif;
+    }
+    .prdDetailsCard__detailsBlock1__3__1__buy{
+      font: 400 2vmax sans-serif;
+    }
+    .prdDetailsCard__detailsBlock1__3 h1{
+        text-align: center;
+        font: 500 3vmax "Franklin Gothic Medium";
+    }
+    .prdDetailsCard__detailsBlock1__3 h3{
+        text-align: center;
+    }
+    .prdDetailsCard__detailsBlock1__4{
+      font: 404 3.2vmax "Franklin Gothic Medium";
+    }
+    .prdDetailsCard__detailsBlock1__4>p{
+      font: 404 2.2vmax sans-serif;
+    }
+    .prdDetailsCard__detailsBlock1__4 span{
+      font: 404 2.2vmax sans-serif;
+    }
+  }
+
+  /* =========================
+   MOBILE & TABLET (PDP)
+========================= */
+
+/* @media screen and (max-width: 768px) {
+
+   
+    .prdDetailsCard {
+      flex-direction: column;
+      width: 100%;
+      padding: 1rem;
+      box-sizing: border-box;
+    }
+  
+  
+    .prdDetailsCard__imgcontainer {
+      width: 100%;
+      height: auto;
+      margin-bottom: 1rem;
+    }
+  
+    .prdDetailsCard__imgcontainer img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+  
+   
+    .prdDetailsCard__detailsBlock1 {
+      width: 100%;
+      padding: 0;
+    }
+  
+    .prdDetailsCard__detailsBlock1__1 h2 {
+      font-size: 1.2rem;
+      line-height: 1.4;
+    }
+  
+    .prdDetailsCard__detailsBlock1__1 p {
+      font-size: 0.8rem;
+    }
+  
+   
+    .prdDetailsCard__detailsBlock1__2 {
+      font-size: 0.9rem;
+      margin: 0.5rem 0;
+    }
+  
+ 
+    .prdDetailsCard__detailsBlock1__3 h1 {
+      font-size: 1.4rem;
+    }
+  
+    .prdDetailsCard__detailsBlock1__3 h1 span {
+      font-size: 0.9rem;
+    }
+  
+    
+    .prdDetailsCard__detailsBlock1__3__image {
+      display: flex;
+      overflow-x: auto;
+      gap: 0.5rem;
+      padding-bottom: 0.5rem;
+    }
+  
+    .prdDetailsCard__detailsBlock1__3__image::-webkit-scrollbar {
+      display: none;
+    }
+  
+    .prdDetailsCard__detailsBlock1__3__image__slide {
+      min-width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+  
+   
+    .prdDetailsCard__detailsBlock1__3__1 {
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+  
+    .prdDetailsCard__detailsBlock1__3__1 input {
+      width: 40px;
+      text-align: center;
+    }
+  
+    .prdDetailsCard__detailsBlock1__3__1__buy {
+      width: 100%;
+      padding: 0.8rem;
+      font-size: 1rem;
+    }
+  
+    
+    .prdDetailsCard__detailsBlock1__4 {
+      font-size: 0.9rem;
+      margin-top: 1rem;
+    }
+  
+    
+    .AddReviews {
+      width: 90%;
+      padding: 1rem;
+      left: 5%;
+    }
+  }
+   */

@@ -1,0 +1,329 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,700;1,400&family=Libre+Franklin:ital,wght@0,400;0,500;1,300&family=Poppins:ital,wght@0,300;0,500;0,700;1,400;1,500&family=Roboto+Slab:wght@300;400;500;700&family=Ysabeau+SC:wght@400;500;600&display=swap');
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+input {
+    display: inline;
+}
+
+.inp-container {
+    width: 70%;
+    height: 60%;
+    margin: auto;
+    background-color: rgb(242, 237, 237);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-content: center;
+    margin-top: 4vmax;
+    margin-bottom: 4vmax;
+    /* box-shadow: 6px 9px 12px rgb(1, 50, 45); */
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    overflow: hidden;
+    border-radius: 1.2rem;
+    background-image: linear-gradient(-225deg, #FFFEFF 0%, #D7FFFE 100%);
+    /* clip-path: circle(63.6% at 89% 42%); */
+}
+@media screen and (max-width:768px) {
+    .inp-container{
+        width: 90%;
+        margin: auto;
+        display: block;
+        margin-bottom: 10vmax;
+    }
+    .input .redir{
+        margin: 10px 0;
+        
+    }
+}
+
+.inp-container .wlcm {
+
+    background: url("../imageFolder/login1.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    object-fit: cover;
+    background-position: center;
+    /* padding: 10vw; */
+    height: 70vh;
+    color: rgb(248, 248, 255);
+    display: flex;
+    flex-direction: column;
+    clip-path: polygon(0 0, 100% 0%, 78% 100%, 0% 100%);
+
+    align-items: center;
+
+}
+
+.wlcm h2 {
+    margin-top: 30vh;
+}
+
+.input .login {
+    margin-top: 7vh;
+}
+.input input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.input .showPass{
+    color: rgb(0, 0, 0);
+    background-color: transparent;
+   
+    border: none;
+    font-size: 15px;
+    cursor: pointer;
+    
+}
+.input>.login{
+    color: blue;
+    font: 500 2vmax 'Ysabeau SC', sans-serif ;
+}
+
+.input p{
+    color: rgb(242, 70, 70);
+    font-size: small;
+    margin-top: 1PX;
+}
+.input .redir{
+    margin-top: 1vmax;
+    color:black;
+}
+
+.input p a{
+    text-decoration: none;
+    color: rgb(14, 98, 225);
+    font-size: small;
+}
+
+.input input {
+    display: inline;
+    width: 20vw;
+    height: 3vh;
+    margin-top: 3vh;
+    background-color: rgb(252, 254, 254);
+    border: none;
+
+}
+
+/* <!-- HTML !-->
+<button class="button-85" role="button">Button 85</button> */
+
+/* CSS */
+.signup {
+  padding: 0.1em 2em;
+  border: none;
+  outline: none;
+  color: rgb(255, 255, 255);
+  background: #111;
+  height: 4vmax;
+  width: 10vmax;
+  cursor: pointer;
+  position: relative;
+  z-index: 0;
+  border-radius: 10px;
+  margin-top: 2vmax;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  font: 500 1.2vmax 'Ysabeau SC', sans-serif;
+  letter-spacing: 1px;
+}
+
+.signup:before {
+  content: "";
+  background: linear-gradient(
+    45deg,
+    #ff0000,
+    #ff7300,
+    #fffb00,
+    #48ff00,
+    #00ffd5,
+    #002bff,
+    #7a00ff,
+    #ff00c8,
+    #ff0000
+  );
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  background-size: 400%;
+  z-index: -1;
+  filter: blur(5px);
+  -webkit-filter: blur(5px);
+  width: calc(100% + 5px);
+  height: calc(100% + 3px);
+  animation: glowing-signup 20s linear infinite;
+  transition: opacity 0.3s ease-in-out;
+  border-radius: 10px;
+}
+
+@keyframes glowing-signup {
+    0% {
+      background-position: 0 0;
+    }
+    50% {
+      background-position: 400% 0;
+    }
+    100% {
+      background-position: 0 0;
+    }
+  }
+
+.signup:after {
+  z-index: -1;
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #222;
+  left: 0;
+  top: 0;
+  border-radius: 10px;
+}
+
+
+/* .signup:hover {
+    box-shadow: 0 0 10px rgb(250, 4, 4), 0 0 40px rgb(253, 57, 3), 0 0 80px rgb(250, 72, 2);
+
+    cursor: pointer;
+
+} */
+
+.input {
+    display: flex;
+    justify-items: center;
+    align-items: flex-start;
+    flex-direction: column;
+    color: rgb(0, 0, 0);
+    height: 70vh;
+    /* background-color: #040404; */
+    /* background-image: linear-gradient(-225deg, #FFFEFF 0%, #D7FFFE 100%); */
+  
+    /* background-position: center; */
+
+
+}
+
+.input input {
+    background: transparent;
+    color: rgb(2, 2, 2);
+    font:500 1.5vmax  'Libre Franklin', sans-serif;;
+    width: 200px;
+   
+}
+
+.input-span {
+    width: 80%;
+    height: 1px;
+    border: 1px solid rgba(0, 0, 0, 0.523);
+
+    margin-top: 0px;
+}
+
+.input input::placeholder {
+    color: rgba(0, 0, 0, 0.623)
+}
+
+.input input:focus {
+    outline: none;
+
+}
+
+.error {
+    color: rgb(248, 1, 1);
+    font-size: 0.5em;
+
+}
+
+.home-container {
+    color: red;
+}
+body {
+    background-color: #080809;
+}
+
+.profile-image{
+    align-items: flex-end;
+    flex-direction: row;
+    margin-left: 0px;
+    margin-top: 0.5vmax;
+    position: relative;
+}
+.profile-image> input::file-selector-button{
+    position: absolute;
+    cursor: pointer;
+    width: 60%;
+    z-index: 1;
+    height: 4vh;
+    border: none;
+    margin: 0%;
+    font: 400 1vmax cursive;
+    transform: 0.5s all;
+    padding: 0vmax 1vmax;
+    /* padding-bottom: 2vmax; */
+    outline: none;
+    top: 1vmax;
+    color: rgba(0, 0, 0, 0.623);
+    background-color: rgb(255, 255, 255);
+}
+
+@media screen and (max-width:600px) {
+    .inp-container{
+        margin-top: 10vmax;
+    }
+    
+   
+    .inp-container .wlcm{
+        height: 30vh;
+        clip-path: polygon(0 0, 100% 0%, 100% 66%, 0% 100%);
+        /* display: none; */
+    }
+    .wlcm h2 {
+        margin-top: 10vh;
+    }
+    .input{
+        align-items: center;
+        height: 60vh;
+    }
+    .input >.login{
+        margin-top: 0;
+        font: 600 3.5vmax 'Ysabeau SC', sans-serif ;
+    }
+    .signup{
+        width: 80%;
+        margin-bottom: 10vmax;
+        /* font-size: ; */
+       font: 500 2.5vmax 'Ysabeau SC', sans-serif;
+
+    }
+    .input .redir{
+        margin-bottom: 20px;
+        font-size: medium;
+    }
+    .input input {
+        background: transparent;
+        color: rgb(2, 2, 2);
+        font: 500 2.5vmax  'Libre Franklin', sans-serif;;
+        width: 200px;
+    }
+    
+    .input p a{
+        text-decoration: none;
+        color: rgb(14, 98, 225);
+        font-size: medium;
+    }
+    .signup {
+        width: 80%;
+        margin-top: 3vmax;
+        margin-bottom: 3vmax;
+        font: 500 2.5vmax 'Ysabeau SC', sans-serif;
+        height: 7vmax;
+    }
+    
+}

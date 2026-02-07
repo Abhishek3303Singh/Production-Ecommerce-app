@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,700;1,400&family=Libre+Franklin:ital,wght@0,400;0,500;1,300&family=Poppins:ital,wght@0,300;0,500;0,700;1,400;1,500&family=Roboto+Slab:wght@300;400;500;700&family=Ysabeau+SC:wght@400;500;600&display=swap');
+
+
+.sidebar-container{
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    justify-content: flex-start;
+    background-color: #fff;
+    background: transparent;
+    padding: 1vmax 0;
+    position: -webkit-sticky;
+    position: sticky;
+}
+.sidebar-container>a:first-child{
+    padding: 0;
+    text-decoration: none;
+}
+.sidebar-container>a>h2{
+    color: rgb(42, 42, 43);
+    width: 100%;
+    transition: all ease 0.5s;
+    text-decoration: none;
+    font: 600 2.5vmax 'Ysabeau SC', sans-serif;
+    padding-left: 1.5rem;
+}
+.sidebar-container>a>h2:hover{
+    color: #2874f0;;
+}
+.sidebar-container a{
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.7);
+    padding: 1.5rem;
+    font: 500 1.5vmax 'Roboto Slab', serif;
+    transition: all ease 0.5s;
+}
+.sidebar-container a:hover{
+    color: #2874f0;
+    transform: scale(1.1);
+}
+.sidebar-container a>p{
+    display: flex;
+    align-items: center; 
+}
+.sidebar-container a>p>svg{
+    margin-right: 1.5vmax;
+
+}
+.MuiTreeItem-root{
+    background-color: #fff !important;
+    background: transparent !important;
+
+}
+.MuiTypography-body1{
+    font: 500 1vmax 'Roboto Slab', serif !important;
+}
+.MuiTypography-body1 {
+    /* font-size: 1rem; */
+    font: 500 1.5vmax 'Roboto Slab', serif !important;
+    /* font-family: "Roboto", "Helvetica", "Arial", sans-serif; */
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: 0.00938em;
+}

@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,500;0,700;1,400&family=Roboto+Slab:wght@300;400;500;700&display=swap');
+// $Poppins :'Poppins', sans-serif;
+$Roboto:'Roboto Slab', serif;
+// $color
+$dark :rgb(29, 29, 29);
+$light:white;
+$primary:rgb(162,162,246);
+$bg:rgb(255, 252, 244);
+$btnwarn:rgb(255, 191, 0);
+$btnSucccess:rgb(0, 255, 0);
+
+// spacing
+$spacing-md:16px;
+$spacing-lg:32px;
+
+// border_radius
+$borderRadius:12px;
+
+// header height
+$headerHeight:70px;
+
+// Mix in
+
+$mid:890px;
+$small: 300px;
+@mixin breakpoint($point){
+    @if($point==mid){
+        // 768px
+        @media (min-width:50em) {
+            @content;
+        }
+    }
+}

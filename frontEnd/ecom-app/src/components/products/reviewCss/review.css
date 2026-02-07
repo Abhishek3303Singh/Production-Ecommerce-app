@@ -1,0 +1,127 @@
+import React, { useEffect } from 'react'
+// import classes from './ProductDetails.module.scss';
+import Carousel from 'react-material-ui-carousel';
+import { useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom'
+import { getProductDetails } from '../../store/productDetailsSlice'
+import { STATUSES } from '../../store/productDetailsSlice';
+import ReactStars from 'react-rating-stars-component'
+import ReactImageMagnify from 'react-image-magnify';
+import CustomerRevCard from '../products/CustomerRevCard';
+import Loader from '../layout/loader/Loader'
+import { FaShoppingCart } from 'react-icons/fa'
+import { BsFillLightningFill } from 'react-icons/bs'
+import { useState } from 'react';
+import './prodDet.css'
+// import { match } from 'assert';
+
+const ProdDet = () => {
+    const { id } = useParams()
+    const { product, images, status, responseStatus } = useSelector((state) => state.productDetails)
+    // console.log('first url',product.Image[0].url)
+    //   const [image, setImage] = useState(product.Image? product.Image[0]:[{url:" "}])
+    // const [image, setImage] = useState(images)
+
+
+    console.log('url', product)
+    const options = {
+        edit: false,
+        color: "rgb(20, 40, 20, 0.5)",
+        activeColor: "tomato",
+        size: window.innerHeight < 600 ? 20 : 30,
+        value: product.ratings,
+        isHalf: true,
+    }
+    //   dispatch(getProductDetails(id))
+
+    const dispatch = useDispatch();
+    useEffect(() => {
+        console.log('running')
+
+        dispatch(getProductDetails(id))
+    }, [dispatch, id, responseStatus])
+    return (
+        <>
+            {
+                status == STATUSES.LOADING ? <Loader /> :
+                    <>
+                        <div className='prdDetailsCard'>
+                            <div className='imgcontainer'>
+                                <Carousel pause='hover'>
+                                    {
+                                        product.Image && product.Image.map((item, i) => (
+                                            <Carousel.Item>
+                                                <img className='prdDetailsCard-imgcontainer-carouselimg' src={item.url}
+                                                    alt={`${1} slide`} />
+                                            
+                                            </Carousel.Item>
+                                        ))
+                                    }
+                                </Carousel>
+                            </div>
+                            <div className='detailsBlock1'>
+                                <div className='detailsBlock1-1'>
+                                    <h2>{product.name}</h2>
+                                    <p>product # {product._id}</p>
+                                </div>
+                                <div className='detailsBlock1-2'>
+                                    <ReactStars {...options} />
+                                    <span>({product.reviewsCount} Reviews)</span>
+                                </div>
+                                <div className='detailsBlock1-3'>
+                                    <h1>Price: &#x20B9;{product.price}</h1>
+                                    <div className='detailsBlock1-3-image'>
+
+                                        {
+                                            product.Image && product.Image.map((item, i) => (
+                                                <img className='detailsBlock1-3-image-slide' src={item.url}
+                                                    key={item.url} alt={`${i} slide`}  />
+                                            ))
+                                        }
+
+                                    </div>
+                                    <div className='detailsBlock1-3-1'>
+                                        <div className='detailsBlock1-3-1-1'>
+                                            <button>+</button>
+                                            <input type="number" value='1' />
+                                            <button>-</button>
+                                        </div>
+                                        <button className='detailsBlock1-3-1-add'><FaShoppingCart /> Add to cart</button>
+                                        <button className='detailsBlock1-3-1-buy'><BsFillLightningFill />Buy Now</button>
+
+                                    </div>
+                                    <p>
+                                        status:{""}
+                                        <b className={product.Stock > 1 ? 'inStock' : 'OutOfStock'}>
+                                            {product.Stock > 1 ? "InStock" : "OutOfStock"}
+                                        </b>
+
+                                    </p>
+
+                                </div>
+                                <div className='detailsBlock1-4'>
+                                    Description: <p>{product.description}</p>
+
+                                </div>
+                                <button className='detailsBlock1-submitReview'>Add Review</button>
+                            </div>
+                        </div>
+                        <h3 className='reviweHeading'>REVIEWS</h3>
+                        {product.customerReview && product.customerReview[0] ? (
+                            <div className='review'>
+                                {product.customerReview.map((revw) => <CustomerRevCard revw={revw} />)}
+
+                            </div>
+                        ) : (
+                            <p className='noReview'>No Reviews Yet &#128532;</p>
+                        )}
+                    </>
+            }
+
+        </>
+
+    )
+}
+
+export default ProdDet;  

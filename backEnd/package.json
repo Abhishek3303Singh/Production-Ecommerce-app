@@ -1,0 +1,36 @@
+{
+  "name": "y",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "abhishek",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "body-parser": "^1.20.1",
+    "cloudinary": "^1.39.0",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-fileupload": "^1.4.0",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^6.9.1",
+    "nodemailer": "^6.9.1",
+    "nodemon": "^2.0.20",
+    "path": "^0.12.7",
+    "stripe": "^12.12.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Abhishek3303Singh/Production-Ecommerce-app.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Abhishek3303Singh/Production-Ecommerce-app/issues"
+  },
+  "homepage": "https://github.com/Abhishek3303Singh/Production-Ecommerce-app#readme",
+  "description": ""
+}

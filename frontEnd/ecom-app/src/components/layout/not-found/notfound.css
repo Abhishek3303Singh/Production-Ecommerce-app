@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,700;1,400&family=Libre+Franklin:ital,wght@0,400;0,500;1,300&family=Poppins:ital,wght@0,300;0,500;0,700;1,400;1,500&family=Roboto+Slab:wght@300;400;500;700&family=Ysabeau+SC:wght@400;500;600&display=swap');
+
+*{
+ margin: 0%;
+ padding: 0%;
+ box-sizing: border-box;
+}
+.not-found-container{
+
+    min-height: 15vmax;
+    width: 30%;
+    /* border: 2px solid red; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin:2vmax auto;
+    padding: 2vmax auto;
+}
+
+.not-found-container>div>svg{
+    color: rgb(237, 25, 2);
+    width: 10rem;
+    height: 10rem;
+}
+.not-found{
+    color: rgb(2, 0, 43);
+    font: 600 2.7vmax 'Roboto Slab', serif;
+    padding: 1vmax auto;
+
+    
+}
+
+@media screen and (max-width:768px) {
+
+    .not-found-container{
+
+        min-height: 15vmax;
+        width: 90%;
+        /* border: 2px solid red; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin:2vmax auto;
+        padding: 2vmax auto;
+    }
+
+    .not-found-container>div>svg{
+        color: rgb(237, 25, 2);
+        
+        width: 15rem;
+        height: 15rem;
+    }
+    .not-found{
+    color: rgb(2, 0, 43);
+        
+        font: 600 3.7vmax 'Roboto Slab', serif;
+        padding: 1vmax auto;
+    
+        
+    }
+}
