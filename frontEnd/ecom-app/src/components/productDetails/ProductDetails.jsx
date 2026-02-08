@@ -18,7 +18,7 @@ import { useAlert } from 'react-alert'
 import Rating from "@mui/material/Rating";
 import CancelIcon from '@mui/icons-material/Cancel';
 import 'animate.css';
-import { addReview } from '../../store/addReviewSlice';
+import { addReview } from '../../store/productDetailsSlice';
 import ProductGallery from './ProductGallery';
 import AddToCart from './AddToCart';
 
@@ -122,7 +122,8 @@ const ProductDetails = () => {
     // }
 
   }
-
+//  console.log(product, 'product')
+//  console.log(product?.customerReview, 'customer review')
   return (
     <>
       <MetaData title={`${product.name}FunHub`}></MetaData>
@@ -226,11 +227,11 @@ const ProductDetails = () => {
       </div>
       <h3 className='reviweHeading'>Ratings & Reviews</h3>
 
-      {product.customerReview && product.customerReview.length > 0 ? (
+      {product?.customerReview && product?.customerReview?.length > 0 ? (
         <div className="review">
-          {product.customerReview.map((rev) => (
-            <CustomerRevCard key={rev._id} revw={rev} />
-          ))}
+          {/* {product?.customerReview?.map((rev) => ( */}
+            <CustomerRevCard  revw={product?.customerReview} />
+           {/* ))} */}
         </div>
       ) : (
         <p className="noReview">No Reviews Yet 😔</p>

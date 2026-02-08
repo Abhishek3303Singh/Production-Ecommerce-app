@@ -6,8 +6,10 @@ import {AiTwotoneStar} from 'react-icons/ai'
 
 const CustomerRevCard = ({ revw }) => {
   const [pageNo, setPageNo] = useState(0)
-  const reviewPerPage = 1;
+  const reviewPerPage = 10;
   const pageVisited = pageNo * reviewPerPage;
+
+  // console.log(revw, 'revwCard')
 
 
   return (
@@ -15,7 +17,7 @@ const CustomerRevCard = ({ revw }) => {
     <div className="rev-container">
       {
         revw.slice(pageVisited, pageVisited + reviewPerPage).map((item) => (
-          <div className="review-card-container">
+          <div key={item?._id || item?.tempId} className="review-card-container">
             <div className="rev-img-container">
               <img src={profile} alt="user" />
             </div>

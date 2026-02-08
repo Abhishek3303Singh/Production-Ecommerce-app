@@ -18,7 +18,10 @@ const productDetailsSlide = createSlice({
   },
   reducers: {
     setProductDetails(state, action) {
-      state.product = action.payload.reqProduct;
+      state.product = action.payload.reqProduct ??{
+        customerReview:[],
+        reviewsCount:0
+      }
       state.responseStatus = action.payload.status;
       // state.images = action.payload.reqProduct.Image
     },
@@ -99,6 +102,8 @@ export function addReview(userName, reviewData) {
 
     dispatch(addOptimisticReview(optimisticReview));
     dispatch(setStatus(STATUSES.LOADING));
+
+    console.log(reviewData, 'revData')
 
     try {
       const res = await fetch(`${apiUrl}/api/v1/product/review`, {

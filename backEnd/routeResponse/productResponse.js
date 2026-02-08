@@ -191,8 +191,15 @@ exports.searchItem = async (req, res) => {
 // Customer review for products
 exports.productReview = async (req, res) => {
   // console.log("running")
-  // console.log(req.body)
-  const { id, feedback, ratings } = req.body.review;
+  console.log(req.body)
+  const { id, feedback, ratings } = req.body;
+  if (!id || !ratings) {
+    return res.status(400).json({
+      status: "failed",
+      message: "Invalid review data",
+    });
+  }
+
 
   // console.log(req.body)
   const review = {
@@ -204,6 +211,12 @@ exports.productReview = async (req, res) => {
   // console.log(review)
 
   const product = await ProductModels.findById(id);
+  if (!product) {
+    return res.status(404).json({
+      status: "failed",
+      message: "Product not found",
+    });
+  }
   // console.log(product)
   const isReviewed = product.customerReview.find(
     (rev) => rev.user.toString() === req.user._id.toString()
