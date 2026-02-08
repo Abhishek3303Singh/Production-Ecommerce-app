@@ -246,8 +246,10 @@ exports.productReview = async (req, res) => {
   // console.log("rating", avRating)
   product.ratings = avRating;
   await product.save({ validateBeforeSave: false });
+  const newReview =product.customerReview[product.customerReview.length - 1];
   res.status(200).json({
     status: "success",
+    review:newReview
   });
 };
 

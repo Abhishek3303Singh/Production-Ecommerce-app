@@ -26,11 +26,11 @@ const CustomerRevCard = ({ revw }) => {
               <div className='ratings'>
 
                 {/* <ReactStars {...options}/> */}
-                <p style={item.rating>2?{background:'rgb(2, 159, 57)'}:{background:'red'}}><span>{item.rating}</span> <span> <AiTwotoneStar/> </span></p>
+                <p style={item?.rating>2?{background:'rgb(2, 159, 57)'}:{background:'red'}}><span>{item?.rating}</span> <span> <AiTwotoneStar/> </span></p>
                 
 
-                <p>{item.feedback}</p>
-                <p>{item.name}</p>
+                <p>{item?.feedback}</p>
+                <p>{item?.name}</p>
               </div>
             </div>
           </div>
@@ -40,7 +40,7 @@ const CustomerRevCard = ({ revw }) => {
       
       {/* <button onClick={()=>setPageNo(pageNo+1)}>{ pageVisited + reviewPerPage<revw.length?'More Reviews':'No More Reviews'}</button> */}
       {
-        pageVisited + reviewPerPage < revw.length ? <button className='more-rev-btn' onClick={() => setPageNo(pageNo + 1)}>More Reviews</button> : <button className='more-rev-btn-disable' disabled>No More Reviews</button>
+        pageVisited + reviewPerPage < revw?.length ? <button className='more-rev-btn' onClick={() => setPageNo(pageNo + 1)}>More Reviews</button> : <button className='more-rev-btn-disable' disabled>No More Reviews</button>
       }
       </div>
 
