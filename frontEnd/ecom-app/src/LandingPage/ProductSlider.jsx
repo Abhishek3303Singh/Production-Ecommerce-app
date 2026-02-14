@@ -5,7 +5,7 @@ const ProductSlider = React.memo(({ products }) => {
 
     return (
        <>
-            {products.map(item => (
+            {products&& products?.map(item => (
                 <HomeProductImageCard key={item._id} product={item} />
             ))}
         </>

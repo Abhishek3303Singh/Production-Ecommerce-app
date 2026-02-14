@@ -13,8 +13,10 @@ const productDetailsSlide = createSlice({
       customerReview: [],
       reviewsCount: 0,
     },
+    recommendedProducts:[],
     status: STATUSES.SUCCESS,
     resErr: false,
+    reviewStatus:STATUSES.SUCCESS
   },
   reducers: {
     setProductDetails(state, action) {
@@ -47,6 +49,12 @@ const productDetailsSlide = createSlice({
     setStatus(state, action) {
       state.status = action.payload;
     },
+    setReviewStatus(state, action){
+      state.reviewStatus = action.payload;
+    },
+    setRecommendedProd(state, action){
+      state.recommendedProducts = action.payload
+    },
     setError(state, action) {
       state.resErr = action.payload;
     },
@@ -56,9 +64,11 @@ export const {
   setProductDetails,
   setStatus,
   setError,
+  setReviewStatus,
   addOptimisticReview,
   confirmReview,
   rollbackReview,
+  setRecommendedProd
 } = productDetailsSlide.actions;
 export default productDetailsSlide.reducer;
 
@@ -86,8 +96,15 @@ export function getProductDetails(id) {
     }
   };
 }
+const SAFE_FEEDBACK_LENGTH = 500;
 export function addReview(userName, reviewData) {
   return async function addReviewThunk(dispatch) {
+    const safeReviewData = {
+      ...reviewData,
+      feedback: reviewData.feedback
+        ?.trim()
+        .slice(0, SAFE_FEEDBACK_LENGTH),
+    };
     const tempId = Date.now();
     const optimisticReview = {
       ...reviewData,
@@ -100,8 +117,9 @@ export function addReview(userName, reviewData) {
       isPending:true
     };
 
-    dispatch(addOptimisticReview(optimisticReview));
-    dispatch(setStatus(STATUSES.LOADING));
+    dispatch(addOptimisticReview({...optimisticReview, feedback:safeReviewData.feedback}));
+    // dispatch(setStatus(STATUSES.LOADING));
+    dispatch(setReviewStatus(STATUSES.LOADING))
 
     console.log(reviewData, 'revData')
 
@@ -116,6 +134,7 @@ export function addReview(userName, reviewData) {
       });
       const data = await res.json()
       dispatch(setStatus(STATUSES.SUCCESS))
+      dispatch(setReviewStatus(STATUSES.SUCCESS))
       dispatch(confirmReview({tempId, serverReview:data.review}))
     } catch (e) {
         console.log(e.message)
@@ -125,6 +144,21 @@ export function addReview(userName, reviewData) {
 
     }
   };
+}
+
+export function getRecommndedProduct(productId){
+  return async function getRecommndedProductThunk (dispatch){
+    try{
+      dispatch(setStatus(STATUSES.LOADING))
+      const res = await fetch(`${apiUrl}/api/v1/products/recommended/${productId}`,{credentials:"include"})
+      const data = await res.json()
+      dispatch(setRecommendedProd(data))
+      dispatch(setStatus(STATUSES.SUCCESS))
+    }catch(e){
+      console.log(e.message)
+      dispatch(setStatus(STATUSES.ERROR))
+    }
+  }
 }
 
 export const clrError = () => {

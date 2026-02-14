@@ -5,6 +5,7 @@ const { productsTrie } = require("../utils/buildTrie");
 const Featurs = require("../utils/featurs");
 // const cloudinary = require('cloudinary')
 const cloudinary = require("cloudinary");
+const mongoose =require('mongoose')
 
 // Update Product
 exports.updateProduct = async (req, res) => {
@@ -94,20 +95,20 @@ exports.allProducts = async (req, res) => {
   }
 };
 // search suggestion controller functio//
-exports.searchSuggestion = (req, res)=>{
-  const q = req.query.keyword
-  if(!q){
+exports.searchSuggestion = (req, res) => {
+  const q = req.query.keyword;
+  if (!q) {
     return res.status(200).json({
-      status:"success",
-      suggestionName:[]
-    })  
+      status: "success",
+      suggestionName: [],
+    });
   }
-  const suggestionList = productsTrie.search(q)
+  const suggestionList = productsTrie.search(q);
   return res.status(200).json({
-    status:"success",
-    suggestionName:suggestionList
-  })
-}
+    status: "success",
+    suggestionName: suggestionList,
+  });
+};
 
 // get Product Details
 exports.productDetails = async (req, res) => {
@@ -119,6 +120,8 @@ exports.productDetails = async (req, res) => {
         message: "Req Product not Available",
       });
     }
+    reqProduct.views += 1;
+    await reqProduct.save();
     res.status(200).json({
       status: "success",
       reqProduct,
@@ -131,7 +134,113 @@ exports.productDetails = async (req, res) => {
   }
 };
 
+// Category Based Recomendation Response
 
+exports.recommendedProduct = async (req, res) => {
+  try {
+    const currProduct = await ProductModels.findById(req.params.productId);
+    if (!currProduct) {
+      return res.status(500).json({
+        status: "failed",
+        message: "Requested Product is not Available",
+      });
+    }
+
+    const recomnededProduct = await ProductModels.find({
+      category: currProduct.category,
+      _id: { $ne: currProduct._id },
+    }).limit(6);
+
+    return res.status(200).json({
+      status: "success",
+      recomnededProduct,
+    });
+  } catch (e) {
+    return res.status(400).json({
+      status: "failed",
+      message: e.message,
+    });
+  }
+};
+
+// Tending Products Recomendation
+
+exports.trendingProducts = async (req, res) => {
+  try {
+    const tendingProd = await ProductModels.find().sort({ views: -1 }).limit(8);
+    return res.status(200).json({
+      status: "success",
+      tendingProd,
+    });
+  } catch (e) {
+    return res.status(400).json({
+      status: "failed",
+      message: e.message,
+    });
+  }
+};
+
+// Best Sellers
+
+exports.bestSeller = async (req, res) => {
+  try {
+    const bestSeller = await ProductModels.find().sort({ sold: -1 }).limit(8);
+    return res.status(200).json({
+      status: "success",
+      bestSeller,
+    });
+  } catch (e) {
+    return res.status(400).json({
+      status: "failed",
+      message: e.message,
+    });
+  }
+};
+// Recently Viewed Products 
+
+exports.getProductsByIds = async (req, res)=>{
+  try{
+    
+    const {ids} = req.query
+    if(!ids){
+      return res.status(400).json({
+        status:'failed',
+        message:'Product ids not Provided'
+      })
+    }
+    const idsArray = ids.split(',')
+    // ObjectIds Validate
+
+    const idsValid = idsArray?.filter(id=>
+      mongoose.Types.ObjectId.isValid(id)
+    );
+    if (idsValid?.length > 15) {
+      return res.status(400).json({
+        status: "fail",
+        message: "Too many product IDs requested",
+      });
+    }
+
+    const products = await ProductModels.find(
+      {
+        _id : {$in:idsValid}
+      }
+    )
+    return res.status(200).json({
+      status:"success",
+      results:products?.length,
+      recentlyViewedProd:products
+    })
+
+
+  }catch(e){
+    console.log(e.message)
+    return res.status(500).json({
+      status:'failed',
+      message:'server error'
+    })
+  }
+}
 
 exports.deleteProduct = async (req, res) => {
   try {
@@ -191,7 +300,7 @@ exports.searchItem = async (req, res) => {
 // Customer review for products
 exports.productReview = async (req, res) => {
   // console.log("running")
-  console.log(req.body)
+  console.log(req.body);
   const { id, feedback, ratings } = req.body;
   if (!id || !ratings) {
     return res.status(400).json({
@@ -199,7 +308,6 @@ exports.productReview = async (req, res) => {
       message: "Invalid review data",
     });
   }
-
 
   // console.log(req.body)
   const review = {
@@ -246,17 +354,16 @@ exports.productReview = async (req, res) => {
   // console.log("rating", avRating)
   product.ratings = avRating;
   await product.save({ validateBeforeSave: false });
-  const newReview =product.customerReview[product.customerReview.length - 1];
+  const newReview = product.customerReview[product.customerReview.length - 1];
   res.status(200).json({
     status: "success",
-    review:newReview
+    review: newReview,
   });
 };
 
 // Get all the review for a Product
 
 exports.getAllReviews = async (req, res) => {
-  
   try {
     const productId = req.query.id;
     const product = await ProductModels.findById(productId);
@@ -393,7 +500,7 @@ exports.addProduct = async (req, res) => {
     }
     // console.log(imageLinks, 'ImageLinks')
     req.body.Image = imageLinks;
-    req.body.searchKeywords = JSON.parse(req.body.searchKeywords)
+    req.body.searchKeywords = JSON.parse(req.body.searchKeywords);
 
     req.body.user = req.user.id;
     const product = new ProductModels(req.body);

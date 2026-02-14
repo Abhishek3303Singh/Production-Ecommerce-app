@@ -1,23 +1,21 @@
-const express = require('express')
-const app = express()
+const express = require("express");
+const app = express();
 require("./dataBase/conf");
-const UserModel = require('./dataBase/User')
-const ProfileModel = require('./dataBase/Profile')
+const UserModel = require("./dataBase/User");
+const ProfileModel = require("./dataBase/Profile");
 // const ProductModels = require('./dataBase/product/Product')
-const cors = require('cors');
-const { findOne } = require('./dataBase/User');
-const bcrypt = require('bcryptjs')
-const secretKey = process.env.SECRET_KEY
-const jwt = require('jsonwebtoken')
-const cookieParser = require('cookie-parser')
-const dotenv = require('dotenv')
-const fileUpload = require('express-fileupload');
-const bodyParser = require('body-parser')
-const cloudinary = require('cloudinary')
-const path = require('path')
-const {buildTrieSuggestion} = require("./utils/buildTrie")
-
-
+const cors = require("cors");
+const { findOne } = require("./dataBase/User");
+const bcrypt = require("bcryptjs");
+const secretKey = process.env.SECRET_KEY;
+const jwt = require("jsonwebtoken");
+const cookieParser = require("cookie-parser");
+const dotenv = require("dotenv");
+const fileUpload = require("express-fileupload");
+const bodyParser = require("body-parser");
+const cloudinary = require("cloudinary");
+const path = require("path");
+const { buildTrieSuggestion } = require("./utils/buildTrie");
 
 // const conDB = async ()=>{
 //     mongoose.connect('mongodb://localhost:27017/ecommerce')
@@ -29,7 +27,7 @@ require("dotenv").config({ path: "config/config.env" });
 
 const allowedOrigins = [
   "http://localhost:3000",
-  "https://your-frontend-url.onrender.com"
+  "https://your-frontend-url.onrender.com",
 ];
 
 app.use(
@@ -44,18 +42,23 @@ app.use(
     credentials: true,
   })
 );
-app.use(cookieParser())
-app.use(express.json())
 
-app.use(bodyParser.urlencoded({extended:true}))
+// app.use(cors({
+//   origin: true,
+//   credentials: true
+// }))
+app.use(cookieParser());
+app.use(express.json());
+
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(fileUpload());
-buildTrieSuggestion()
+buildTrieSuggestion();
 
-cloudinary.config({ 
-    cloud_name:process.env.CLOUD_NAME, 
-    api_key:process.env.API_KEY, 
-    api_secret:process.env.API_SECRET 
-  });
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET,
+});
 // Middleware for token
 // app.post('/api/v1/profile', (req, res, next)=>{
 //         const token = req.headers.authorization;
@@ -68,7 +71,7 @@ cloudinary.config({
 //                     status:"failed",
 //                     message:"The token has been expired"
 //                 })
-//             }            
+//             }
 //              // bar
 //              console.log(decode)
 //             req.user = decode.data
@@ -80,31 +83,30 @@ cloudinary.config({
 //             status:'failed',
 //             message:"user is not Authenticated"
 //         })
-//     }   
-   
+//     }
+
 // })
 
 ///////////////////////////   route/////////////////////////////
-const productEnv = require('./routes/ProductRoute')
-app.use('/api/v1', productEnv)
+const productEnv = require("./routes/ProductRoute");
+app.use("/api/v1", productEnv);
 ////////////////////////////////////////////////////////
 
 //// user Route////////////////
-const userRoute = require('./routes/userRouts')
-app.use('/api/v1', userRoute)
+const userRoute = require("./routes/userRouts");
+app.use("/api/v1", userRoute);
 
 /////Order route/////
-const orderRoute = require('./routes/orderRoute')
-app.use('/api/v1', orderRoute)
+const orderRoute = require("./routes/orderRoute");
+app.use("/api/v1", orderRoute);
 
 /// Payment Route
-const payment = require('./routes/paymentRoute')
-app.use('/api/v1',payment)
-
+const payment = require("./routes/paymentRoute");
+app.use("/api/v1", payment);
 
 /// Banner Route
-const banner = require('./routes/banner')
-app.use('/api/v1/', banner)
+const banner = require("./routes/banner");
+app.use("/api/v1/", banner);
 
 // app.use(express.static(path.join(__dirname, '../frontEnd/ecom-app/build')))
 // app.get('*',(req, res)=>{
@@ -113,16 +115,12 @@ app.use('/api/v1/', banner)
 // })
 
 //////////////// Handling uncaught Exception///////////
-process.on('uncaughtException', (err)=>{
-    console.log(`Error=> ${err.message}`);
-    console.log('shutting down server due to uncaught err!!')
-    process.exit(1)    
-})
+process.on("uncaughtException", (err) => {
+  console.log(`Error=> ${err.message}`);
+  console.log("shutting down server due to uncaught err!!");
+  process.exit(1);
+});
 ////////////////////////////////////////////////
-
-
-
-
 
 // Admin Api or  Route
 // app.post('/add-product', async (req, res) => {
@@ -140,7 +138,7 @@ process.on('uncaughtException', (err)=>{
 //             message:e.message
 //         })
 //     }
-    
+
 // })
 // app.get('/products', async (req, res)=>{
 //     try{
@@ -158,20 +156,18 @@ process.on('uncaughtException', (err)=>{
 
 // })
 
-
-
 /// listining port
 
 const PORT = process.env.PORT || 8081;
 let server = app.listen(PORT, () => {
-    console.log(`Server is up on ${PORT} port`)
-})
+  console.log(`Server is up on ${PORT} port`);
+});
 
 // Unhandled Promise Rejection
-process.on('unhandledRejection', (err)=>{
-    console.log(`Error=> ${err.message}`);
-    console.log('shutting down server!!')
-    server.close(()=>{
-        process.exit(1)
-    })
-})
+process.on("unhandledRejection", (err) => {
+  console.log(`Error=> ${err.message}`);
+  console.log("shutting down server!!");
+  server.close(() => {
+    process.exit(1);
+  });
+});

@@ -1,0 +1,139 @@
+.rec-slider-container {
+    background: #f1f3f6;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 30px;
+  }
+  
+  .rec-heading {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 15px;
+  }
+  
+  .rec-slider {
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+  
+  .slider-btn {
+    background: white;
+    border: none;
+    font-size: 22px;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    border-radius: 50%;
+    transition: 0.3s ease;
+    z-index: 2;
+  }
+  
+  .slider-btn:hover {
+    background: #2874f0;
+    color: white;
+  }
+  
+  .slider-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+  
+  .rec-products {
+    display: flex;
+   
+    gap: 15px;
+    overflow: hidden;
+    flex: 1;
+    transition: transform 0.4s ease;
+  }
+  .rec-prod-card{
+    width: 20%;
+  }
+  
+  /* Card */
+  .rec-card {
+    width: 15%;
+    min-width: 200px;
+    background: white;
+    border-radius: 6px;
+    padding: 12px;
+    cursor: pointer;
+    transition: 0.3s ease;
+  }
+
+  .rec-card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transform: translateY(-3px);
+  }
+  
+  .rec-img-container {
+    height: 160px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .rec-img-container img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+  }
+  
+  .rec-title {
+    font-size: 14px;
+    margin-top: 10px;
+    height: 36px;
+    overflow: hidden;
+  }
+  
+  .rec-rating {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 6px;
+  }
+  
+  .rating-box {
+    background: green;
+    color: white;
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+  
+  .review-count {
+    font-size: 12px;
+    color: gray;
+  }
+  
+  .rec-price {
+    margin-top: 8px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  
+  /* Responsive */
+  @media (max-width: 900px) {
+    .rec-prod-card{
+        width: 35%;
+    }
+    .rec-card {
+      min-width: 180px;
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .rec-card {
+      min-width: 100%;
+    }
+    .rec-prod-card{
+        width: 50%;
+    }
+  
+    .slider-btn {
+      display: none;
+    }
+  }
+  

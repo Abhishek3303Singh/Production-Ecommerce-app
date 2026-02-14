@@ -18,6 +18,7 @@ import amdinOrdersReducer from './allOrdersSlice'
 import allUserAdminReducer from './adminUsersSlie'
 import adminReviewsReducer from './adminReviewsSlice'
 import adminBannnerReducer from './addBannerSlice'
+import recommendedProdList from './recommndedProdSlice'
 const store = configureStore({
   reducer: {
     product: productReducer,
@@ -36,7 +37,8 @@ const store = configureStore({
     allOrders:amdinOrdersReducer,
     Allusers:allUserAdminReducer,
     adminReviews:adminReviewsReducer,
-    createBanner:adminBannnerReducer
+    createBanner:adminBannnerReducer,
+    recommendedProd:recommendedProdList
   },
 });
 export default store;

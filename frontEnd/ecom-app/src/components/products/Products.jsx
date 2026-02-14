@@ -125,7 +125,7 @@ const Products = () => {
             <h2 className='ProductHeading'>Products</h2>
             <div className="product-main-container">
                 {
-                    (status == STATUSES.SUCCESS && products.length === 0 ? (<div className="prod-not-found-cont"><h1>Sorry! Product Not Found</h1><p>
+                    (status == STATUSES.SUCCESS && products?.length === 0 ? (<div className="prod-not-found-cont"><h1>Sorry! Product Not Found</h1><p>
                         We could not find any products for the selected filters
                     </p></div>) : <ProductGrid products={visibleProducts} />)
                 }

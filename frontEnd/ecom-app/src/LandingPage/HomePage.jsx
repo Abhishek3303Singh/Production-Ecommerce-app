@@ -19,18 +19,22 @@ import promotionbnr from "../images/promotion_img.jpg"
 import mobilebnr1 from '../images/mobilebanner.jpg'
 import mobilebnr3 from '../images/yogabanner.jpg'
 import mobilebnr4 from '../images/moblehandband.jpg'
-import HomeProductImageCard from './HomeProductImageCard';
-import { useInView } from 'react-intersection-observer'
 
+import { useInView } from 'react-intersection-observer'
+import { fetchProductLists } from '../store/recommndedProdSlice';
 import './homePage.css'
 import ProductSlider from './ProductSlider';
 import { getBanner } from '../store/addBannerSlice';
 import { useNavigate } from 'react-router-dom';
+import RecommendationSlider from '../components/productDetails/RecommendationSlider';
+import { STATUSES } from '../store/productDetailsSlice';
+import RecentlyViewedSlider from './RecentlyViewedSlider';
 
 const ProdDet = () => {
     const [imgIndex, setImageIndex] = useState(0)
     const { products, status, } = useSelector((state) => state.product);
     const { banners, status: bannerStatus, resError, isCreated } = useSelector((state) => state.createBanner)
+    const {trending, bestSellers, status:recomStatus, error} = useSelector((state)=>state.recommendedProd)
     const [currentIndex, setCurrentIndex] = useState(0);
     const navigate = useNavigate()
 
@@ -67,8 +71,12 @@ const ProdDet = () => {
         dispatch(getBanner())
 
     }, [dispatch])
-    const maxDesktopIndex = Math.max(products.length - 4, 0);
-    const maxMobileIndex = Math.max(products.length - 1, 0)
+    useEffect(()=>{
+        dispatch(fetchProductLists('trending'))
+        dispatch(fetchProductLists('bestseller'))
+    },[dispatch])
+    const maxDesktopIndex = Math.max(products?.length - 5, 0);
+    const maxMobileIndex = Math.max(products?.length - 1, 0)
     const handlePrev = useCallback(() => {
 
         setCurrentIndex(prevIndex => (prevIndex <= 0 ? maxDesktopIndex : prevIndex - 1));
@@ -117,12 +125,17 @@ const ProdDet = () => {
         )
     }
     const desktopProducts = useMemo(() => {
-        return products.slice(currentIndex, currentIndex + 4);
+        return trending?.tendingProd?.slice(currentIndex, currentIndex + 5);
     }, [products, currentIndex]);
 
     const mobileProduct = useMemo(() => {
-        return products.slice(currentIndex, currentIndex + 1);
+        return trending?.tendingProd?.slice(currentIndex, currentIndex + 1);
     }, [products, currentIndex]);
+
+    let recentlyViewed =[]
+    useEffect(()=>{
+       recentlyViewed  = JSON.parse(localStorage.getItem("recentlyViewed")) || []
+    },[recentlyViewed])
 
     if (bannerStatus === 'loading' || status === 'loading' || !banners?.banners) {
         return <Loader />
@@ -194,23 +207,29 @@ const ProdDet = () => {
                         </div>
                     </div>
                 </div>
+               <RecentlyViewedSlider/>
                 {/* Lazy Rendering Slider */}
                 <div ref={desktopRef}>
                     {!isMobile &&
                         desktopInView && (
 
-
+                            <>
+                          
+                            
                             <div className='display-main-product-container'>
-                                <h2>Best Sellers in Sports, Fitness & Outdoors</h2>
+                                <h2>Trends you may like</h2>
                                 <div className='display-product-container'>
                                 <div className="product-cont">
                                 
-                                    <ProductSlider products={desktopProducts} />
+                                   {recomStatus==STATUSES.LOADING?<h1>LOADING...</h1>:<ProductSlider products={desktopProducts} />} 
                                 </div>
                                 </div>
                                 <button className='left-shift' onClick={handlePrev}>&lt;</button>
                                 <button className='right-shift' onClick={handleNext}>&gt;</button>
                             </div>
+                            <RecommendationSlider products={bestSellers?.bestSeller} heading={'Bestsellers'} />
+                            </>
+                            
 
                         )
                     }
@@ -220,13 +239,15 @@ const ProdDet = () => {
                 <div ref={mobileRef}>
                     {isMobile &&
                         mobileInView && (
+                            <>
+                             <RecommendationSlider products={bestSellers?.bestSeller} heading={"Bestsellers"} />
                             <div className='display-main-product-mobile-container'>
                             
-                                <h2>Best Sellers in Sports, Fitness & Outdoors</h2>
+                                <h2>Trends you may like</h2>
                                 <div className='display-product-mobile-container'>
 
                                     <div className="product-mobile-cont">
-                                        {console.log("mobile card is running!!")}
+                                        {/* {console.log("mobile card is running!!")} */}
 
                                         {/* {
                                             products && products?.slice(currentIndex, currentIndex + 1)?.map((item) => (
@@ -234,7 +255,8 @@ const ProdDet = () => {
 
                                             ))
                                         } */}
-                                        <ProductSlider products={mobileProduct} />
+                                        {recomStatus==STATUSES.LOADING?<h1>LOADING...</h1>:<ProductSlider products={mobileProduct} />}
+                                        
                                     </div>
 
 
@@ -246,6 +268,7 @@ const ProdDet = () => {
                                 </div>
 
                             </div>
+                            </>
 
                         )
                     }

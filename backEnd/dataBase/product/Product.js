@@ -97,6 +97,14 @@ const productSchema = mongoose.Schema({
         type:mongoose.Schema.ObjectId,
         ref:"users",
         require:true
+    },
+    views:{
+        type:Number,
+        default:0
+    },
+    sold:{
+        type:Number,
+        default:0
     },              
 
     createdAt:{
