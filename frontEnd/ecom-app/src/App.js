@@ -51,14 +51,14 @@ const App = () => {
   async function getStripeApiKey() {
     const resData = await fetch(`${apiUrl}/api/v1/stripekey`,{credentials:'include'});
     const data = await resData.json();
-    console.log("stripeApiKey", data);
+    // console.log("stripeApiKey", data);
     setStripeApiKey(data.stripeApiKey);
   }
 
   useEffect(() => {
     dispatch(getUser());
     getStripeApiKey();
-  }, []);
+  }, [dispatch]);
   // getStripeApiKey();
 
   return (

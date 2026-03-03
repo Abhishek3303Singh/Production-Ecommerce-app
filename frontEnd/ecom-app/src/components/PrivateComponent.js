@@ -1,11 +1,16 @@
 import {Navigate, Outlet} from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import Loader from './layout/loader/Loader';
 const PrivateComponent=()=>{
-    const {user, status, isAuthenticated} = useSelector((state)=>state.user)
+    const {status, isAuthenticated} = useSelector((state)=>state.user)
+
+    if(status==="LOADING"){
+        return <Loader/>
+    }
     
     
     // const userAuth = localStorage.getItem('userData')
     // return userAuth? <Outlet />:<Navigate to="/login" />
-    return !isAuthenticated ? <Navigate to="/login" />:<Outlet />
+    return isAuthenticated ? <Outlet /> : <Navigate to="/login" replace />
 }
 export default PrivateComponent;

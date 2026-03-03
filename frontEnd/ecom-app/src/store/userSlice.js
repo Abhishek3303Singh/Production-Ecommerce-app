@@ -1,3 +1,5 @@
+// import { error } from "console";
+
 const { createSlice } = require("@reduxjs/toolkit");
 // import axios from 'axios'
 const apiUrl = process.env.REACT_APP_API_BASE_URL;
@@ -14,7 +16,8 @@ const userSlice = createSlice({
     user: {},
     status: STATUSES.SUCCESS,
     isAuthenticated: false,
-    resError:false
+    // resError:false
+    error:null
   },
   reducers: {
     setUser(state, action) {
@@ -27,7 +30,7 @@ const userSlice = createSlice({
       state.isAuthenticated = action.payload;
     },
     setError(state, action){
-        state.resError=action.payload
+        state.error=action.payload
     }
   },
 });
@@ -36,12 +39,13 @@ export default userSlice.reducer;
 
 // Thunk
  // Login// 
-export function login(email, password) {
-  return async function loginThunk(dispatch, getState) {
+export function login({email, password}) {
+  return async function loginThunk(dispatch) {
     dispatch(setStatus(STATUSES.LOADING));
     dispatch(setAuthention(false));
+    dispatch(setError(null))
     try {
-      // console.log('keywordSlice', keyword)
+      console.log(email, password)
       // let link = `/api/v1/products?keyword=${keyword}&page=${currPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&raings[gte]=${ratings}`
       // if(category){
       //     link = `/api/v1/products?keyword=${keyword}&page=${currPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}`
@@ -50,40 +54,85 @@ export function login(email, password) {
       // const res = await fetch('/api/v1/login', {email, password}, config)
 
       let loginResponse = await fetch(`${apiUrl}/api/v1/login`, {
-        method: "Post",
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
         credentials:'include',
-        body: JSON.stringify({
-          email: email.email,
-          password: password.password,
-        }),
+        // body: JSON.stringify({
+        //   email:email.email,
+        //   password:password.password,
+        // }),
+
+        body:JSON.stringify({email, password})
        
       });
       const data = await loginResponse.json();
       // console.log("loginResponse", data);
+      if(!loginResponse.ok){
+        throw new Error (data.message || "Login Failed")
+      }
       
 
+      if(data.status=='failed'){
+        dispatch(setAuthention(false));
+        // dispatch(setError(false))
+      }
+      // else{
+      //   dispatch(setError(true))
+      // }
+      
       dispatch(setUser(data));
-      if(data.status=='success'){
-        dispatch(setAuthention(true));
-        dispatch(setError(false))
-      }
-      else{
-        dispatch(setError(true))
-      }
+      dispatch(setAuthention(true))
       dispatch(setStatus(STATUSES.SUCCESS));
     //   dispatch(setAuthention(true));
     } catch (err) {
       console.log(err);
       dispatch(setUser(null));
+      dispatch(setAuthention(false))
       dispatch(setStatus(STATUSES.ERROR));
-      dispatch(setAuthention(false));
+      dispatch(setError(err.message));
     }
   };
 }
+
+// Google Login Thunk
+
+export const googleLogin = (token) => async (dispatch) => {
+  try {
+    dispatch(setStatus(STATUSES.LOADING));
+    dispatch(setError(null))
+    if(!token){
+      dispatch(setError('Invalid Google credential'))
+      dispatch(setStatus(STATUSES.ERROR))
+    }
+
+    const res = await fetch(`${apiUrl}/api/v1/auth/google`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({ token }),
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) throw new Error(data.message);
+
+    dispatch(setUser(data.user));
+    dispatch(setAuthention(true));
+    dispatch(setStatus(STATUSES.SUCCESS));
+
+  } catch (error) {
+    dispatch(setAuthention(false))
+    dispatch(setUser(null))
+    dispatch(setError(error.message));
+    dispatch(setStatus(STATUSES.ERROR));
+  }
+};
+
 
 // Register//
 
@@ -143,36 +192,42 @@ return async function registerThunk(dispatch, getState) {
 export function clearErr(){
   return async function clearError(dispatch , getState){
     dispatch(setUser(null))
-    dispatch(setError(false))    
+    dispatch(setError(null))    
   }
 }
 
 // Reload Login User //
 
-export function getUser(email, password) {
-  return async function getUserThunk(dispatch, getState) {
+export function getUser() {
+  return async function getUserThunk(dispatch) {
     dispatch(setStatus(STATUSES.LOADING));
-    dispatch(setAuthention(false));
+    dispatch(setError(null));
     try {
 
       let loginResponse = await fetch(`${apiUrl}/api/v1/about/profile`,{credentials:'include'});
       const data = await loginResponse.json();
       // console.log("Reload user Response", data);
+      if(!loginResponse.ok){
+        throw new Error (data.message || "Login Failed")
+      }
       
 
       dispatch(setUser(data));
-      if(data.status=='success'){
-        dispatch(setAuthention(true));
-        dispatch(setError(false))
-      }
-      else{
-        dispatch(setError(true))
-      }
+      dispatch(setAuthention(true))
       dispatch(setStatus(STATUSES.SUCCESS));
+      // if(data.status=='success'){
+      //   dispatch(setAuthention(true));
+      //   dispatch(setError(false))
+      // }
+      // else{
+      //   dispatch(setError(true))
+      // }
+      
     //   dispatch(setAuthention(true));
     } catch (err) {
       console.log(err);
       dispatch(setUser(null));
+      dispatch(setError(err.message))
       dispatch(setStatus(STATUSES.ERROR));
       dispatch(setAuthention(false));
     }

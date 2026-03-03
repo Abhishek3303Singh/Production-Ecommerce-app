@@ -6,7 +6,7 @@ import store from './store/store';
 import {Provider} from 'react-redux'
 import {positions, transitions, Provider as AlertProvider} from 'react-alert'
 import AlertTemplate from 'react-alert-template-basic'
-import { colors } from '@material-ui/core';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 // const options ={
@@ -24,7 +24,9 @@ const options = {
 root.render(
   <Provider store={store}>
     <AlertProvider template={AlertTemplate} {...options}>
+      <GoogleOAuthProvider clientId='998417920667-1gbv4gs7mlugm15e96s9s8002jqtj32o.apps.googleusercontent.com'>
     <App />
+    </GoogleOAuthProvider>
     </AlertProvider>
   </Provider>
 );

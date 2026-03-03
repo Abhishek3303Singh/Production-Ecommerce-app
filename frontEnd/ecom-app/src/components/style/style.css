@@ -100,14 +100,18 @@ input::-webkit-inner-spin-button {
     color: rgb(14, 98, 225);
     font-size: small;
 }
+.login-form{
+    width: 100%;
+}
 
 .input input {
     display: inline;
-    width: 20vw;
+    width: 90%;
     height: 3vh;
     margin-top: 3vh;
     background-color: rgb(252, 254, 254);
     border: none;
+    border-bottom: 1px solid rgb(2, 2, 2);
 
 }
 
@@ -214,17 +218,18 @@ input::-webkit-inner-spin-button {
     background: transparent;
     color: rgb(2, 2, 2);
     font:500 1.5vmax  'Libre Franklin', sans-serif;;
-    width: 200px;
+    width:90%;
+    border-bottom: 1px solid rgb(2, 2, 2);
    
 }
 
-.input-span {
+/* .input-span {
     width: 80%;
     height: 1px;
     border: 1px solid rgba(0, 0, 0, 0.523);
 
     margin-top: 0px;
-}
+} */
 
 .input input::placeholder {
     color: rgba(0, 0, 0, 0.623)
@@ -287,6 +292,10 @@ body {
     .wlcm h2 {
         margin-top: 10vh;
     }
+    .login-form{
+        width: 95%;
+        margin: 1vmax auto;
+    }
     .input{
         align-items: center;
         height: 60vh;
@@ -296,8 +305,8 @@ body {
         font: 600 3.5vmax 'Ysabeau SC', sans-serif ;
     }
     .signup{
-        width: 80%;
-        margin-bottom: 10vmax;
+        width: 90%;
+        margin:0.5vmax auto;
         /* font-size: ; */
        font: 500 2.5vmax 'Ysabeau SC', sans-serif;
 
@@ -310,7 +319,7 @@ body {
         background: transparent;
         color: rgb(2, 2, 2);
         font: 500 2.5vmax  'Libre Franklin', sans-serif;;
-        width: 200px;
+        width: 95%;
     }
     
     .input p a{
@@ -319,9 +328,8 @@ body {
         font-size: medium;
     }
     .signup {
-        width: 80%;
-        margin-top: 3vmax;
-        margin-bottom: 3vmax;
+        width: 90%;
+       margin: 0.5vmax auto;
         font: 500 2.5vmax 'Ysabeau SC', sans-serif;
         height: 7vmax;
     }

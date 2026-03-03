@@ -27,7 +27,7 @@ const addReviewSlice = createSlice({
 
     confirmRewiew(state, action) {
       const index = state.reviews.findIndex((r) => {
-        r.tempId === action.payload.tempId
+       return r.tempId === action.payload.tempId
       });
       if (index !== -1) {
         state.reviews[index] = action.payload
@@ -37,7 +37,7 @@ const addReviewSlice = createSlice({
     // Rollback if API fails
     rollBackReview(state,action){
       state.reviews = state.reviews.filter((r)=>{
-        r.tempId !== action.payload
+       return r.tempId !== action.payload
       })
 
     },
@@ -52,7 +52,7 @@ const addReviewSlice = createSlice({
   },
 });
 
-export const { setReview, setStatus, addOptimisticReview, confirmRewiew, rollBackReview } = addReviewSlice.actions;
+export const { setReview, setStatus, addOptimisticReview, confirmRewiew, rollBackReview, setError } = addReviewSlice.actions;
 export default addReviewSlice.reducer;
 
 // Thunk for Add Review;
@@ -64,7 +64,7 @@ export const addReview = ({ productId, review}) => {
     try {
       dispatch(setStatus(STATUSES.LOADING));
       console.log(review, 'review')
-      const resData = await fetch(`${apiUrl}/api/v1//product/review`, {
+      const resData = await fetch(`${apiUrl}/api/v1/product/review`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -27,7 +27,7 @@ require("dotenv").config({ path: "config/config.env" });
 
 const allowedOrigins = [
   "http://localhost:3000",
-  "https://your-frontend-url.onrender.com",
+  "https://funhubweb.netlify.app/",
 ];
 
 app.use(
