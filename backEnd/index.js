@@ -25,10 +25,34 @@ const { buildTrieSuggestion } = require("./utils/buildTrie");
 // dotenv.config({ path: 'backEnd/dataBase/config/config.env' });
 require("dotenv").config({ path: "config/config.env" });
 
+// const allowedOrigins = [
+//   "http://localhost:3000",
+//   "https://funhubweb.netlify.app/",
+// ];
 const allowedOrigins = [
   "http://localhost:3000",
-  "https://funhubweb.netlify.app/",
+  "https://funhubweb.netlify.app", 
+ 
 ];
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+     
+      if (!origin) return callback(null, true);
+      
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        console.log('CORS blocked origin:', origin); 
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'Accept']
+  })
+);
 
 app.use(
   cors({
