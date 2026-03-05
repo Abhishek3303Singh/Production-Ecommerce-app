@@ -18,7 +18,7 @@ import {
     useStripe,
     useElements
 } from '@stripe/react-stripe-js'
-import  {createNewOrder, clearErr} from '../../store/newOrderSlice'
+import { createNewOrder, clearErr } from '../../store/newOrderSlice'
 const apiUrl = process.env.REACT_APP_API_BASE_URL;
 const Payment = () => {
     const dispatch = useDispatch()
@@ -29,27 +29,27 @@ const Payment = () => {
     const PayAmntBtn = useRef(null)
     const { shippingInfo, cartItems } = useSelector((state) => state.cart)
     const { user } = useSelector((state) => state.user)
-    const {resError ,newOrder} = useSelector((state)=>state.order);
+    const { resError, newOrder } = useSelector((state) => state.order);
 
     const orderDetails = JSON.parse(sessionStorage.getItem('orderInfo'))
     const paymentData = {
-        amount:Math.round(orderDetails.PayableAmount * 100)
+        amount: Math.round(orderDetails.PayableAmount * 100)
     }
 
-    useEffect(()=>{
-        if(resError){
+    useEffect(() => {
+        if (resError) {
             alert.error(newOrder.message.split(':')[0])
             dispatch(clearErr())
         }
-    },[dispatch,resError,alert])
+    }, [dispatch, resError, alert])
 
     const order = {
-        shippingAddress:shippingInfo,
-        orderProduct : cartItems,
-        productPrice:orderDetails.subTotalAmmount,
-        vatPrice:orderDetails.gst,
+        shippingAddress: shippingInfo,
+        orderProduct: cartItems,
+        productPrice: orderDetails.subTotalAmmount,
+        vatPrice: orderDetails.gst,
         shippingPrice: orderDetails.shippingCharges,
-        totalPrice:orderDetails.PayableAmount
+        totalPrice: orderDetails.PayableAmount
     }
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -62,9 +62,20 @@ const Payment = () => {
 
 
             };
-            const { data } = await axios.post(`${apiUrl}/api/v1/payment/process`, 
-            paymentData,
-                config
+            // const { data } = await axios.post(`${apiUrl}/api/v1/payment/process`, 
+            // paymentData,
+            //     config
+            // );
+            const { data } = await axios.post(`${apiUrl}/api/v1/payment/process`,
+                paymentData,
+                {
+                    ...config,
+                    withCredentials: true,  
+                    headers: {
+                        "Content-Type": "application/json",
+                      
+                    }
+                }
             );
             const client_secret = data.client_secret;
             // console.log(client_secret, 'client_secret')
@@ -91,21 +102,21 @@ const Payment = () => {
                     },
                 },
             );
-            if(result.error){
+            if (result.error) {
                 PayAmntBtn.current.disabled = false;
                 alert(result.error.message)
             }
-            else{
-                if(result.paymentIntent.status==='succeeded'){
+            else {
+                if (result.paymentIntent.status === 'succeeded') {
 
                     order.paymentInformation = {
-                        id:result.paymentIntent.id,
-                        status:result.paymentIntent.status
+                        id: result.paymentIntent.id,
+                        status: result.paymentIntent.status
                     };
                     dispatch(createNewOrder(order))
                     navigate('/success')
                 }
-                else{
+                else {
                     alert.error('Unable to complete transaction. Please try again later!!')
                 }
             }
@@ -116,8 +127,8 @@ const Payment = () => {
             alert.error('Request failed!')
             // console.log('error in payment method')
             console.log(e)
-            
-            
+
+
         }
 
     }
@@ -130,7 +141,7 @@ const Payment = () => {
                 <div className="payment-container">
                     <h3>Card Details</h3>
 
-                    <form action="" className='payment-form' onSubmit={(e)=>handleSubmit(e)}>
+                    <form action="" className='payment-form' onSubmit={(e) => handleSubmit(e)}>
 
 
                         <div>
