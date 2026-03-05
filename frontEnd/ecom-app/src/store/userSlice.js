@@ -45,7 +45,7 @@ export function login({email, password}) {
     dispatch(setAuthention(false));
     dispatch(setError(null))
     try {
-      console.log(email, password)
+      // console.log(email, password)
       // let link = `/api/v1/products?keyword=${keyword}&page=${currPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&raings[gte]=${ratings}`
       // if(category){
       //     link = `/api/v1/products?keyword=${keyword}&page=${currPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}`
