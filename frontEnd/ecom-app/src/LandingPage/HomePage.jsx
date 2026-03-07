@@ -282,7 +282,7 @@ const ProdDet = () => {
 
                         <img loading='lazy' src={headphone} alt="" />
                         <div className='overlay'>
-                            <h2 className='animated-text'>Step Up Your Sound Game</h2>
+                            <h2 className='animated-text-promo'>Step Up Your Sound Game</h2>
 
                         </div>
 

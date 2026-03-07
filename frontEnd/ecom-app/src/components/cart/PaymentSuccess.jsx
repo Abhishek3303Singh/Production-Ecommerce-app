@@ -213,7 +213,7 @@ const PaymentSuccess = () => {
                     <div className="action-buttons">
                         <button 
                             className="btn-primary"
-                            onClick={() => navigate('/orders')}
+                            onClick={() => navigate('/my/orders')}
                         >
                             <span className="btn-icon">📋</span>
                             View My Orders
