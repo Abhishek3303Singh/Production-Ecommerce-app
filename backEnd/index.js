@@ -31,26 +31,24 @@ require("dotenv").config({ path: "config/config.env" });
 // ];
 const allowedOrigins = [
   "http://localhost:3000",
-  "https://funhubweb.netlify.app", 
- 
+  "https://funhubweb.netlify.app",
 ];
 
 app.use(
   cors({
     origin: function (origin, callback) {
-     
       if (!origin) return callback(null, true);
-      
+
       if (allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
-        console.log('CORS blocked origin:', origin); 
+        console.log("CORS blocked origin:", origin);
         callback(new Error("Not allowed by CORS"));
       }
     },
     credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'Accept']
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization", "Accept"],
   })
 );
 
@@ -188,10 +186,35 @@ let server = app.listen(PORT, () => {
 });
 
 // Unhandled Promise Rejection
+// process.on("unhandledRejection", (err) => {
+//   console.log(`Error=> ${err.message}`);
+//   console.log("shutting down server!!");
+//   server.close(() => {
+//     process.exit(1);
+//   });
+// });
+
 process.on("unhandledRejection", (err) => {
-  console.log(`Error=> ${err.message}`);
-  console.log("shutting down server!!");
-  server.close(() => {
-    process.exit(1);
+  console.error("❌ Unhandled Rejection:", err);
+  console.error("Error details:", {
+    message: err.message,
+    stack: err.stack,
+    name: err.name,
   });
+
+  // Checking if it's a critical error that requires shutdown
+  const isCritical =
+    err.message.includes("database") ||
+    err.message.includes("Mongo") ||
+    err.message.includes("connection");
+
+  if (isCritical) {
+    console.log("⚠️ Critical error - shutting down gracefully...");
+    server.close(() => {
+      process.exit(1);
+    });
+  } else {
+    console.log("⚠️ Non-critical error - server continues running");
+    // Server continues running
+  }
 });
