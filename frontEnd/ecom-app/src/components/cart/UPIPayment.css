@@ -1,0 +1,283 @@
+.upi-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 0 15px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+}
+
+/* Header Styles */
+.upi-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 25px 20px;
+    border-radius: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 10px 20px rgba(102, 126, 234, 0.2);
+    text-align: center;
+}
+
+.upi-header h2 {
+    margin: 0 0 10px 0;
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.amount-display {
+    font-size: 1.4rem;
+    font-weight: 500;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 10px 20px;
+    border-radius: 50px;
+    display: inline-block;
+}
+
+/* Quick Apps Section */
+.quick-options {
+    background: white;
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.quick-options h3 {
+    margin: 0 0 15px 0;
+    color: #333;
+    font-size: 1.2rem;
+}
+
+.app-icons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.app-icon {
+    background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
+    padding: 12px 20px;
+    border-radius: 50px;
+    font-weight: 600;
+    color: #495057;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex: 0 1 auto;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.app-icon:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+/* Form Styles */
+.upi-form-container {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.form-group small {
+    display: block;
+    margin-top: 8px;
+    color: #6c757d;
+    font-size: 0.85rem;
+}
+
+/* UPI Examples */
+.upi-examples {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 15px 0;
+}
+
+.upi-example-tag {
+    background: #f0f3ff;
+    color: #667eea;
+    padding: 8px 15px;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid #d0d9ff;
+}
+
+.upi-example-tag:hover {
+    background: #667eea;
+    color: white;
+    border-color: #667eea;
+}
+
+/* Pay Button */
+.pay-btn {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 15px 0;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.pay-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.pay-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* Recent UPI IDs */
+.recent-upis {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.recent-upis h4 {
+    margin: 0 0 10px 0;
+    color: #495057;
+    font-size: 1rem;
+}
+
+.recent-id {
+    display: inline-block;
+    background: #f8f9fa;
+    padding: 8px 15px;
+    border-radius: 25px;
+    margin: 0 5px 5px 0;
+    font-size: 0.9rem;
+    color: #495057;
+    cursor: pointer;
+    border: 1px solid #dee2e6;
+}
+
+.recent-id:hover {
+    background: #e9ecef;
+    border-color: #adb5bd;
+}
+
+/* Secure Note */
+.secure-note {
+    text-align: center;
+    margin-top: 20px;
+    color: #6c757d;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+/* Loading Spinner */
+.spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255,255,255,.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Mobile Responsive */
+@media (max-width: 480px) {
+    .upi-header h2 {
+        font-size: 1.5rem;
+    }
+    
+    .amount-display {
+        font-size: 1.2rem;
+        padding: 8px 15px;
+    }
+    
+    .app-icons {
+        gap: 10px;
+    }
+    
+    .app-icon {
+        padding: 10px 15px;
+        font-size: 0.9rem;
+    }
+    
+    .upi-form-container {
+        padding: 20px;
+    }
+    
+    .form-group input {
+        padding: 12px;
+        font-size: 0.95rem;
+    }
+    
+    .pay-btn {
+        padding: 14px;
+        font-size: 1.1rem;
+    }
+    
+    .upi-example-tag {
+        padding: 6px 12px;
+        font-size: 0.85rem;
+    }
+}
+
+/* Animation for payment processing */
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.processing {
+    animation: pulse 1.5s ease-in-out infinite;
+}

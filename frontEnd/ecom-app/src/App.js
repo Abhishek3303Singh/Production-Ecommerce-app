@@ -1,5 +1,5 @@
 import Nav from "./components/routes/Nav";
-import Navbar from "./components/routes/Navbar"
+import Navbar from "./components/routes/Navbar";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Footer from "./components/routes/footer/Footer";
@@ -43,13 +43,20 @@ import AllReviews from "./Admin/AdminReviews/AllReviews";
 import Error from "./components/cart/Error";
 import AddBanner from "./Admin/AdminBanner/AddBanner";
 import PageNotFound from "./components/layout/not-found/PageNotFound";
+import PaymentMode from "./components/cart/PaymentMode";
+import QRPayment from "./components/cart/QRPayment";
+import UPIPayment from "./components/cart/UPIPayment";
+import RazorpayPayment from "./components/cart/RazorpayPayment";
+import PaymentSuccess from "./components/cart/PaymentSuccess";
 const apiUrl = process.env.REACT_APP_API_BASE_URL;
 const App = () => {
   const [stripeApiKey, setStripeApiKey] = useState("");
   const dispatch = useDispatch();
 
   async function getStripeApiKey() {
-    const resData = await fetch(`${apiUrl}/api/v1/stripekey`,{credentials:'include'});
+    const resData = await fetch(`${apiUrl}/api/v1/stripekey`, {
+      credentials: "include",
+    });
     const data = await resData.json();
     // console.log("stripeApiKey", data);
     setStripeApiKey(data.stripeApiKey);
@@ -104,6 +111,7 @@ const App = () => {
               path="/order/confirm"
               element={<ConfirmOrder />}
             ></Route>
+            <Route exact path="/payment/mode" element={<PaymentMode />}></Route>
             {/* <Route path="/process/payment" element={<Elements stripe={loadStripe(stripeApiKey)}> <Payment /> </Elements } ></Route>  */}
             {stripeApiKey && (
               <Route
@@ -117,6 +125,14 @@ const App = () => {
                 }
               ></Route>
             )}
+            <Route path="/payment/upi" element={<UPIPayment />} />
+            <Route path="/payment/qr" element={<QRPayment />} />
+            <Route path="/payment/razorpay" element={<RazorpayPayment />} />
+            <Route
+              path="/payment/razorpay/upi"
+              element={<RazorpayPayment method="upi" />}
+            />
+            <Route path="/payment/success" element={<PaymentSuccess/>}></Route>
 
             <Route exact path="/success" element={<Success />}></Route>
 
@@ -186,8 +202,7 @@ const App = () => {
             path="/password/reset/:token"
             element={<ResetPassword />}
           ></Route>
-          <Route path="*" element={<PageNotFound />}>
-          </Route>
+          <Route path="*" element={<PageNotFound />}></Route>
         </Routes>
 
         <Footer />
