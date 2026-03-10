@@ -85,6 +85,7 @@ const App = () => {
 
       <BrowserRouter>
         <Navbar />
+       
 
         <Routes>
           {/* {stripeApiKey && (

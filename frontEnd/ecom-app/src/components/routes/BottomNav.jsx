@@ -1,64 +1,104 @@
-import React from 'react'
-import './bottomNav.css'
-import {BiGridAlt} from 'react-icons/bi'
-import {BsCart2} from 'react-icons/bs'
-import {MdPersonOutline} from 'react-icons/md'
-import {RiLoginBoxLine} from 'react-icons/ri'
-import {useSelector} from 'react-redux'
-import { Link } from 'react-router-dom'
-import { useNavigate } from 'react-router-dom'
-import Dropdown from './Dropdown'
-import { useState } from 'react'
-import 'animate.css'
+import React, { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import './bottomNav.css';
+import MobileCategorySideBar from '../products/MobileCategorySideBar';
+
 const BottomNav = () => {
-    const {cartItems} = useSelector((state)=>state.cart)
-    const {isAuthenticated, user} = useSelector((state)=>state.user)
-    const navigate = useNavigate()
-    const [showDropdown, setShowDromdown] = useState(false)
-    function prod(){
-        navigate('/products')
+    const location = useLocation();
+    const navigate = useNavigate();
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    // Get cart items from Redux
+    const { cartItems } = useSelector((state) => state.cart);
+    const { user, isAuthenticated } = useSelector((state) => state.user);
+
+    // Calculate total number of items in cart
+    const cartItemsCount = cartItems?.reduce((total, item) => total + (item.quantity || 1), 0) || 0;
+
+    // Scroll to top when route changes
+    useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }, [location.pathname]);
+
+    // Get user's first name or display name
+    const getUserDisplayName = () => {
+        if (!user) return 'Profile';
+
+        // Try to get first name from different possible fields
+        const fullName = user.name || '';
+        const firstName = fullName.split(' ')[0];
+        return firstName || 'Profile';
+    };
+
+    const handleNavigation = (path) => {
+        navigate(path);
+    };
+    function toggleCategorySidebar(){
+        setIsSidebarOpen(!isSidebarOpen)
     }
-    function cart(){
-        navigate('/cart')
-    }
-    function account(){
-        // navigate('/profile')
-        if(isAuthenticated){
-            setShowDromdown(!showDropdown)
 
-        }
-        else{
-            navigate('/login')
-        }
-    }
-    // console.log(user.name)
+    return (
+        <div className="bottom-nav">
+            <div className="bottom-nav-icons">
+                {/* Home Link */}
+                <button
+                    className={`nav-item ${location.pathname === '/' ? 'active' : ''}`}
+                    onClick={() => handleNavigation('/')}
+                >
+                    <span className="nav-icon">🏠</span>
+                    <span className="nav-label">Home</span>
+                </button>
 
-  return (
-    <>
-   
-   {
-     isAuthenticated && showDropdown && <div className={`animate__animated ${showDropdown?'animate__bounceInRight':'animate__fadeOutRight'} drop-container `}>
-     <Dropdown/>
- 
-     </div>
-   }
-    <header className='bottom-nav-header'>
-        <div className='shop' >
-            <BiGridAlt onClick={prod}/>
+                {/* Products Link - NEW */}
+                <button
+                    className={`nav-item ${location.pathname.includes('/products') ? 'active' : ''}`}
+                    onClick={() => handleNavigation('/products')}
+                >
+                    <span className="nav-icon">🛍️</span>
+                    <span className="nav-label">Products</span>
+                </button>
+
+                <button
+                    className={`nav-item ${isSidebarOpen ? 'active' : ''}`}
+                    onClick={toggleCategorySidebar}
+                    >
+                    <span className="nav-icon">📊</span>
+                    <span className="nav-label">Categories</span>
+                </button>
+
+                {/* Cart Link with Item Count */}
+                <button
+                    className={`nav-item cart-item ${location.pathname === '/cart' ? 'active' : ''}`}
+                    onClick={() => handleNavigation('/cart')}
+                >
+                    <span className="nav-icon">🛒</span>
+                    <span className="nav-label">Cart</span>
+                    {cartItemsCount > 0 && (
+                        <span className="cart-badge">{cartItemsCount}</span>
+                    )}
+                </button>
+
+                {/* Profile/Auth Link */}
+                <button
+                    className={`nav-item ${location.pathname.includes('/profile') || location.pathname.includes('/login') ? 'active' : ''}`}
+                    onClick={() => handleNavigation(isAuthenticated ? '/profile' : '/login')}
+                >
+                    <span className="nav-icon">👤</span>
+                    <span className="nav-label">
+                        {isAuthenticated ? getUserDisplayName() : 'Login'}
+                    </span>
+                </button>
+            </div>
+
+            <MobileCategorySideBar 
+            isOpen={isSidebarOpen}
+            onClose={()=>setIsSidebarOpen(false)}
+            />
         </div>
-        <div className='bottom-cart' >
-           <BsCart2 onClick={cart}/><span>{cartItems.length}</span>
-        </div>
-        <div className='bottom-account' onClick={account}>
-            {/* {isAuthenticated?<MdPersonOutline/>:<RiLoginBoxLine  />} */}
-            {isAuthenticated?<span className='bottom-user-name'>{user?.name[0]}</span>:<RiLoginBoxLine  />}
+    );
+};
 
-        </div>
-
-    </header>
-
-    </>
-  )
-}
-
-export default BottomNav
+export default BottomNav;

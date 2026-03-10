@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAlert } from 'react-alert';
@@ -25,6 +25,7 @@ const PaymentSuccess = () => {
 
     // Get payment details from location state or localStorage
     const paymentDetails = state || JSON.parse(sessionStorage.getItem('lastPayment') || '{}');
+    const alertShown = useRef(false)
 
     useEffect(() => {
         // Clear cart after successful payment
@@ -34,7 +35,11 @@ const PaymentSuccess = () => {
         localStorage.removeItem('cartItems');
         
         // Show success message
-        alert.success('Payment successful! Thank you for your purchase.');
+        if(!alertShown.current){
+            alert.success('Payment successful! Thank you for your purchase.');
+            alertShown.current= true
+        }
+        
         
         // Stop confetti after 5 seconds
         const confettiTimer = setTimeout(() => {
@@ -62,7 +67,7 @@ const PaymentSuccess = () => {
             clearTimeout(redirectTimer);
             clearInterval(countdownInterval);
         };
-    }, [dispatch, navigate, alert]);
+    }, [dispatch, navigate]);
 
     useEffect(() => {
         // Update window dimensions on resize

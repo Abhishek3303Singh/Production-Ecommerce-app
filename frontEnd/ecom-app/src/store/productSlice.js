@@ -37,11 +37,12 @@ export function getAllProducts(keyword='', currPage=1, price=[0, 50000], categor
         
         dispatch(setStatus(STATUSES.LOADING))
         try{
-            console.log('Api Called')
+            // console.log('Api Called')
             let link = `${apiUrl}/api/v1/products?keyword=${keyword}&page=${currPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&raings[gte]=${ratings}`
             if(category){
                 link = `${apiUrl}/api/v1/products?keyword=${keyword}&page=${currPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}`
             }
+            console.log(link, 'link')
             const res = await fetch(link, {credentials:'include'})
             const data = await res.json();
             // console.log("searchedData",data)

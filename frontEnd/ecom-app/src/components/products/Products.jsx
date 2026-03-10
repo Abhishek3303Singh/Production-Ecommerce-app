@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getAllProducts } from "../../store/productSlice";
 import { STATUSES } from "../../store/productSlice";
 import Loader from "../layout/loader/Loader";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import './products.css';
 
 import FiltersPanel from "./FiltersPanel";
@@ -32,15 +32,53 @@ const Products = () => {
     )
     const { keyword } = useParams();
     const location = useLocation()
+    const navigate = useNavigate()
 
     const searchParams = new URLSearchParams(location.search)
-    const paramName = searchParams.get('productName')
+    // const paramName = searchParams.get('productName')
     const dispatch = useDispatch();
     const { products, status, productsCount, responseStatus, itemPerPage, filterProductcount } = useSelector((state) => state.product);
-
+// Reading filters from URL on component mount and when URL changes
     useEffect(() => {
-        setCategory(paramName)
-    }, [])
+        
+        const minPrice = Number(searchParams.get('price[gte]')) || 0;
+        const maxPrice = Number(searchParams.get('price[lte]')) || 10000;
+        const ratings = Number(searchParams.get('ratings[gte]')) || 0;
+        const categoryParam = searchParams.get('category') || '';
+        setCategory(categoryParam)
+
+        setFilters({
+            price: [minPrice, maxPrice],
+            category: categoryParam,
+            ratings: ratings
+        });
+        setCurrPage(1);
+    }, [location.search])
+    console.log(filters, 'filters data')
+    const updateURL = useCallback((newFilters, page) => {
+        const params = new URLSearchParams();
+        
+        if (newFilters.price[0] > 0) {
+            params.append('price[gte]', newFilters.price[0]);
+        }
+        if (newFilters.price[1] < 50000) {
+            params.append('price[lte]', newFilters.price[1]);
+        }
+        if (newFilters.ratings > 0) {
+            params.append('ratings[gte]', newFilters.ratings);
+        }
+        if (newFilters.category) {
+            params.append('category', newFilters.category);
+        }
+        if (page > 1) {
+            params.append('page', page);
+        }
+        
+        const queryString = params.toString();
+        const basePath = keyword ? `/products/${keyword}` : '/products';
+        navigate(`${basePath}${queryString ? `?${queryString}` : ''}`, { replace: true });
+        
+    }, [navigate, keyword]);
 
     const categoryRef = useRef(null);
 
@@ -67,7 +105,8 @@ const Products = () => {
     console.log('keyword', category)
 
     useEffect(() => {
-        dispatch(getAllProducts(keyword, currPage, filters.price, filters.category, filters.ratings))
+        dispatch(getAllProducts(keyword || '', currPage, filters.price, filters.category, filters.ratings))
+        updateURL(filters, currPage);
     }, [dispatch, keyword, currPage, filters.price, filters.category, filters.ratings])
 
     // let count = filterProductcount

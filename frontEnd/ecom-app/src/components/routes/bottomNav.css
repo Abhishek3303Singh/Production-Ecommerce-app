@@ -1,60 +1,175 @@
-.bottom-nav-header {
-    display: none;
-}
-.drop-container{
-    display: none;
+.bottom-nav {
+    display: none; /* Hidden by default on desktop */
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: white;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    padding: 8px 0;
+    border-top: 1px solid #e0e0e0;
 }
 
-@media screen and (max-width:768px) {
-    .bottom-nav-header{
-        /* margin-top: 2vmax; */
-        width: 100%;
-        padding: 1.5vmax 0;
+@media (max-width: 768px) {
+    .bottom-nav {
+        display: block;
+    }
+
+    .bottom-nav-icons {
         display: flex;
         justify-content: space-around;
         align-items: center;
-        box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
-        font-size: 3.5vmax;
-        position: sticky;
-        background:linear-gradient(to right, #050f1b, #240224);
-        color: rgb(59, 225, 250);
-        font-weight: 700;
-        bottom:0px;
-        z-index: 1;
-        /* position: relative; */
+        max-width: 600px;
+        margin: 0 auto;
     }
-    .shop{
-        font-size: 3vmax;
+
+    .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-decoration: none;
+        color: #666;
+        font-size: 12px;
+        transition: all 0.3s ease;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 5px 10px;
+        position: relative;
+        min-width: 60px;
     }
-    .bottom-cart{
+
+    .nav-item:hover {
+        color: #2874f0;
+    }
+
+    .nav-item.active {
+        color: #2874f0;
+        font-weight: 500;
+    }
+
+    .nav-icon {
+        font-size: 24px;
+        margin-bottom: 4px;
+    }
+
+    .nav-label {
+        font-size: 11px;
+        white-space: nowrap;
+        max-width: 60px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    /* Cart Badge Styles */
+    .cart-item {
         position: relative;
     }
-    
-    .bottom-cart>span{
-        position: absolute;
-        font-size: 1.7vmax;
-        left: 20px;
-        bottom: 25px;
 
-        border-radius: 50%;
-        padding: 0 1vmax;
-        background-color: rgb(5, 220, 253);;
+    .cart-badge {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        background: #ff6b6b;
         color: white;
-    }
-    .drop-container{
-        display: block;
-        position: fixed;
-        bottom: 34.5vmax;
-        right: 160px;
-        z-index: 2;
-    }
-    .animate__animated.animate__bounceInRight{
-        --animate-duration: 1s;
-    }
-    .bottom-user-name{
-        border: 1px solid white;
-        padding: 0 1.5vmax;
         border-radius: 50%;
-        background-color: #fff;
+        min-width: 18px;
+        height: 18px;
+        font-size: 11px;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 4px;
+        border: 2px solid white;
+        animation: pulse 2s infinite;
     }
+
+    @keyframes pulse {
+        0% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.1);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+
+    /* Active state indicator */
+    .nav-item.active::after {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 30px;
+        height: 3px;
+        background: #2874f0;
+        border-radius: 3px 3px 0 0;
+    }
+
+    /* Add padding to body to prevent content hiding behind bottom nav */
+    body {
+        padding-bottom: 70px;
+    }
+}
+
+/* For very small screens */
+@media (max-width: 380px) {
+    .nav-label {
+        font-size: 10px;
+    }
+    
+    .nav-icon {
+        font-size: 22px;
+    }
+    
+    .nav-item {
+        min-width: 50px;
+    }
+}
+
+/* Update your existing nav-item.active style */
+.nav-item.active {
+    color: #2874f0;
+    font-weight: 500;
+}
+
+/* Add this for category button when sidebar is open */
+.nav-item.active-category {
+    color: #2874f0;
+    font-weight: 500;
+}
+
+/* Optional: Add a small indicator that sidebar is open */
+.nav-item.category-open::after {
+    content: '';
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    width: 8px;
+    height: 8px;
+    background: #4CAF50;
+    border-radius: 50%;
+    border: 2px solid white;
+}
+
+/* Animation for cart badge update */
+@keyframes badgePop {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.3);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.cart-badge.update {
+    animation: badgePop 0.3s ease;
 }
