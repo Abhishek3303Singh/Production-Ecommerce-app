@@ -8,22 +8,35 @@ const jwt = require('jsonwebtoken')
 const Schema = mongoose.Schema;
 // const {forgotPassword} = ('../route')
 const userSchema = mongoose.Schema({
-  email: String,
-  name: String,
-  phone: Number,
-  password: {
-    type: String,
-    // select: false,
+  email: {
+    type:String,
+    required:true,
+    unique:true,
+    lowercase:true
   },
+
+  name: {
+    type:String,
+    required:true
+  },
+  phone: {
+    type:String
+  },
+  password: {
+  type: String,
+  select: false,
+  required: function () {
+    return this.provider === "local";
+  }
+},
   ProfilePic: {
-    public_id: {
-      type: String,
-      // required: true,
-    },
-    url: {
-      type: String,
-      // require: true,
-    },
+    public_id: String,
+    url: String
+  },
+  provider:{
+    type:String,
+    enum:['local', 'google'],
+    default:'local'
   },
   role: {
     type: String,
@@ -39,9 +52,11 @@ const userSchema = mongoose.Schema({
 });
 
 userSchema.methods.getJWTToken = function () {
-  return jwt.sign({ id: this._id }, secretKey, {
-    expiresIn: Math.floor(Date.now() / 1000) + 60 * 60,
-  });
+  return jwt.sign(
+    { id: this._id }, // This creates { id: "user_id" }
+    secretKey,
+    { expiresIn: '7d' } 
+  );
 };
 
 userSchema.methods.getresetPassordtoken = function () {

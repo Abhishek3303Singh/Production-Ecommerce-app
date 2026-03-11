@@ -32,9 +32,11 @@ import RecentlyViewedSlider from './RecentlyViewedSlider';
 
 const ProdDet = () => {
     const [imgIndex, setImageIndex] = useState(0)
+    const [recentlyViewed, setRecentlyViewed] = useState([]);
     const { products, status, } = useSelector((state) => state.product);
     const { banners, status: bannerStatus, resError, isCreated } = useSelector((state) => state.createBanner)
     const {trending, bestSellers, status:recomStatus, error} = useSelector((state)=>state.recommendedProd)
+    const {user,isAuthenticated} = useSelector((state)=>state.user)
     const [currentIndex, setCurrentIndex] = useState(0);
     const navigate = useNavigate()
 
@@ -75,6 +77,10 @@ const ProdDet = () => {
         dispatch(fetchProductLists('trending'))
         dispatch(fetchProductLists('bestseller'))
     },[dispatch])
+    useEffect(() => {
+        const viewed = JSON.parse(localStorage.getItem("recentlyViewed")) || [];
+        setRecentlyViewed(viewed);
+    }, []);
     const maxDesktopIndex = Math.max(products?.length - 5, 0);
     const maxMobileIndex = Math.max(products?.length - 1, 0)
     const handlePrev = useCallback(() => {
@@ -132,11 +138,11 @@ const ProdDet = () => {
         return trending?.tendingProd?.slice(currentIndex, currentIndex + 1);
     }, [products, currentIndex]);
 
-    let recentlyViewed =[]
-    useEffect(()=>{
-       recentlyViewed  = JSON.parse(localStorage.getItem("recentlyViewed")) || []
-    },[recentlyViewed])
-
+    // let recentlyViewed =[]
+    // useEffect(()=>{
+    //    recentlyViewed  = JSON.parse(localStorage.getItem("recentlyViewed")) || []
+    // },[recentlyViewed])
+    const hasRecentlyViewed = recentlyViewed && recentlyViewed.length > 0;
     if (bannerStatus === 'loading' || status === 'loading' || !banners?.banners) {
         return <Loader />
     }
@@ -169,9 +175,22 @@ const ProdDet = () => {
                 </div>
 
                 <div className='prod-card-container'>
-                    <div className='pro-card1' onClick={() => { navigate(`/products?productName=Gym`) }}>
+                    <div className='pro-card1' >
+                        <div className="login-card">
+                            {
+                                isAuthenticated ? <> <h2>Hi {user&&user?.user?.name} </h2>
+                                <button onClick={() => { navigate(`/profile`) }}>See your profile</button></>
+                                :
+                                <><h2>Sign in for your best experience</h2>
+                                <button onClick={() => { navigate(`/login`) }}>Sign in securely</button></>
+                            }
+                            
+                        </div>
+                        <div className='prod-card-1-inner-contener' onClick={() => { navigate(`/products?productName=Gym`) }}>
                         <h2>Up to 70% off on Gym Products</h2>
-                        <img loading='lazy' src={bag} alt="" /></div>
+                        <img loading='lazy' src={bag} alt="" />
+                        </div>
+                       </div>
                     <div className='pro-card2' onClick={() => { navigate(`/products?productName=Electronics`) }}>
                         <h2>Up to 50% off | PC Accessiories</h2>
                         <img loading='lazy' src={pcaso} alt="" /></div>
@@ -207,7 +226,12 @@ const ProdDet = () => {
                         </div>
                     </div>
                 </div>
-               <RecentlyViewedSlider/>
+                {
+                    hasRecentlyViewed &&(<RecentlyViewedSlider/>)
+                }
+                {!hasRecentlyViewed && (
+                    <div className="spacer-for-no-recent" style={{ height: '80px' }} />
+                )}
                 {/* Lazy Rendering Slider */}
                 <div ref={desktopRef}>
                     {!isMobile &&
@@ -221,7 +245,7 @@ const ProdDet = () => {
                                 <div className='display-product-container'>
                                 <div className="product-cont">
                                 
-                                   {recomStatus==STATUSES.LOADING?<h1>LOADING...</h1>:<ProductSlider products={desktopProducts} />} 
+                                   {recomStatus===STATUSES.LOADING ? <h1>LOADING...</h1>:<ProductSlider products={desktopProducts} />} 
                                 </div>
                                 </div>
                                 <button className='left-shift' onClick={handlePrev}>&lt;</button>
@@ -255,7 +279,7 @@ const ProdDet = () => {
 
                                             ))
                                         } */}
-                                        {recomStatus==STATUSES.LOADING?<h1>LOADING...</h1>:<ProductSlider products={mobileProduct} />}
+                                        {recomStatus===STATUSES.LOADING?<h1>LOADING...</h1>:<ProductSlider products={mobileProduct} />}
                                         
                                     </div>
 

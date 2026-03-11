@@ -32,7 +32,7 @@ exports.paymentProcess= async(req, res, next)=>{
 
 exports.stripeKeySend= async(req, res, next)=>{
     try{
-        console.log('StripeApiKey=',process.env.STRIPE_API_KEY)
+        // console.log('StripeApiKey=',process.env.STRIPE_API_KEY)
         res.status(200).json({
             status:'success',
             stripeApiKey:`${process.env.STRIPE_API_KEY}`

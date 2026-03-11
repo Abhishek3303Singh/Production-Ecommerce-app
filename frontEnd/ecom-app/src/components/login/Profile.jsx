@@ -109,6 +109,7 @@ const Profile = () => {
                 </div>
                 <div className="profile-info">
                     <div className="profile-avatar">
+                        {/* <img src={user?.user?.ProfilePic?.url} alt="" /> */}
                         <span className="avatar-text">{getUserInitials()}</span>
                     </div>
                     <div className="profile-details">

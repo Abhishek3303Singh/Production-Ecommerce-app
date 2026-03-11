@@ -80,34 +80,80 @@ html{
     grid-template-columns: 0.1fr 3fr 3fr 3fr 3fr 0.1fr;
     gap: 1.5vmax;
     z-index: 2;
+    height: 380px;
     position: absolute;
     top: 300px;
 }
 
 .pro-card1 {
     grid-column: 2/3;
-    background-color: #fff;
+    /* background-color: #fff; */
     height: 100%;
     position: relative;
     margin-bottom: 0;
     margin-top: 0;
     overflow: hidden;
-    padding-top: 20px;
+    
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    gap: 5%;
 
 
 }
+.login-card{
+    height: 30%;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.prod-card-1-inner-contener{
+    height:65%;
+    background-color: #fff;
+}
+.login-card>button{
+    border: none;
+    width: 80%;
+    padding: 6px 12px;
+    border-radius: 1vmax;
+   
+    
+   
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+   
+    border: none;
+    
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(156, 236, 214, 0.317);
+}
+.login-card>button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(73, 231, 240, 0.4);
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
 
-.pro-card1>h2 {
+.login-card>button:active {
+    transform: translateY(0);
+}
+.login-card>h2{
+    font-size: 1.5vmax;
+}
+.prod-card-1-inner-contener>h2 {
     text-align: center;
     font-size: 1.2vmax;
 }
 
-.pro-card1>img {
+.prod-card-1-inner-contener>img {
     width: 100%;
     grid-column: 2/3;
 
@@ -426,11 +472,29 @@ html{
         position: relative;
         flex-direction: column;
         width: 100%;
+        height: auto;
         /* grid-template-rows: 1fr; */
         gap: 1.5vmax;
         top: 1vmax;
 
 
+    }
+    .pro-card1{
+        display: flex;
+        flex-direction: column;
+        gap: 1.5vmax;
+        
+    }
+    .login-card{
+        height: 100px;
+    }
+    .login-card>h2{
+        font-size:2.2vmax ;
+    }
+    .prod-card-1-inner-contener>h2{
+        text-align: center;
+        font-size:2.2vmax ;
+        height:100%
     }
 
     .pro-card1>h2,
@@ -527,7 +591,25 @@ html{
     text-align: center;
     animation: wave 2s ease-in-out infinite;
 }
+/* Add this for the conditional spacer */
+.spacer-for-no-recent {
+    width: 100%;
+    height: 80px; /* Adjust this value based on your design */
+    background: transparent;
+}
 
+/* Mobile responsive adjustment */
+@media (max-width: 768px) {
+    .spacer-for-no-recent {
+        height: 60px;
+    }
+}
+
+@media (max-width: 480px) {
+    .spacer-for-no-recent {
+        height: 40px;
+    }
+}
 @keyframes wave {
     0% {
         transform: scale(1);

@@ -10,7 +10,7 @@ import ForgotPassword from "./components/login/ForgotPassword";
 import ResetPassword from "./components/login/ResetPassword";
 // import Products from "./components/products/Products";
 import PrivateComponent from "./components/PrivateComponent";
-import Home from "./components/products/Home";
+
 import Profile from "./components/login/Profile";
 import ProductDetails from "./components/productDetails/ProductDetails";
 // import ProdDet from "./components/productDetails/ProdDet";
@@ -20,7 +20,7 @@ import { getUser } from "./store/userSlice";
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import Cart from "./components/cart/Cart";
-import { ToastContainer, toast } from "react-toastify";
+
 import Shipping from "./components/cart/Shipping";
 import BottomNav from "./components/routes/BottomNav";
 import ConfirmOrder from "./components/cart/ConfirmOrder";

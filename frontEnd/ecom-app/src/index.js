@@ -21,10 +21,11 @@ const options = {
   offset: '40px',
   transition: 'scale',
 }
+console.log(process.env.REACT_APP_GOOGLE_CLIENT_ID, 'google client id')
 root.render(
   <Provider store={store}>
     <AlertProvider template={AlertTemplate} {...options}>
-      <GoogleOAuthProvider clientId='998417920667-1gbv4gs7mlugm15e96s9s8002jqtj32o.apps.googleusercontent.com'>
+      <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
     <App />
     </GoogleOAuthProvider>
     </AlertProvider>
