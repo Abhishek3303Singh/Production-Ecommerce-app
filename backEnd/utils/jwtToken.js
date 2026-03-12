@@ -1,5 +1,6 @@
 const sendToken = (user, statusCode, res) => {
-    const token = user.getJWTToken();
+    // const token = user.getJWTToken();
+    const token = jwt.sign({ id: user._id }, secretKey, { expiresIn: "7d" });
   
     // options for cookie
     const options = {
@@ -9,7 +10,7 @@ const sendToken = (user, statusCode, res) => {
       httpOnly: true,
     };
   
-    res.status(statusCode).cookie("token", token, options).json({
+    res.status(statusCode).cookie("token", token).json({
       success: true,
       user,
       token,

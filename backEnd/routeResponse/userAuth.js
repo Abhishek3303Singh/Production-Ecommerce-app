@@ -73,7 +73,7 @@ exports.register = async (req, res) => {
           maxAge: 7 * 24 * 60 * 60 * 1000,
           secure: process.env.NODE_ENV === 'production',
           httpOnly: true,
-          sameSite: "lax",
+          sameSite:process.env.NODE_ENV === 'production' ? 'none' : 'lax',
 
         })
         .json({
@@ -138,7 +138,7 @@ exports.login = async (req, res) => {
             .cookie("token", token, {
               httpOnly: true,
               secure: process.env.NODE_ENV === "production",
-              sameSite: "lax",
+              sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
               maxAge: 7 * 24 * 60 * 60 * 1000,
 
               //   httpOnly: true,
@@ -289,7 +289,7 @@ exports.googleLogin = async (req, res, next) => {
     res.cookie("token", jwtToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 

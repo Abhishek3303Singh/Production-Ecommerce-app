@@ -21,7 +21,7 @@ const options = {
   offset: '40px',
   transition: 'scale',
 }
-console.log(process.env.REACT_APP_GOOGLE_CLIENT_ID, 'google client id')
+// console.log(process.env.REACT_APP_GOOGLE_CLIENT_ID, 'google client id')
 root.render(
   <Provider store={store}>
     <AlertProvider template={AlertTemplate} {...options}>
