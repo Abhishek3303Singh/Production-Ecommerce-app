@@ -17,12 +17,26 @@ const Navbar = () => {
   const [dropdown, setDropdown] = useState(false);
   const [keyword, setKeyword] = useState("");
   const [suggestions, setSuggestions] = useState([]);
+  const [showSuggestions, setShowSuggestions] = useState(false); 
 
   const cacheRef = useRef({});
+  const searchRef = useRef(null); 
   const navigate = useNavigate();
 
   const { cartItems } = useSelector((state) => state.cart);
   const { user, isAuthenticated } = useSelector((state) => state.user);
+
+  //Handling click outside to close suggestions
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (searchRef.current && !searchRef.current.contains(event.target)) {
+        setShowSuggestions(false);
+      }
+    };
+    
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const handleSearch = () => {
     if (keyword.trim()) {
@@ -31,6 +45,7 @@ const Navbar = () => {
       navigate("/products");
     }
     setSuggestions([]);
+    setShowSuggestions(false); 
   };
 
   const fetchSuggestion = async (searchKey) => {
@@ -38,12 +53,14 @@ const Navbar = () => {
 
     if (!normalizedKey.trim()) {
       setSuggestions([]);
+      setShowSuggestions(false);
       return;
     }
 
-    //CACHE CHECKing
+    // Cache check
     if (cacheRef.current[normalizedKey]) {
       setSuggestions(cacheRef.current[normalizedKey]);
+      setShowSuggestions(true);
       return;
     }
 
@@ -54,18 +71,46 @@ const Navbar = () => {
       );
 
       const data = await res.json();
-        // caching the res data
       cacheRef.current[normalizedKey] = data.suggestionName;
       setSuggestions(data.suggestionName);
+      setShowSuggestions(data.suggestionName.length > 0);
     } catch (err) {
       console.error(err);
+      setSuggestions([]);
+      setShowSuggestions(false);
     }
   };
 
-  //  DEBOUNCING to dealy api call 
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      if (keyword.trim()) {
+        navigate(`/products/${keyword}`);
+      } else {
+        navigate("/products");
+      }
+      setSuggestions([]);
+      setShowSuggestions(false);
+    }
+  };
+
+  //Handling suggestion click
+  const handleSuggestionClick = (item) => {
+    setKeyword(item);
+    setSuggestions([]);
+    setShowSuggestions(false);
+    navigate(`/products/${item}`);
+  };
+
+  //  Debouncing to delay API call
   useEffect(() => {
     const timer = setTimeout(() => {
-      fetchSuggestion(keyword);
+      if (keyword.trim()) {
+        fetchSuggestion(keyword);
+      } else {
+        setSuggestions([]);
+        setShowSuggestions(false);
+      }
     }, 300);
 
     return () => clearTimeout(timer);
@@ -74,12 +119,11 @@ const Navbar = () => {
   return (
     <header className="header">
       <div className="header-content">
-   
+
         <div className="header-logo">
           <Link to="/">F&H</Link>
         </div>
 
-     
         <nav className={`header-nav ${openMenu ? "active" : ""}`}>
           <ul>
             <li>
@@ -114,32 +158,29 @@ const Navbar = () => {
           )}
         </nav>
 
-      
-        <div className="search-wrapper">
+        {/*  Search wrapper with ref for click outside detection */}
+        <div className="search-wrapper" ref={searchRef}>
           <input
             type="text"
             placeholder="Search products..."
             value={keyword}
+            onKeyPress={handleKeyPress}
             onChange={(e) => setKeyword(e.target.value)}
+            onFocus={() => keyword.trim() && suggestions.length > 0 && setShowSuggestions(true)}
           />
 
           <button onClick={handleSearch}>
             <FaSearch />
           </button>
 
-         
-          {suggestions.length > 0 && (
+          {/*  Only show suggestions when showSuggestions is true */}
+          {showSuggestions && suggestions.length > 0 && (
             <div className="suggestion-box">
               <ul>
                 {suggestions.map((item, index) => (
                   <li
                     key={index}
-                    onClick={() => {
-                      navigate(`/products/${item}`);
-                      setSuggestions([]);
-                      setKeyword(item);
-                      
-                    }}
+                    onClick={() => handleSuggestionClick(item)}
                   >
                     {MatchHighlight(item, keyword)}
                   </li>
@@ -149,7 +190,6 @@ const Navbar = () => {
           )}
         </div>
 
-       
         <div className="menu-toggle">
           {!openMenu ? (
             <BiMenuAltRight onClick={() => setOpenMenu(true)} />
@@ -159,7 +199,6 @@ const Navbar = () => {
         </div>
       </div>
 
-      
       {isAuthenticated && dropdown && <Dropdown />}
     </header>
   );

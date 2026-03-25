@@ -5,16 +5,21 @@ class Featurs{
     }
     // Search Products
     search(){
-        const keyword = this.queryString.keyword ?{
-            name:{
-                $regex:this.queryString.keyword,
-                $options: "i",
-            },
-        }:{};
-        // console.log(keyword, 'keyWord')
-        this.query= this.query.find({...keyword});
-        // console.log(this, 'query') 
-        return this;
+        const { keyword } = this.queryString;
+        if (keyword && keyword.trim() !== ''){
+            const searchTerm = keyword.trim();
+            this.query = this.query.find({
+                $or:[
+                    {name:{$regex: searchTerm, $options:'i'}},
+                    { title: { $regex: searchTerm, $options: "i" } },
+                    { brand: { $regex: searchTerm, $options: "i" } },
+                    { description: { $regex: searchTerm, $options: "i" } },
+                    { category: { $regex: searchTerm, $options: "i" } },
+                    { searchKeywords: { $regex: searchTerm, $options: "i" } },
+                ]
+            })
+        }
+        return this
     }
 
     // Filter the Product;
@@ -47,5 +52,15 @@ class Featurs{
         this.query = this.query.limit(itemPerPage).skip(skip)
         return this;
     }
+    sort() {
+        if (this.queryString.sort) {
+          const sortBy = this.queryString.sort.split(',').join(' ');
+          this.query = this.query.sort(sortBy);
+        } else {
+          // Default sort by newest first
+          this.query = this.query.sort({ createdAt: -1 });
+        }
+        return this;
+      }
 }
 module.exports = Featurs

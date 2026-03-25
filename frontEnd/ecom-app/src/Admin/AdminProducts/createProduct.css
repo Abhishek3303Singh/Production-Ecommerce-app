@@ -64,6 +64,127 @@
     background: black;
     color:#fff;
 }
+.search-keywords-section {
+    margin: 5px 0;
+    padding: 15px 0px;
+    width: 100%;
+
+    
+   
+    
+}
+
+.keyword-help-text {
+    font-size: 12px;
+    color: #666;
+    margin: 5px 0 10px 0;
+}
+
+.keyword-input-container {
+    display: flex;
+    width: 100%;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.keyword-input-container input {
+    flex: 1;
+    padding: 10px 0px;
+    width: 80%;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.keyword-input-container input:focus {
+    outline: none;
+    border-color: #2874f0;
+    box-shadow: 0 0 0 2px rgba(40, 116, 240, 0.1);
+}
+
+.add-keyword-btn {
+ 
+    width: 20%;
+    background: black;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s;
+    margin-bottom: 1.2vmax;
+}
+
+.add-keyword-btn:hover {
+    background: #04132a;
+    transform: translateY(-1px);
+}
+
+
+
+.keywords-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 5px;
+}
+
+.keyword-tag {
+    display: inline-flex;
+    align-items: center;
+    background: linear-gradient(135deg, #021806 0%, #2c012e 100%);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    gap: 8px;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.keyword-text {
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.remove-keyword-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 12px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.remove-keyword-btn:hover {
+    background: rgba(255, 255, 255, 0.4);
+    transform: scale(1.1);
+}
+
+.keyword-count {
+    font-size: 12px;
+    color: #666;
+    margin-top: 5px;
+}
 #descriptions{
     resize: none;
     width: 100%;

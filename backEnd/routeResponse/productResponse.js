@@ -5,7 +5,7 @@ const { productsTrie } = require("../utils/buildTrie");
 const Featurs = require("../utils/featurs");
 // const cloudinary = require('cloudinary')
 const cloudinary = require("cloudinary");
-const mongoose =require('mongoose')
+const mongoose = require("mongoose");
 
 // Update Product
 exports.updateProduct = async (req, res) => {
@@ -19,10 +19,24 @@ exports.updateProduct = async (req, res) => {
       });
     }
 
+    if (req.body.searchKeywords) {
+      try {
+        // If it's a string, parse it to array
+        if (typeof req.body.searchKeywords === "string") {
+          req.body.searchKeywords = JSON.parse(req.body.searchKeywords);
+        }
+      } catch (e) {
+        console.error("Error parsing searchKeywords:", e);
+        req.body.searchKeywords = [];
+      }
+    }
+
     if (req.body.Image !== undefined) {
       for (let i = 0; i < reqProduct.Image.length; i++) {
         await cloudinary.v2.uploader.destroy(reqProduct.Image[i].public_id);
       }
+
+
 
       let images = [];
       // console.log(typeof req.body.Image, 'Image-Type!!')
@@ -76,6 +90,7 @@ exports.allProducts = async (req, res) => {
     const featurs = new Featurs(ProductModels.find(), req.query)
       .search()
       .filter()
+      .sort()
       .pagination(itemPerPage);
     //  let allProducts = await ProductModels.find();
     // console.log(featurs, 'featurs')
@@ -196,22 +211,21 @@ exports.bestSeller = async (req, res) => {
     });
   }
 };
-// Recently Viewed Products 
+// Recently Viewed Products
 
-exports.getProductsByIds = async (req, res)=>{
-  try{
-    
-    const {ids} = req.query
-    if(!ids){
+exports.getProductsByIds = async (req, res) => {
+  try {
+    const { ids } = req.query;
+    if (!ids) {
       return res.status(400).json({
-        status:'failed',
-        message:'Product ids not Provided'
-      })
+        status: "failed",
+        message: "Product ids not Provided",
+      });
     }
-    const idsArray = ids.split(',')
+    const idsArray = ids.split(",");
     // ObjectIds Validate
 
-    const idsValid = idsArray?.filter(id=>
+    const idsValid = idsArray?.filter((id) =>
       mongoose.Types.ObjectId.isValid(id)
     );
     if (idsValid?.length > 15) {
@@ -221,26 +235,22 @@ exports.getProductsByIds = async (req, res)=>{
       });
     }
 
-    const products = await ProductModels.find(
-      {
-        _id : {$in:idsValid}
-      }
-    )
+    const products = await ProductModels.find({
+      _id: { $in: idsValid },
+    });
     return res.status(200).json({
-      status:"success",
-      results:products?.length,
-      recentlyViewedProd:products
-    })
-
-
-  }catch(e){
-    console.log(e.message)
+      status: "success",
+      results: products?.length,
+      recentlyViewedProd: products,
+    });
+  } catch (e) {
+    console.log(e.message);
     return res.status(500).json({
-      status:'failed',
-      message:'server error'
-    })
+      status: "failed",
+      message: "server error",
+    });
   }
-}
+};
 
 exports.deleteProduct = async (req, res) => {
   try {

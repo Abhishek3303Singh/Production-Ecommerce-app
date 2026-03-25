@@ -4,7 +4,7 @@ import './createProduct.css'
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import MetaData from '../../components/routes/MetaData'
-import { Button } from "@material-ui/core";
+
 import { clearErr, createNewProduct, resetCreated } from '../../store/createProductSlice'
 import { useAlert } from 'react-alert'
 import { useNavigate } from 'react-router-dom'
@@ -19,6 +19,8 @@ const CreateProduct = () => {
     const [stock, setStock] = useState(0);
     const [image, setImage] = useState([]);
     const [imagePreview, setImagePreview] = useState([]);
+    const [keyword, setKeyword] = useState('');
+    const [searchKeywords, setSearchKeywords] = useState([]);
 
     const dispatch = useDispatch();
     const alert = useAlert()
@@ -75,8 +77,27 @@ const CreateProduct = () => {
     // const handleProductImage = (e) => {
     //     setImage([...e.target.files])
     // }
-
-
+    const handleAddKeyword = () => {
+        if (keyword.trim() === '') {
+            alert.error('Please enter a keyword')
+            return
+        }
+        if (searchKeywords.includes(keyword.trim().toLowerCase())) {
+            alert.error('Keyword already exists')
+            return
+        }
+        setSearchKeywords([...searchKeywords, keyword.trim().toLowerCase()])
+        setKeyword('')
+    }
+    const handleRemoveKeyword = (keywordToRemove) => {
+        setSearchKeywords(searchKeywords.filter(k => k !== keywordToRemove))
+    }
+    const handleKeywordKeyPress = (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault()
+            handleAddKeyword()
+        }
+    }
     function addProductSubmitHandler(e) {
         e.preventDefault()
         console.log(image, 'image')
@@ -85,10 +106,11 @@ const CreateProduct = () => {
         formData.set('title', title)
         formData.set('brand', brand)
         formData.set('price', price)
-        formData.set('offerPrice', offerPrice)  
+        formData.set('offerPrice', offerPrice)
         formData.set('category', category)
         formData.set('description', description)
         formData.set('Stock', stock)
+        formData.set('searchKeywords', JSON.stringify(searchKeywords))
         image.forEach((file) => {
             formData.append("Image", file)
         })
@@ -100,7 +122,7 @@ const CreateProduct = () => {
             alert.success('product created successfully')
             dispatch(resetCreated())
             navigate('/admin/dashboard')
-            
+
 
         }
     }
@@ -162,6 +184,49 @@ const CreateProduct = () => {
                                     </select>
                                 </div>
                             </div>
+                            {/* Search Keywords Section */}
+                            <div className="search-keywords-section">
+                                <label htmlFor="search-keywords">Search Keywords</label>
+                                <p className="keyword-help-text">
+                                    Add keywords to help users find this product in search (e.g., "wireless", "bluetooth", "fitness", "smartwatch")
+                                </p>
+                                <div className="keyword-input-container">
+                                    <input
+                                        type="text"
+                                        id="search-keywords"
+                                        value={keyword}
+                                        onChange={(e) => setKeyword(e.target.value)}
+                                        onKeyPress={handleKeywordKeyPress}
+                                        placeholder="Add search keywords.."
+                                    />
+                                    <button type="button" className="add-keyword-btn" onClick={handleAddKeyword}>
+                                        Add
+                                    </button>
+                                </div>
+
+                                {/* Horizontal Keywords List */}
+                                {searchKeywords.length > 0 && (
+                                    <div className="keywords-list-container">
+                                        <div className="keywords-list">
+                                            {searchKeywords.map((kw, index) => (
+                                                <div key={index} className="keyword-tag">
+                                                    <span className="keyword-text">{kw}</span>
+                                                    <button
+                                                        type="button"
+                                                        className="remove-keyword-btn"
+                                                        onClick={() => handleRemoveKeyword(kw)}
+                                                    >
+                                                        ✕
+                                                    </button>
+                                                </div>
+                                            ))}
+                                        </div>
+                                        <div className="keyword-count">
+                                            {searchKeywords.length} keyword{searchKeywords.length !== 1 ? 's' : ''} added
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
 
 
                             <div>
@@ -174,10 +239,7 @@ const CreateProduct = () => {
                                 <input type="file" name="productImage" id="product-image" accept='image/*' multiple onChange={handleProductImage} />
                             </div>
 
-                            {/* <div className='create-product-image'>
-                                <label htmlFor="product-image">Image</label> <br />
-                                <input type="file" name="productImage" id="product-image"  multiple onChange={(e)=>setImage(e.target.value)} />
-                            </div> */}
+
 
 
 
@@ -191,16 +253,7 @@ const CreateProduct = () => {
 
 
 
-                            {/* <div  className="product-image-preview">
-                                {image?.map((file, index) => (
-                                    <img
-                                        key={index}
-                                        src={URL.createObjectURL(file)}
-                                        alt={`Uploaded image ${index}`}
-                                        style={{ width: '200px', height: '200px', margin: '10px' }}
-                                    />
-                                ))}
-                            </div> */}
+
 
 
                             <div className="product-submit-btn">
