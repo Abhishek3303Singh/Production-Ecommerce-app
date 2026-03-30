@@ -1,11 +1,12 @@
 const ProductModels = require("../dataBase/product/Product");
 require("../dataBase/conf");
-const catchError = require("../middleware/asyncError");
+
 const { productsTrie } = require("../utils/buildTrie");
 const Featurs = require("../utils/featurs");
 // const cloudinary = require('cloudinary')
 const cloudinary = require("cloudinary");
 const mongoose = require("mongoose");
+const redisClient = require("../config/redis");
 
 // Update Product
 exports.updateProduct = async (req, res) => {
@@ -85,7 +86,20 @@ exports.updateProduct = async (req, res) => {
 exports.allProducts = async (req, res) => {
   // return res("this is Error")
   try {
+    const cacheKey = `products:${JSON.stringify(req.query)}`
     let itemPerPage = 8;
+    // first of all we will check redis for requested data if available we will get from that and return it without hitting actual db.
+    const cacheData = await redisClient.get(cacheKey)
+    
+    if(cacheData){
+      return res.json({
+        status:"success",
+        source:"redis",
+        data:JSON.parse(cacheData)
+
+      })
+    }
+   
     const totalProduct = await ProductModels.countDocuments();
     const featurs = new Featurs(ProductModels.find(), req.query)
       .search()
@@ -95,12 +109,24 @@ exports.allProducts = async (req, res) => {
     //  let allProducts = await ProductModels.find();
     // console.log(featurs, 'featurs')
     let allProducts = await featurs.query;
-    // console.log(allProducts)
-    res.status(200).json({
-      status: "success",
+
+    const responseData = {
       allProducts,
       totalProduct,
       itemPerPage,
+    };
+    // Store in redis
+
+
+    await redisClient.setEx(cacheKey, 60, JSON.stringify(responseData))
+    // console.log(allProducts)
+    res.status(200).json({
+      status: "success",
+      source:'db',
+      // allProducts,
+      // totalProduct,
+      // itemPerPage,
+      data:responseData
     });
   } catch (e) {
     res.status(400).json({

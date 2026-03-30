@@ -8,13 +8,14 @@ const { paymentProcess, stripeKeySend,
     
 
 } = require('../routeResponse/paymentResponse');
+const strictLimiter = require('../middleware/strictLimiter')
 
 const {razorpayWebhook} = require('../routeResponse/webhookController')
-router.route("/payment/process").post(isAuthenticated, paymentProcess)
-router.route('/razorpay/order').post(isAuthenticated, createRazorpayOrder)
-router.route('/razorpay/verify').post(isAuthenticated, verifyPayment)
-router.route('/razorpay/payment/:paymentId').get(isAuthenticated, getPaymentDetails)
-router.route('/razorpay/upi-collect').post(isAuthenticated, createUPICollect)
-router.route("/stripekey").get(stripeKeySend)
-router.route('/webhook/razorpay').post(express.raw({type:'application/json'}), razorpayWebhook)
+router.route("/payment/process").post(isAuthenticated, strictLimiter, paymentProcess)
+router.route('/razorpay/order').post(isAuthenticated, strictLimiter, createRazorpayOrder)
+router.route('/razorpay/verify').post(isAuthenticated, strictLimiter, verifyPayment)
+router.route('/razorpay/payment/:paymentId').get(isAuthenticated, strictLimiter, getPaymentDetails)
+router.route('/razorpay/upi-collect').post(isAuthenticated, strictLimiter, createUPICollect)
+router.route("/stripekey").get(strictLimiter, stripeKeySend)
+router.route('/webhook/razorpay').post(express.raw({type:'application/json'}), strictLimiter, razorpayWebhook)
 module.exports = router 

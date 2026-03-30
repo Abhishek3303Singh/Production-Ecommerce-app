@@ -14,11 +14,11 @@ const productSlide= createSlice({
     },
     reducers:{
         setProduct(state, action){
-        state.products = action.payload.allProducts
-        state.productsCount = action.payload.totalProduct
+        state.products = action.payload.data.allProducts
+        state.productsCount = action.payload.data.totalProduct
         state.responseStatus = action.payload.status
-        state.itemPerPage = action.payload.itemPerPage
-        state.filterProductcount = action.payload.filterProductcount
+        state.itemPerPage = action.payload.data.itemPerPage
+        state.filterProductcount = action.payload.data.filterProductcount
         },
         setStatus(state, action){
             state.status = action.payload
@@ -45,7 +45,7 @@ export function getAllProducts(keyword='', currPage=1, price=[0, 50000], categor
             console.log(link, 'link')
             const res = await fetch(link, {credentials:'include'})
             const data = await res.json();
-            // console.log("searchedData",data)
+            console.log("searchedData",data)
     
             dispatch(setProduct(data))
             dispatch(setStatus(STATUSES.SUCCESS))

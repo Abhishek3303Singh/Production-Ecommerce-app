@@ -111,7 +111,7 @@ cloudinary.config({
 
 ///////////////////////////   route/////////////////////////////
 const productEnv = require("./routes/ProductRoute");
-app.use("/api/v1", productEnv);
+app.use("/api/v1",productEnv);
 ////////////////////////////////////////////////////////
 
 //// user Route////////////////
@@ -120,11 +120,11 @@ app.use("/api/v1", userRoute);
 
 /////Order route/////
 const orderRoute = require("./routes/orderRoute");
-app.use("/api/v1", orderRoute);
+app.use("/api/v1",orderRoute);
 
 /// Payment Route
 const payment = require("./routes/paymentRoute");
-app.use("/api/v1", payment);
+app.use("/api/v1",payment);
 
 /// Banner Route
 const banner = require("./routes/banner");
