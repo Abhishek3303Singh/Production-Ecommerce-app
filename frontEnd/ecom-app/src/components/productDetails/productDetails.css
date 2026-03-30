@@ -31,7 +31,7 @@
   }
   
   .prdDetailsCard__detailsBlock1__1 p {
-    font: 500 1vmax cursive;
+    font: 500 1vmax 'Libre Franklin', sans-serif ;
   }
   
   /* Rating section */
@@ -244,7 +244,7 @@
       margin-left: 0px;
     }
     .prdDetailsCard__detailsBlock1__1 p{
-        font: 500 1.75vmax cursive;
+        font: 500 1.75vmax 'Libre Franklin', sans-serif;
     }
     .prdDetailsCard__detailsBlock1__2{
         width: 100%;

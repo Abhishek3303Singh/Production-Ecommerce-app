@@ -1,7 +1,7 @@
 const redisClient = require("../config/redis");
 
 const WINDOW_SIZE = 60; // seconds
-const MAX_REQ = 20;
+let MAX_REQ;
 
 const slidingWindowRateLimiter = async (req, res, next) => {
   try {
@@ -11,8 +11,8 @@ const slidingWindowRateLimiter = async (req, res, next) => {
     } else {
       MAX_REQ = 10;
     }
-    
-    const key = `rate_limit:${req.ip}`;
+    const identifier = req.user?.id || req.ip;
+    const key = `rate_limit:${identifier}`;
     const currTime = Date.now(); // ms
     const windowStart = currTime - WINDOW_SIZE * 1000;
     // removing old req

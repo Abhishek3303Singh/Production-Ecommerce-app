@@ -1,7 +1,7 @@
 const redisClient = require("../config/redis");
 
 const WINDOW_SIZE = 60; // seconds
-const MAX_REQ = 50;
+let MAX_REQ;
 
 const slidingWindowRateLimiter = async (req, res, next) => {
   try {
