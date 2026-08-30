@@ -9,13 +9,7 @@ const orderSchema = new mongoose.Schema({
     landmark: { type: String, required: true },
     country: { type: String, required: true, default: "India" },
     phoneNo: { type: Number, required: true },
-    lat,
-    lng,
-    // Sync GeoJSON (MongoDB expects [lng, lat])
-    location: {
-      type: "Point",
-      coordinates: [lng, lat],
-    },
+    
   },
   orderProduct: [
     {
@@ -50,4 +44,6 @@ const orderSchema = new mongoose.Schema({
   orderStatus: { type: String, required: true, default: "In process" },
   deliveredDate: { type: Date, required: true, default: Date.now() },
 });
+
+
 module.exports = mongoose.model("Order", orderSchema);

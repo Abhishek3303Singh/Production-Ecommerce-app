@@ -146,7 +146,6 @@ const Shipping = () => {
     }
     dispatch(shippingDetails({
       name, address, city, instate, pincode, landmark, country, phoneNo,
-      lat: position[0], lng: position[1]
     }));
     navigate('/order/confirm');
   };

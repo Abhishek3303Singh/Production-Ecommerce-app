@@ -1,5 +1,5 @@
 const {createClient} = require( 'redis')
-console.log('url',process.env.REDIS_URL)
+// console.log('url',process.env.REDIS_URL)
 const redisClient = createClient(
     {
         url: process.env.REDIS_URL
