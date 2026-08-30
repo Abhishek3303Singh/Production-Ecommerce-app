@@ -82,7 +82,7 @@ html{
     z-index: 2;
     height: 380px;
     position: absolute;
-    top: 300px;
+    top: 400px;
 }
 
 .pro-card1 {
@@ -419,6 +419,9 @@ html{
 .product-mobile-cont img {
   aspect-ratio: 1 / 1;
   object-fit: contain;
+}
+.recently-viewed-container{
+    margin-top: 9rem !important;
 }
 
 

@@ -1,0 +1,296 @@
+/* ================= BANNER CAROUSEL ================= */
+
+.banner-carousel {
+  position: relative;
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+/* Hero - Desktop */
+.banner-carousel--hero {
+  height: 600px;
+}
+
+/* Mid - Desktop */
+.banner-carousel--mid {
+  height: 300px;
+  margin: 20px auto;
+}
+
+/* ================= SLIDE ================= */
+
+.banner-slide {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #eaeded; /* placeholder bg while loading */
+}
+
+.banner-slide__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center; /* KEY: was "center top", now centered */
+  display: block;
+}
+
+/* ================= CONTENT OVERLAY ================= */
+
+.banner-slide__content {
+  position: absolute;
+  top: 40px;      /* Amazon puts promos at bottom */
+  left: 40px;
+  z-index: 10;
+  max-width: 600px;
+  padding: 0;
+}
+
+.banner-slide__title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 12px;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+  line-height: 1.15;
+}
+
+.banner-slide__desc {
+  font-size: 1.2rem;
+  color: #ffffff;
+  margin-bottom: 20px;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+}
+
+.banner-slide__cta {
+  padding: 14px 32px;
+  background: #febd69;
+  color: #131921;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.banner-slide__cta:hover {
+  background: #f3a847;
+}
+
+/* ================= GRADIENT OVERLAY ================= */
+
+.banner-slide::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60%;        /* Taller gradient for mobile readability */
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.4) 50%,
+    rgba(0, 0, 0, 0.75) 100%
+  );
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ================= ARROWS ================= */
+
+.banner-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 45px;
+  height: 100px;
+  background: rgba(255, 255, 255, 0.25);
+  border: none;
+  color: white;
+  font-size: 1.8rem;
+  cursor: pointer;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.banner-arrow:hover {
+  background: rgba(255, 255, 255, 0.45);
+}
+
+.banner-arrow--prev {
+  left: 0;
+  border-radius: 0 4px 4px 0;
+}
+
+.banner-arrow--next {
+  right: 0;
+  border-radius: 4px 0 0 4px;
+}
+
+/* ================= DOTS ================= */
+
+.banner-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 0;
+  background: #eaeded;
+}
+
+.banner-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid #888;
+  background: transparent;
+  cursor: pointer;
+}
+
+.banner-dot.active {
+  background: #febd69;
+  border-color: #febd69;
+}
+
+/* ================= SKELETON ================= */
+
+.banner-skeleton {
+  height: 600px;
+  background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ================= TABLET ================= */
+
+@media (max-width: 1024px) {
+  .banner-carousel--hero { height: 420px; }
+  .banner-slide__title { font-size: 2.4rem; }
+  .banner-slide__content { left: 30px; bottom: 30px; max-width: 450px; }
+}
+
+/* ================= MOBILE (Amazon Style) ================= */
+
+@media (max-width: 768px) {
+  
+  /* Full-bleed like Amazon India app */
+  .banner-carousel {
+    max-width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+
+  /* KEY FIX: Portrait aspect ratio for mobile banners */
+  .banner-carousel--hero {
+    height: auto;
+    aspect-ratio: 3 / 4;      /* Portrait (taller than wide) */
+    max-height: 520px;       /* Cap so it doesn't eat the whole screen */
+    min-height: 320px;
+  }
+
+  .banner-carousel--mid {
+    height: auto;
+    aspect-ratio: 16 / 9;
+    max-height: 240px;
+    margin: 12px 0;
+  }
+
+  /* No rounded corners for hero — Amazon uses full-bleed */
+  .banner-slide {
+    border-radius: 0;
+  }
+
+  /* If you want the "card in feed" look instead, swap to this: */
+  /*
+  .banner-slide {
+    border-radius: 12px;
+    margin: 0 10px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+  }
+  */
+
+  /* Stronger gradient for mobile */
+  .banner-slide::after {
+    height: 70%;
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.3) 40%,
+      rgba(0, 0, 0, 0.8) 100%
+    );
+  }
+
+  /* Content at bottom-left like Amazon promos */
+  .banner-slide__content {
+    top: 50px;
+    left: 25px;
+    max-width: 80%;
+  }
+
+  .banner-slide__title {
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.8);
+  }
+
+  .banner-slide__desc {
+    font-size: 0.9rem;
+    margin-bottom: 14px;
+  }
+
+  .banner-slide__cta {
+    padding: 10px 22px;
+    font-size: 0.9rem;
+    border-radius: 6px;
+    margin-left: 25px;
+  }
+
+  /* Smaller arrows */
+  .banner-arrow {
+    width: 32px;
+    height: 64px;
+    font-size: 1.3rem;
+  }
+
+  .banner-dots {
+    padding: 10px 0;
+    gap: 6px;
+  }
+
+  .banner-skeleton {
+    height: auto;
+    aspect-ratio: 3 / 4;
+    max-height: 520px;
+  }
+}
+
+/* ================= SMALL PHONES ================= */
+
+@media (max-width: 480px) {
+  .banner-carousel--hero {
+    aspect-ratio: 3 / 4;
+    max-height: 460px;
+  }
+
+  .banner-slide__content {
+    top: 50px;
+    left: 25px;
+  }
+
+  .banner-slide__title {
+    font-size: 2.5rem;
+  }
+
+  .banner-slide__desc {
+    font-size: 1.85rem;
+  }
+}

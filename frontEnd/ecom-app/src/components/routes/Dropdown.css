@@ -33,7 +33,7 @@
 }
 .drop-icons{
     padding-right: 1vmax;
-    color: aqua;
+    color:white gray;
 }
 .sub-menu-items:hover{
     /* background-color: rgba(255, 255, 255, 0.685); */
@@ -41,4 +41,13 @@
 }
 .drop-sub-menu-clicked{
     display: none;
+}
+@media screen and (max-width: 768px){
+    .drop-sub-menu{
+        display: none;
+    }
+    .drop-sub-menu-clicked{
+        display: none;
+    }
+
 }

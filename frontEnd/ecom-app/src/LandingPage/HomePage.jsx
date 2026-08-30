@@ -16,35 +16,36 @@ import offerProd2 from "../images/offr_prod.png"
 import offerProd3 from "../images/offer_prod3.png"
 import offerProd4 from "../images/off_prd4.jpeg"
 import promotionbnr from "../images/promotion_img.jpg"
-import mobilebnr1 from '../images/mobilebanner.jpg'
-import mobilebnr3 from '../images/yogabanner.jpg'
-import mobilebnr4 from '../images/moblehandband.jpg'
+// import mobilebnr1 from '../images/mobilebanner.jpg'
+// import mobilebnr3 from '../images/yogabanner.jpg'
+// import mobilebnr4 from '../images/moblehandband.jpg'
 
 import { useInView } from 'react-intersection-observer'
 import { fetchProductLists } from '../store/recommndedProdSlice';
 import './homePage.css'
 import ProductSlider from './ProductSlider';
-import { getBanner } from '../store/addBannerSlice';
+import { getBanners } from '../store/addBannerSlice';
 import { useNavigate } from 'react-router-dom';
 import RecommendationSlider from '../components/productDetails/RecommendationSlider';
 import { STATUSES } from '../store/productDetailsSlice';
 import RecentlyViewedSlider from './RecentlyViewedSlider';
+import BannerCarousel from './BannerCarousel';
 
 const ProdDet = () => {
-    const [imgIndex, setImageIndex] = useState(0)
+    // const [imgIndex, setImageIndex] = useState(0)
     const [recentlyViewed, setRecentlyViewed] = useState([]);
     const { products, status, } = useSelector((state) => state.product);
     const { banners, status: bannerStatus, resError, isCreated } = useSelector((state) => state.createBanner)
-    const {trending, bestSellers, status:recomStatus, error} = useSelector((state)=>state.recommendedProd)
-    const {user,isAuthenticated} = useSelector((state)=>state.user)
+    const { trending, bestSellers, status: recomStatus, error } = useSelector((state) => state.recommendedProd)
+    const { user, isAuthenticated } = useSelector((state) => state.user)
     const [currentIndex, setCurrentIndex] = useState(0);
     const navigate = useNavigate()
 
-    const bannerArr = useMemo(() => ([
-        { url: mobilebnr4, text: 'Stay Connected, Stay Stylish' },
-        { url: mobilebnr1, text: 'Escape into Your Own World of Music' },
-        { url: mobilebnr3, text: 'Limited Time Offer: Up to 50% Off!' },
-    ]), [])
+    // const bannerArr = useMemo(() => ([
+    //     { url: mobilebnr4, text: 'Stay Connected, Stay Stylish' },
+    //     { url: mobilebnr1, text: 'Escape into Your Own World of Music' },
+    //     { url: mobilebnr3, text: 'Limited Time Offer: Up to 50% Off!' },
+    // ]), [])
 
     const isMobile = window.innerWidth <= 768;
 
@@ -52,8 +53,8 @@ const ProdDet = () => {
 
 
     const dispatch = useDispatch()
-    const intervalIdRef = useRef(null);
-    const isBannerPause = useRef(false)
+    // const intervalIdRef = useRef(null);
+    // const isBannerPause = useRef(false)
 
 
     const { ref: desktopRef, inView: desktopInView } = useInView({
@@ -70,13 +71,13 @@ const ProdDet = () => {
 
     useEffect(() => {
         dispatch(getAllProducts())
-        dispatch(getBanner())
+        dispatch(getBanners())
 
     }, [dispatch])
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(fetchProductLists('trending'))
         dispatch(fetchProductLists('bestseller'))
-    },[dispatch])
+    }, [dispatch])
     useEffect(() => {
         const viewed = JSON.parse(localStorage.getItem("recentlyViewed")) || [];
         setRecentlyViewed(viewed);
@@ -101,35 +102,35 @@ const ProdDet = () => {
     }, [maxMobileIndex])
 
 
-    const moveToNextBanner = useCallback(() => {
-        const images = banners?.banners?.[0]?.Image
-        if (!images?.length) {
-            return
-        }
-        if (isBannerPause.current) return
+    // const moveToNextBanner = useCallback(() => {
+    //     const images = banners?.banners?.[0]?.Image
+    //     if (!images?.length) {
+    //         return
+    //     }
+    //     if (isBannerPause.current) return
 
-        setImageIndex(prevBannerIndex => (prevBannerIndex === images?.length - 1 ? 0 : prevBannerIndex + 1));
+    //     setImageIndex(prevBannerIndex => (prevBannerIndex === images?.length - 1 ? 0 : prevBannerIndex + 1));
 
-    }, [banners]);
+    // }, [banners]);
 
     // console.log(imgIndex, 'imageIndex')
-    useEffect(() => {
-        const images = banners?.banners?.[0]?.Image
-        if (!images?.length) return
+    // useEffect(() => {
+    //     const images = banners?.banners?.[0]?.Image
+    //     if (!images?.length) return
 
-        intervalIdRef.current = setInterval(moveToNextBanner, 4000);
-        return () => clearInterval(intervalIdRef.current);
-    }, [moveToNextBanner]);
+    //     intervalIdRef.current = setInterval(moveToNextBanner, 4000);
+    //     return () => clearInterval(intervalIdRef.current);
+    // }, [moveToNextBanner]);
 
-    const next = moveToNextBanner
-    const prev = () => {
-        const images = banners?.banners?.[0]?.Image
-        if (!images?.length) return
+    // const next = moveToNextBanner
+    // const prev = () => {
+    //     const images = banners?.banners?.[0]?.Image
+    //     if (!images?.length) return
 
-        setImageIndex(prev =>
-            prev === 0 ? images.length - 1 : prev - 1
-        )
-    }
+    //     setImageIndex(prev =>
+    //         prev === 0 ? images.length - 1 : prev - 1
+    //     )
+    // }
     const desktopProducts = useMemo(() => {
         return trending?.tendingProd?.slice(currentIndex, currentIndex + 5);
     }, [products, currentIndex]);
@@ -143,54 +144,39 @@ const ProdDet = () => {
     //    recentlyViewed  = JSON.parse(localStorage.getItem("recentlyViewed")) || []
     // },[recentlyViewed])
     const hasRecentlyViewed = recentlyViewed && recentlyViewed.length > 0;
-    if (bannerStatus === 'loading' || status === 'loading' || !banners?.banners) {
+    if (bannerStatus === 'loading' || status === 'loading') {
         return <Loader />
     }
 
     return (
         <>
             <div>
-                {/* ProdDet */}
+
             </div>
             <div className='home-product-main-container'>
 
                 <div className='sticker'>
                     <h3> Flat 50% OFF <BiRightArrow /></h3></div>
 
-                <div className='image-silder'
-                    onMouseEnter={() => (isBannerPause.current = true)}
-                    onMouseLeave={() => (isBannerPause.current = false)}
-                >
-                    <img loading='lazy' src={banners && banners?.banners[0]?.Image[imgIndex]?.url} alt="" />
-
-                    <button className='left' onClick={prev}>&lt;</button>
-                    <button className='right' onClick={next}>&gt;</button>
-                </div>
-
-                <div className='mobile-image-slider-container'>
-                    <img loading='lazy' className='slider-image' src={bannerArr && bannerArr[imgIndex].url} alt="" />
-                    <h1 className='slider-text'>
-                        {bannerArr && bannerArr[imgIndex].text}
-                    </h1>
-                </div>
+                    <BannerCarousel position="hero" />
 
                 <div className='prod-card-container'>
                     <div className='pro-card1' >
                         <div className="login-card">
                             {
-                                isAuthenticated ? <> <h2>Hi {user&&user?.user?.name} </h2>
-                                <button onClick={() => { navigate(`/profile`) }}>See your profile</button></>
-                                :
-                                <><h2>Sign in for your best experience</h2>
-                                <button onClick={() => { navigate(`/login`) }}>Sign in securely</button></>
+                                isAuthenticated ? <> <h2>Hi {user && user?.user?.name} </h2>
+                                    <button onClick={() => { navigate(`/profile`) }}>See your profile</button></>
+                                    :
+                                    <><h2>Sign in for your best experience</h2>
+                                        <button onClick={() => { navigate(`/login`) }}>Sign in securely</button></>
                             }
-                            
+
                         </div>
                         <div className='prod-card-1-inner-contener' onClick={() => { navigate(`/products?productName=Gym`) }}>
-                        <h2>Up to 70% off on Gym Products</h2>
-                        <img loading='lazy' src={bag} alt="" />
+                            <h2>Up to 70% off on Gym Products</h2>
+                            <img loading='lazy' src={bag} alt="" />
                         </div>
-                       </div>
+                    </div>
                     <div className='pro-card2' onClick={() => { navigate(`/products?productName=Electronics`) }}>
                         <h2>Up to 50% off | PC Accessiories</h2>
                         <img loading='lazy' src={pcaso} alt="" /></div>
@@ -226,8 +212,11 @@ const ProdDet = () => {
                         </div>
                     </div>
                 </div>
+                <div className="recently-viewed-container">
+
+                </div>
                 {
-                    hasRecentlyViewed &&(<RecentlyViewedSlider/>)
+                    hasRecentlyViewed && (<RecentlyViewedSlider />)
                 }
                 {!hasRecentlyViewed && (
                     <div className="spacer-for-no-recent" style={{ height: '80px' }} />
@@ -238,22 +227,22 @@ const ProdDet = () => {
                         desktopInView && (
 
                             <>
-                          
-                            
-                            <div className='display-main-product-container'>
-                                <h2>Trends you may like</h2>
-                                <div className='display-product-container'>
-                                <div className="product-cont">
-                                
-                                   {recomStatus===STATUSES.LOADING ? <h1>LOADING...</h1>:<ProductSlider products={desktopProducts} />} 
+
+
+                                <div className='display-main-product-container'>
+                                    <h2>Trends you may like</h2>
+                                    <div className='display-product-container'>
+                                        <div className="product-cont">
+
+                                            {recomStatus === STATUSES.LOADING ? <h1>LOADING...</h1> : <ProductSlider products={desktopProducts} />}
+                                        </div>
+                                    </div>
+                                    <button className='left-shift' onClick={handlePrev}>&lt;</button>
+                                    <button className='right-shift' onClick={handleNext}>&gt;</button>
                                 </div>
-                                </div>
-                                <button className='left-shift' onClick={handlePrev}>&lt;</button>
-                                <button className='right-shift' onClick={handleNext}>&gt;</button>
-                            </div>
-                            <RecommendationSlider products={bestSellers?.bestSeller} heading={'Bestsellers'} />
+                                <RecommendationSlider products={bestSellers?.bestSeller} heading={'Bestsellers'} />
                             </>
-                            
+
 
                         )
                     }
@@ -264,34 +253,34 @@ const ProdDet = () => {
                     {isMobile &&
                         mobileInView && (
                             <>
-                             <RecommendationSlider products={bestSellers?.bestSeller} heading={"Bestsellers"} />
-                            <div className='display-main-product-mobile-container'>
-                            
-                                <h2>Trends you may like</h2>
-                                <div className='display-product-mobile-container'>
+                                <RecommendationSlider products={bestSellers?.bestSeller} heading={"Bestsellers"} />
+                                <div className='display-main-product-mobile-container'>
 
-                                    <div className="product-mobile-cont">
-                                        {/* {console.log("mobile card is running!!")} */}
+                                    <h2>Trends you may like</h2>
+                                    <div className='display-product-mobile-container'>
 
-                                        {/* {
+                                        <div className="product-mobile-cont">
+                                            {/* {console.log("mobile card is running!!")} */}
+
+                                            {/* {
                                             products && products?.slice(currentIndex, currentIndex + 1)?.map((item) => (
                                                 <HomeProductImageCard key={item._id} product={item} />
 
                                             ))
                                         } */}
-                                        {recomStatus===STATUSES.LOADING?<h1>LOADING...</h1>:<ProductSlider products={mobileProduct} />}
-                                        
+                                            {recomStatus === STATUSES.LOADING ? <h1>LOADING...</h1> : <ProductSlider products={mobileProduct} />}
+
+                                        </div>
+
+
+                                    </div>
+                                    <div className='mobile-shift-buttons'>
+                                        <button className='left-mobile-shift' onClick={handlePrevMobile}>&lt;</button>
+                                        <button className='right-mobile-shift' onClick={handleNextMobile}>&gt;</button>
+
                                     </div>
 
-
                                 </div>
-                                <div className='mobile-shift-buttons'>
-                                    <button className='left-mobile-shift' onClick={handlePrevMobile}>&lt;</button>
-                                    <button className='right-mobile-shift' onClick={handleNextMobile}>&gt;</button>
-
-                                </div>
-
-                            </div>
                             </>
 
                         )
@@ -301,61 +290,61 @@ const ProdDet = () => {
 
             </div>
 
-                <div className="homepage-card" >
-                    <div className="homeleft-card" onClick={() => { navigate(`/products?productName=Headphone`) }}>
+            <div className="homepage-card" >
+                <div className="homeleft-card" onClick={() => { navigate(`/products?productName=Headphone`) }}>
 
-                        <img loading='lazy' src={headphone} alt="" />
-                        <div className='overlay'>
-                            <h2 className='animated-text-promo'>Step Up Your Sound Game</h2>
-
-                        </div>
-
+                    <img loading='lazy' src={headphone} alt="" />
+                    <div className='overlay'>
+                        <h2 className='animated-text-promo'>Step Up Your Sound Game</h2>
 
                     </div>
 
-                    <div className="right-card">
-
-                        <div className="right-top" onClick={() => { navigate(`/products?productName=Earpods`) }}>
-                            <div className='inner-right-top'>
-                                <img loading='lazy' src={offerProd} alt="" />
-                                <h2>True wireless</h2>
-                                <h3>Top Picks</h3>
-                            </div>
-                            <div className='inner-right-top-two'>
-                                <img loading='lazy' src={offerProd2} alt="" />
-                                <h2>Wrist Watches</h2>
-                                <h3>Min. 70% Off</h3>
-                            </div>
-                        </div>
-                        <div className="bottom-right" onClick={() => { navigate(`/products?productName=Smartband`) }}>
-                            <div className='inner-bottom-right'>
-                                <img loading='lazy' src={offerProd3} alt="" />
-                                <h2>Face Wash</h2>
-                                <h3>Min. 50% Off</h3>
-                            </div>
-                            <div className='inner-bottom-right-two'>
-                                <img loading='lazy' src={offerProd4} alt="" />
-                                <h2>Lockets</h2>
-                                <h3>Min. 50% Off</h3>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div className="end" onClick={() => { navigate(`/products?productName=Smartband`) }}>
-                        <img loading='lazy' src={promotionbnr} alt="" />
-
-                    </div>
 
                 </div>
 
+                <div className="right-card">
 
-                <div className="mobile-main-container">
+                    <div className="right-top" onClick={() => { navigate(`/products?productName=Earpods`) }}>
+                        <div className='inner-right-top'>
+                            <img loading='lazy' src={offerProd} alt="" />
+                            <h2>True wireless</h2>
+                            <h3>Top Picks</h3>
+                        </div>
+                        <div className='inner-right-top-two'>
+                            <img loading='lazy' src={offerProd2} alt="" />
+                            <h2>Wrist Watches</h2>
+                            <h3>Min. 70% Off</h3>
+                        </div>
+                    </div>
+                    <div className="bottom-right" onClick={() => { navigate(`/products?productName=Smartband`) }}>
+                        <div className='inner-bottom-right'>
+                            <img loading='lazy' src={offerProd3} alt="" />
+                            <h2>Face Wash</h2>
+                            <h3>Min. 50% Off</h3>
+                        </div>
+                        <div className='inner-bottom-right-two'>
+                            <img loading='lazy' src={offerProd4} alt="" />
+                            <h2>Lockets</h2>
+                            <h3>Min. 50% Off</h3>
+                        </div>
+
+                    </div>
+                </div>
+                <div className="end" onClick={() => { navigate(`/products?productName=Smartband`) }}>
+                    <img loading='lazy' src={promotionbnr} alt="" />
 
                 </div>
 
+            </div>
 
-            </>
-            )
+
+            <div className="mobile-main-container">
+
+            </div>
+
+
+        </>
+    )
 }
 
-            export default ProdDet
+export default ProdDet

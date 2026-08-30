@@ -4,7 +4,12 @@ require('dotenv').config(); // Load environment variables from .env file
 require("dotenv").config({ path: "config/config.env" });
 
 // console.log(`${process.env.MONGO_DB_PORT}`, 'mongodb connect')
-mongoose.connect(`${process.env.MONGO_DB_PORT}`); 
+mongoose.connect(`${process.env.MONGO_DB_PORT}`,{
+  readPreference:'secondaryPreferred'
+}); 
+// const mongoose = require("mongoose");
+
+mongoose.set("debug", true);
 // const connectionString = process.env.MONGO_DB_PORT;
 // const connectionString1 = process.env.CLOUD_NAME;
 

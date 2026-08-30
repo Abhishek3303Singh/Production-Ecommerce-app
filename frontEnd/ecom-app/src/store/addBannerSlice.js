@@ -1,113 +1,78 @@
-const { createSlice } = require("@reduxjs/toolkit");
+import { createSlice } from "@reduxjs/toolkit";
+
 const apiUrl = process.env.REACT_APP_API_BASE_URL;
-const STATUSES = Object.freeze({
-  SUCCESS: "idle",
+
+export const STATUSES = Object.freeze({
+  IDLE: "idle",
   LOADING: "loading",
   ERROR: "error",
 });
 
-const createBannerSlice = createSlice({
-  name: "createBanner",
+// ================= SLICE =================
+const bannerSlice = createSlice({
+  name: "banner",
   initialState: {
-    createBanner: {},
-    banners:{},
-    status: STATUSES.SUCCESS,
-    resError: false,
-    isCreated: false
+    banners: [],        // ✅ array
+    status: STATUSES.IDLE,
+    headerThemeColor: '#131921',
+    error: null,
+    isCreated: false,
   },
   reducers: {
-    setBanner(state, action) {
-      state.createBanner = action.payload;
-    },
-    setAllBanners(state, action){
-        state.banners = action.payload
+    setBanners(state, action) {
+      state.banners = action.payload;
     },
     setStatus(state, action) {
       state.status = action.payload;
     },
     setError(state, action) {
-      state.resError = action.payload;
+      state.error = action.payload;
     },
-    setIscreated(state, action){
-      state.isCreated = action.payload
+    setCreated(state, action) {
+      state.isCreated = action.payload;
+    },
+    resetBannerState(state) {
+      state.isCreated = false;
+      state.error = null;
+    },
+    setHeaderThemeColor(state, action){
+      state.headerThemeColor = action.payload
     }
   },
 });
 
-export const { setError, setBanner, setStatus,setAllBanners, setIscreated } = createBannerSlice.actions;
-export default createBannerSlice.reducer;
+export const {
+  setBanners,
+  setStatus,
+  setError,
+  setCreated,
+  resetBannerState,
+  setHeaderThemeColor
+} = bannerSlice.actions;
 
-// THunk for Add product
-export const createNewBanner = (formData) => {
-  return async function createNewBannerThunk(dispatch, getState) {
+export default bannerSlice.reducer;
+
+export const getBanners = (position = "hero") => {
+  return async (dispatch) => {
     dispatch(setStatus(STATUSES.LOADING));
-    try {
-      // console.log(formData.get('Image'), 'form-Data-image')
-      const resData = await fetch(`${apiUrl}/api/v1/admin/udate/banner`, {
-        method: "POST",
-        body: formData,
-        credentials:'include'
-      });
-      const data = await resData.json()
-      // console.log(data.get('Image'), 'Data-Add Product')
-      dispatch(setBanner(data))
-      dispatch(setStatus(STATUSES.SUCCESS))
-      if(data.status==='failed'){
-        dispatch(setError(true))
-      }
-      else{
-        dispatch(setError(false))
-        dispatch(setIscreated(true))
-      }
-    }
 
-    
-    catch (e) {
-      console.log(e.message);
+    try {
+      const res = await fetch(
+        `${apiUrl}/api/v1/banners?position=${position}`,
+        { credentials: "include" }
+      );
+
+      const data = await res.json();
+      // console.log(data, 'banner-data')
+
+      dispatch(setBanners(data.data)); // ✅ correct structure
+      dispatch(setStatus(STATUSES.IDLE));
+
+
+    } catch (err) {
       dispatch(setStatus(STATUSES.ERROR));
-      // dispatch(setError(true));
+      dispatch(setError(err.message));
     }
   };
 };
-//Thunk for getAll Banners
-export const getBanner = () => {
-    return async function getThunk(dispatch, getState) {
-      dispatch(setStatus(STATUSES.LOADING));
-      try {
-        // console.log(formData.get('Image'), 'form-Data-image')
-        const resData = await fetch(`${apiUrl}/api/v1/admin/get/banner`, {credentials:'include'});
-        const data = await resData.json()
-        // console.log(data.get('Image'), 'Data-Add Product')
-        dispatch(setAllBanners(data))
-        dispatch(setStatus(STATUSES.SUCCESS))
-        if(data.status==='failed'){
-          dispatch(setError(true))
-        }
-        else{
-          dispatch(setError(false))
-          dispatch(setIscreated(true))
-        }
-      }
-  
-      
-      catch (e) {
-        console.log(e.message);
-        dispatch(setStatus(STATUSES.ERROR));
-        // dispatch(setError(true));
-      }
-    };
-  };
 
-
-export function clearErr(){
-    return function clearErrThunk(dispatch, getState){
-        dispatch(setError(false))
-        dispatch(setBanner(null))
-    }
-}
-export function resetCreated(){
-  return function resetCreatedThunk(dispatch, getState){
-      dispatch(setIscreated(false))
-      // dispatch(setProduct(null))
-  }
-}

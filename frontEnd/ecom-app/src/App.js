@@ -48,6 +48,7 @@ import QRPayment from "./components/cart/QRPayment";
 import UPIPayment from "./components/cart/UPIPayment";
 import RazorpayPayment from "./components/cart/RazorpayPayment";
 import PaymentSuccess from "./components/cart/PaymentSuccess";
+import AllBanners from "./Admin/AdminBanner/AllBanners";
 const apiUrl = process.env.REACT_APP_API_BASE_URL;
 const App = () => {
   const [stripeApiKey, setStripeApiKey] = useState("");
@@ -176,7 +177,9 @@ const App = () => {
               element={<EditUser />}
             ></Route>
             <Route exact path="/admin/reviews" element={<AllReviews />}></Route>
-            <Route exact path="/admin/banner" element={<AddBanner />}></Route>
+            <Route exact path="/admin/banners/create" element={<AddBanner />}></Route>
+            <Route exact path="/admin/banners" element={<AllBanners/>} ></Route>
+
           </Route>
 
           <Route

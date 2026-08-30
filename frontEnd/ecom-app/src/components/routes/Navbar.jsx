@@ -25,6 +25,7 @@ const Navbar = () => {
 
   const { cartItems } = useSelector((state) => state.cart);
   const { user, isAuthenticated } = useSelector((state) => state.user);
+  const themeColor = useSelector((state) => state.createBanner.headerThemeColor);
 
   //Handling click outside to close suggestions
   useEffect(() => {
@@ -117,7 +118,15 @@ const Navbar = () => {
   }, [keyword]);
 
   return (
-    <header className="header">
+    <header className="header"
+
+    style={{
+      backgroundColor: themeColor,
+      transition: 'background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
+      willChange: 'background-color',
+    }}
+    
+    >
       <div className="header-content">
 
         <div className="header-logo">

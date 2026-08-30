@@ -16,6 +16,7 @@ const bodyParser = require("body-parser");
 const cloudinary = require("cloudinary");
 const path = require("path");
 const { buildTrieSuggestion } = require("./utils/buildTrie");
+// require('./corn/syncAnalytics')
 
 // const conDB = async ()=>{
 //     mongoose.connect('mongodb://localhost:27017/ecommerce')
@@ -51,6 +52,8 @@ app.use(
     allowedHeaders: ["Content-Type", "Authorization", "Accept"],
   })
 );
+app.use(express.json({ limit: '20mb' }));
+app.use(express.urlencoded({ extended: true, limit: '20mb' }));
 
 app.use(
   cors({
@@ -129,6 +132,9 @@ app.use("/api/v1",payment);
 /// Banner Route
 const banner = require("./routes/banner");
 app.use("/api/v1/", banner);
+const cloudinarySig = require('./routes/clodinarySigRoute')
+
+app.use('/api/v1', cloudinarySig)
 
 // app.use(express.static(path.join(__dirname, '../frontEnd/ecom-app/build')))
 // app.get('*',(req, res)=>{
@@ -179,11 +185,15 @@ process.on("uncaughtException", (err) => {
 // })
 
 /// listining port
-
-const PORT = process.env.PORT || 8081;
+app.get("/", (req, res) => {
+  console.log(`Response from PORT ${PORT}`);
+});
+const PORT = process.env.PORT || 5000;
 let server = app.listen(PORT, () => {
   console.log(`Server is up on ${PORT} port`);
 });
+
+
 
 // Unhandled Promise Rejection
 // process.on("unhandledRejection", (err) => {

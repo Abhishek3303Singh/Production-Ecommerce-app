@@ -18,6 +18,8 @@ import 'animate.css';
 
 const Dropdown = () => {
     const { user, isAuthenticated, status } = useSelector((state) => state.user);
+  const themeColor = useSelector((state) => state.createBanner.headerThemeColor);
+
     const navigate = useNavigate()
     console.log(user, 'dropDown items')
     const [dropdown, setDropdown] = useState(false)
@@ -90,7 +92,13 @@ const Dropdown = () => {
 
     return (
         <>
-            <ul className={dropdown ? "drop-sub-menu-clicked " : "drop-sub-menu "} onClick={() => setDropdown(!dropdown)}>
+            <ul className={dropdown ? "drop-sub-menu-clicked " : "drop-sub-menu "} onClick={() => setDropdown(!dropdown)}
+            style={{
+                backgroundColor: themeColor,
+                transition: 'background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
+                willChange: 'background-color',
+              }}
+            >
                 {dropDownItems&& dropDownItems.map(item => {
                     return (
                         <li key={item.id} onClick={item.fun}>

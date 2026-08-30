@@ -12,6 +12,47 @@
     position: -webkit-sticky;
     position: sticky;
 }
+/* style/sidebar.css */
+
+.sidebar-container {
+    width: 300px;
+    height: 100vh;           
+    position: fixed;        
+    left: 0;
+    top: 5vh;
+    
+    padding: 20px 0;
+    
+   
+    overflow-y: auto;        
+    overflow-x: hidden;      
+    
+    
+    scroll-behavior: smooth;
+    scrollbar-width: none;        
+    -ms-overflow-style: none;    
+}
+
+/* Scrollbar styling (optional, looks better) */
+.sidebar-container::-webkit-scrollbar {
+    display: none;
+}
+.sidebar-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.sidebar-container::-webkit-scrollbar-track {
+    background: #131921;
+}
+
+.sidebar-container::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 3px;
+}
+
+.sidebar-container::-webkit-scrollbar-thumb:hover {
+    background: #febd69;     
+}
 .sidebar-container>a:first-child{
     padding: 0;
     text-decoration: none;
@@ -25,7 +66,8 @@
     padding-left: 1.5rem;
 }
 .sidebar-container>a>h2:hover{
-    color: #2874f0;;
+    /* color: #2874f0;; */
+    color: orangered;
 }
 .sidebar-container a{
     text-decoration: none;
@@ -35,7 +77,8 @@
     transition: all ease 0.5s;
 }
 .sidebar-container a:hover{
-    color: #2874f0;
+    /* color: #2874f0; */
+    color: orangered;
     transform: scale(1.1);
 }
 .sidebar-container a>p{
@@ -61,4 +104,11 @@
     font-weight: 400;
     line-height: 1.5;
     letter-spacing: 0.00938em;
+}
+
+.MuiTreeItem-root.Mui-selected > .MuiTreeItem-content .MuiTreeItem-label{
+    background-color: transparent !important;
+}
+.MuiTreeItem-label:hover{
+    background-color: transparent !important;
 }

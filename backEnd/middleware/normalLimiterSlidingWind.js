@@ -9,7 +9,7 @@ const slidingWindowRateLimiter = async (req, res, next) => {
     if (role === "Admin") {
       MAX_REQ = 100;
     } else {
-      MAX_REQ = 10;
+      MAX_REQ = 30;
     }
     const identifier = req.user?.id || req.ip;
     const key = `rate_limit:${identifier}`;

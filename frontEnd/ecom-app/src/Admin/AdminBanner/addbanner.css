@@ -1,85 +1,216 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,700;1,400&family=Libre+Franklin:ital,wght@0,400;0,500;1,300&family=Poppins:ital,wght@0,300;0,500;0,700;1,400;1,500&family=Roboto+Slab:wght@300;400;500;700&family=Ysabeau+SC:wght@400;500;600&display=swap');
+/* AdminBanner.css - Add these styles */
 
-.admin-reviews-container{
-    display: grid;
-    grid-template-columns: 1fr 5fr;
-    min-height: 40vmax;
+/* ================= CREATE PAGE ================= */
+
+.create-banner-main-container{
+  width: 100%;
+  display: flex;
+  gap: 20px;
+  min-height: 100vh;
 }
-.reviews-sidebar{
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+.craete-banner-sidebar {
+  width: 260px;          
+  flex-shrink: 0;       
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+.admin-banner-create {
+  flex: 1;
+  padding: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+ 
 
 }
-.admin-reviews{
-    width: 98%;
-    margin: auto;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-    margin-top: 0.5vmax;
+
+.btn-back {
+  padding: 10px 20px;
+  background: #37475a;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
-.admin-reviews>header{
-    text-align: center;
-    padding: 1vmax;
-    background: linear-gradient(to right, #071423, #240224);
-    color: #fff;
-    letter-spacing: 2px;
-    font: 600 1.7vmax 'Lato', sans-serif;
-    text-transform: uppercase;
+
+.btn-back:hover {
+  background: #485769;
 }
-.product-review-input{
-    width: 60%;
-    margin: auto;
-    background-color: #071423;
-    margin-top: 0.5vmax;
+
+/* Form Layout */
+.banner-form {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 30px;
+  margin-top: 24px;
 }
-.product-review-input>h3{
-    text-align: center;
-    color: #fff;
-    font: 500 1.5vmax 'Ysabeau SC', sans-serif;
+
+.form-left {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
-.product-review-input>div{
-    width: 80%;
-    margin: auto;
-    text-align: center;
+
+.form-right {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
-.product-review-input>div>input{
-    width: 100%;   
-    margin: auto;
-    text-align: center;
-    offset: none;
-    outline: none;
-    border: none;
-    padding: 0.5vmax;
-    margin-bottom: 1vmax;
-    color: #0799fa;
-    border: 1px solid white;
-    background-color: white;
+
+/* Form Groups */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
-.product-review-container>button{
-    width: 50%;
-    margin: auto;
-    margin-bottom: 1vmax ;
-    padding: 0.2vmax;
-    background: #07eafab0;
-    color: #fff;
-    border: none;
-    outline: none;
-    text-transform: uppercase;
-    border-radius: 2px;
-    cursor: pointer;
-    transition: all 0.5s ease;
+
+.form-group label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #37475a;
 }
-.product-review-container>button:hover{
-        /* transform: scalex(1vmax); */
-        transform: scale(1.2,1.1);
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 10px 14px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #febd69;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 16px;
+}
+
+/* Image Upload */
+.image-upload-box {
+  background: #f8f9fa;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.image-upload-box label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: #37475a;
+}
+
+.upload-area {
+  width: 100%;
+  height: 200px;
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  overflow: hidden;
+}
+
+.upload-area:hover {
+  border-color: #febd69;
+  background: #fff8f0;
+}
+
+.preview-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.upload-placeholder {
+  text-align: center;
+  color: #888;
+}
+
+.upload-placeholder span {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.hint {
+  color: #888;
+  font-size: 0.8rem;
+  margin-top: 6px;
+  display: block;
+}
+
+/* Submit */
+.form-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+}
+
+.btn-submit {
+  padding: 14px 40px;
+  /* background: #febd69; */
+  background: orangered;
+
+  color: #fdfdfd;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-submit:hover:not(:disabled) {
+  background: #f3a847;
+}
+
+.btn-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.error-msg {
+  color: #c62828;
+  font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .banner-form {
+    grid-template-columns: 1fr;
+  }
   
+  .form-right {
+    flex-direction: row;
+  }
 }
-.all-reviews-container{
-    margin-top: 1vmax;
-    width: 100%;
+
+@media (max-width: 768px) {
+  .form-right {
+    flex-direction: column;
+  }
 }
 
+/* Mobile upload area - portrait */
+.image-upload-box:nth-child(2) .upload-area {
+  aspect-ratio: 9/16;
+  max-height: 400px;
+}
 
-
-
-
-
-
+.preview-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

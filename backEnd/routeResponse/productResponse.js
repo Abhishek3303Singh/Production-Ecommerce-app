@@ -37,8 +37,6 @@ exports.updateProduct = async (req, res) => {
         await cloudinary.v2.uploader.destroy(reqProduct.Image[i].public_id);
       }
 
-
-
       let images = [];
       // console.log(typeof req.body.Image, 'Image-Type!!')
       if (typeof req.body.Image === "string") {
@@ -86,48 +84,130 @@ exports.updateProduct = async (req, res) => {
 exports.allProducts = async (req, res) => {
   // return res("this is Error")
   try {
-    const cacheKey = `products:${JSON.stringify(req.query)}`
+    // const cacheKey = `products:${JSON.stringify(req.query)}`
     let itemPerPage = 8;
-    // first of all we will check redis for requested data if available we will get from that and return it without hitting actual db.
-    const cacheData = await redisClient.get(cacheKey)
-    
-    if(cacheData){
-      return res.json({
-        status:"success",
-        source:"redis",
-        data:JSON.parse(cacheData)
-
-      })
-    }
-   
-    const totalProduct = await ProductModels.countDocuments();
-    const featurs = new Featurs(ProductModels.find(), req.query)
-      .search()
-      .filter()
+    // Normalize query (IMP)
+    const sortedQuery = Object.keys(req.query)
       .sort()
-      .pagination(itemPerPage);
-    //  let allProducts = await ProductModels.find();
-    // console.log(featurs, 'featurs')
-    let allProducts = await featurs.query;
+      .reduce((acc, key) => {
+        acc[key] = req.query[key];
+        return acc;
+      }, {});
 
-    const responseData = {
-      allProducts,
-      totalProduct,
-      itemPerPage,
-    };
-    // Store in redis
+    const cacheKey = `products:${JSON.stringify(sortedQuery)}`;
+    const lockKey = `lock:${cacheKey}`;
+    let cacheData = null;
 
+    // first of all we will check redis for requested data if available we will get from that and return it without hitting actual db.
+    // safe redis read [prevent crash on redis down]
+    try {
+      cacheData = await redisClient.get(cacheKey);
+    } catch (e) {
+      console.log("Redis get error:", e.message);
+    }
 
-    await redisClient.setEx(cacheKey, 60, JSON.stringify(responseData))
+    if (cacheData) {
+      return res.json({
+        status: "success",
+        source: "redis",
+        data: JSON.parse(cacheData),
+      });
+    }
+    let lock = null;
+    try {
+      lock = await redisClient.set(lockKey, "1", { NX: true, EX: 5 });
+    } catch (e) {
+      console.log("Redis lock eror:", e.message);
+    }
+
+    if (lock) {
+      try {
+        // FIRST REQUEST (DB HIT)
+        const totalProduct = await ProductModels.countDocuments();
+        const featurs = new Featurs(ProductModels.find(), req.query)
+          .search()
+          .filter()
+          .sort()
+          .pagination(itemPerPage);
+        //  let allProducts = await ProductModels.find();
+        // console.log(featurs, 'featurs')
+        featurs.query = featurs.query.read("secondaryPreferred");
+        let allProducts = await featurs.query;
+
+        const responseData = {
+          allProducts,
+          totalProduct,
+          itemPerPage,
+        };
+        // Store in redis
+
+        try {
+          // cache write  Safe Redis Write + TTL jitter (stampede protection)
+          await redisClient.setEx(
+            cacheKey,
+            60 + Math.floor(Math.random() * 10),
+            JSON.stringify(responseData)
+          );
+        } catch (e) {
+          console.log("redis set error:", e.message);
+        }
+
+        res.status(200).json({
+          status: "success",
+          source: "db",
+          // allProducts,
+          // totalProduct,
+          // itemPerPage,
+          data: responseData,
+        });
+      } finally {
+        //   release lock
+        try {
+          await redisClient.del(lockKey);
+        } catch (e) {
+          console.log("Redis DEL lock error:", e.message);
+        }
+      }
+    } else {
+      // OTHER REQUESTS (WAIT & RETRY)
+      await new Promise((res) => setTimeout(res, 100));
+      try {
+        const retryCache = await redisClient.get(cacheKey);
+
+        if (retryCache) {
+          return res.status(200).json({
+            status: "success",
+            source: "redis-retry",
+            data: JSON.parse(retryCache),
+          });
+        }
+      } catch (e) {
+        console.log("redis retry error:", e.message);
+      }
+// final fallback to db
+      const totalProduct = await ProductModels.countDocuments();
+
+      const features = new Featurs(ProductModels.find(), req.query)
+        .search()
+        .filter()
+        .sort()
+        .pagination(itemPerPage);
+
+      features.query = features.query.read("secondaryPreferred");
+
+      const allProducts = await features.query;
+      return res.status(200).json({
+        status: "success",
+        source: "db-fallback",
+        data: {
+          allProducts,
+          totalProduct,
+          itemPerPage,
+        },
+      });
+    }
+
     // console.log(allProducts)
-    res.status(200).json({
-      status: "success",
-      source:'db',
-      // allProducts,
-      // totalProduct,
-      // itemPerPage,
-      data:responseData
-    });
   } catch (e) {
     res.status(400).json({
       status: "failed",
