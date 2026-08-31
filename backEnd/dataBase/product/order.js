@@ -9,7 +9,20 @@ const orderSchema = new mongoose.Schema({
     landmark: { type: String, required: true },
     country: { type: String, required: true, default: "India" },
     phoneNo: { type: Number, required: true },
-    
+    lat:{type:Number},
+    lag:{type:Number},
+     // GeoJSON for geospatial querie
+     location:{
+      type:{
+        type:String,
+        enum:['Point'],
+        default:'Point'
+      },
+      coordinates:{
+        type:[Number],
+        default:[0,0]
+      }
+     },
   },
   orderProduct: [
     {
@@ -45,5 +58,6 @@ const orderSchema = new mongoose.Schema({
   deliveredDate: { type: Date, required: true, default: Date.now() },
 });
 
+orderSchema.index({"shippingAddress.location": "2dsphere"})
 
 module.exports = mongoose.model("Order", orderSchema);

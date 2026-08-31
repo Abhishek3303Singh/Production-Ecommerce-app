@@ -15,8 +15,20 @@ exports.creatNewOrder = async (req, res) => {
       shippingPrice,
       totalPrice,
     } = req.body.order;
+    const enrichedShippingAddress = {
+      ...shippingAddress,
+      location: {
+        type: 'Point',
+        coordinates: [
+          shippingAddress.lng || 0,  // longitude FIRST
+          shippingAddress.lat || 0   // latitude second
+        ]
+      }
+    };
+
+    console.log('enrichedShippingAddress', enrichedShippingAddress)
     const order = await OrderModel.create({
-      shippingAddress,
+      shippingAddress: enrichedShippingAddress,
       orderProduct,
       paymentInformation,
       productPrice,

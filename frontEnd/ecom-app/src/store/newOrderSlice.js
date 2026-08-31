@@ -63,7 +63,7 @@ export function createNewOrder(order) {
         credentials: "include",
       });
       const data = await resData.json();
-      console.log('order response', data)
+      // console.log('order response', data)
       if (!resData.ok || data.status === "failed") {
         dispatch(setError(true));
         dispatch(setIsCreated(false));

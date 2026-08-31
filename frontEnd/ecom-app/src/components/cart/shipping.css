@@ -187,6 +187,7 @@
   @media (max-width: 768px) {
     .shipping-map-container {
       height: 250px !important;
+      width: 300px !important;
     }
   }
   .map-fallback {
@@ -201,6 +202,7 @@
     max-width: 600px;
     margin: 0 auto 25px auto;
     padding: 0 15px;
+    width: 300px;
   }
   
   .map-toolbar {
@@ -208,6 +210,7 @@
     align-items: center;
     gap: 15px;
     margin-bottom: 10px;
+    width: 250px;
   }
   
   .btn-locate {
@@ -237,6 +240,7 @@
     color: #666;
     font-size: 0.85rem;
     margin-top: 6px;
+    width: 200px !important;
   }
   
   @media (max-width: 768px) {

@@ -1,5 +1,3 @@
-/* ================= BANNER CAROUSEL ================= */
-
 .banner-carousel {
   position: relative;
   width: 100%;
@@ -79,7 +77,7 @@
   background: #f3a847;
 }
 
-/* ================= GRADIENT OVERLAY ================= */
+/*  graidien5t overlay  */
 
 .banner-slide::after {
   content: '';
@@ -87,7 +85,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  height: 60%;        /* Taller gradient for mobile readability */
+  height: 60%;        
   background: linear-gradient(
     to bottom,
     rgba(0, 0, 0, 0) 0%,
@@ -98,7 +96,7 @@
   pointer-events: none;
 }
 
-/* ================= ARROWS ================= */
+
 
 .banner-arrow {
   position: absolute;
