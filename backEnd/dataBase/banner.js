@@ -27,7 +27,7 @@ const bannerSchema = new mongoose.Schema(
     // Positioning
     position: {
       type: String,
-      enum: ["hero", "mid", "mid2", "bottom", "sidebar"],
+      enum: ["hero", "mid", "mid2", "bottom", "sidebar", 'promotion', 'hero2'],
       default: "hero",
       index: true,
     },
@@ -99,7 +99,7 @@ const bannerSchema = new mongoose.Schema(
     },
     themeColor: {
       type: String,
-      default: '#131921', // Amazon dark blue default
+      default: '#131921', 
     },
     createdBy: {
       type: mongoose.Schema.ObjectId,

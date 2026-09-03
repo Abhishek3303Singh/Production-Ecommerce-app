@@ -1,12 +1,13 @@
 import React from 'react'
-import electronicsicon from '../../images/categoryStrip/electronics.png'
-import sports from '../../images/categoryStrip/sports1.png'
+import electronicsicon from '../../images/categoryStrip/cateElec.png'
+// import sports from '../../images/categoryStrip/sports1.png'
 import fashion from '../../images/categoryStrip/fashion.png'
 import HomeFood from '../../images/categoryStrip/homeFood.png'
 import genZTrends from '../../images/categoryStrip/gnZTrend.png'
 import beauty from '../../images/categoryStrip/beauty.png'
 import ToysBaby from '../../images/categoryStrip/ToysBaby.png'
 import HomeKitchen from '../../images/categoryStrip/HomeKitchen.png'
+import sports from '../../images/categoryStrip/cateSports.png'
 const CategoryStrip = ({ onCategorySelect }) => {
 
     const categoryStripData = [

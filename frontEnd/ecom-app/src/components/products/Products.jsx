@@ -16,6 +16,8 @@ import PaginationBar from "./PaginationBar";
 import CategoryStrip from "./CategoryStrip";
 // import useDebounce from "../hooks/useDebounce";
 import { useMemo } from "react";
+import BannerCarousel from "../../LandingPage/BannerCarousel";
+import MultiBannerCarousel from "../../BannerCarousel/MultiBannerCarousel";
 
 
 const Products = () => {
@@ -145,20 +147,23 @@ const Products = () => {
         <>
             <MetaData title="PRODUCTS-FunHub"></MetaData>
 
-            <ProductsBanner />
+            {/* <ProductsBanner /> */}
+            <div ref={categoryRef} className="category-container">
+            
+            <CategoryStrip onCategorySelect={(category) => {
+                handleFilterChange({
+                    ...filters,
+                    category
+                })
+            }} />
+        </div>
+            <MultiBannerCarousel position="hero2" autoPlay={true} interval={4000}/>
+            
 
 
             {/* <h2 className='ProductHeading'>Products</h2> */}
 
-            <div ref={categoryRef} className="category-container">
-            
-                <CategoryStrip onCategorySelect={(category) => {
-                    handleFilterChange({
-                        ...filters,
-                        category
-                    })
-                }} />
-            </div>
+
 
 
             <h2 className='ProductHeading'>Products</h2>

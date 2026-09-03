@@ -24,6 +24,7 @@
   height: 100%;
   overflow: hidden;
   background: #eaeded; /* placeholder bg while loading */
+  transition: filter 0.5s ease-in-out, opacity 0.5s ease-in-out;
 }
 
 .banner-slide__image {
@@ -32,6 +33,7 @@
   object-fit: cover;
   object-position: center; /* KEY: was "center top", now centered */
   display: block;
+  transition: filter 0.5s ease-in-out, opacity 0.5s ease-in-out;
 }
 
 /* ================= CONTENT OVERLAY ================= */
@@ -206,7 +208,11 @@
   .banner-slide {
     border-radius: 0;
   }
-
+.banner-slide__image{
+  width: 95%;
+  margin: auto;
+  border-radius: 15px;
+}
   /* If you want the "card in feed" look instead, swap to this: */
   /*
   .banner-slide {
@@ -219,12 +225,8 @@
   /* Stronger gradient for mobile */
   .banner-slide::after {
     height: 70%;
-    background: linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0) 0%,
-      rgba(0, 0, 0, 0.3) 40%,
-      rgba(0, 0, 0, 0.8) 100%
-    );
+    background: transparent;
+  
   }
 
   /* Content at bottom-left like Amazon promos */
@@ -291,4 +293,224 @@
   .banner-slide__desc {
     font-size: 1.85rem;
   }
+}
+
+/* ================= MID BANNER (Big E-com Style) ================= */
+
+.banner-carousel--mid {
+  height: 300px;
+  max-width: 1500px;
+ 
+  margin: 30px auto;
+  padding: 0 20px;
+}
+
+.banner-carousel--mid .banner-slide {
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+  overflow: hidden;
+}
+
+/* Mid banner image — focus on center for product shots */
+.banner-carousel--mid .banner-slide__image {
+  object-position: center;
+  object-fit: cover;
+}
+
+/* Mid banner content — centered, larger CTA */
+.banner-carousel--mid .banner-slide__content {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  max-width: 800px;
+  width: 90%;
+}
+
+.banner-carousel--mid .banner-slide__title {
+  font-size: 2.4rem;
+  margin-bottom: 8px;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.7);
+}
+
+.banner-carousel--mid .banner-slide__desc {
+  font-size: 1.1rem;
+  margin-bottom: 24px;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.6);
+}
+
+.banner-carousel--mid .banner-slide__cta {
+  padding: 14px 40px;
+  font-size: 1.05rem;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #131921;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.banner-carousel--mid .banner-slide__cta:hover {
+  background: #f0f0f0;
+  transform: translateY(-2px);
+}
+
+/* Gradient overlay for mid — stronger center focus */
+.banner-carousel--mid .banner-slide::after {
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(0,0,0,0.5) 0%,
+    rgba(0,0,0,0.1) 50%,
+    rgba(0,0,0,0.5) 100%
+  );
+}
+
+/* Hide arrows on mid banner (cleaner look) */
+.banner-carousel--mid .banner-arrow {
+  display: none;
+}
+
+/* Dots at bottom inside the banner */
+.banner-carousel--mid .banner-dots {
+  position: absolute;
+  bottom: 12px;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  background: transparent;
+  padding: 0;
+}
+
+.banner-carousel--mid .banner-dot {
+  background: rgba(255,255,255,0.5);
+  border-color: transparent;
+}
+
+.banner-carousel--mid .banner-dot.active {
+  background: #ffffff;
+}
+
+/* ================= MID2 BANNER (Smaller promo strip) ================= */
+
+.banner-carousel--mid2 {
+  height: 180px;
+  max-width: 1500px;
+  margin: 20px auto;
+  padding: 0 20px;
+}
+
+.banner-carousel--mid2 .banner-slide {
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+
+.banner-carousel--mid2 .banner-slide__content {
+  bottom: 20px;
+  left: 30px;
+  top: auto;
+  transform: none;
+  text-align: left;
+}
+
+.banner-carousel--mid2 .banner-slide__title {
+  font-size: 1.6rem;
+}
+
+.banner-carousel--mid2 .banner-slide__desc {
+  font-size: 0.95rem;
+  margin-bottom: 12px;
+}
+
+.banner-carousel--mid2 .banner-slide__cta {
+  padding: 8px 20px;
+  font-size: 0.9rem;
+}
+
+/* ================= BOTTOM BANNER (Footer promo) ================= */
+
+.banner-carousel--bottom {
+  height: 200px;
+  margin: 40px 0 0 0;
+  max-width: 100%;
+  border-radius: 0;
+}
+
+.banner-carousel--bottom .banner-slide {
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* ================= RESPONSIVE MID BANNER ================= */
+
+@media (max-width: 768px) {
+  .banner-carousel--mid {
+    height: 200px;
+    margin: 16px 0;
+    padding: 0 12px;
+  }
+
+  .banner-carousel--mid .banner-slide {
+    border-radius: 12px;
+  }
+
+  .banner-carousel--mid .banner-slide__title {
+    font-size: 1.5rem;
+  }
+
+  .banner-carousel--mid .banner-slide__desc {
+    font-size: 0.9rem;
+    margin-bottom: 16px;
+  }
+
+  .banner-carousel--mid .banner-slide__cta {
+    padding: 10px 28px;
+    font-size: 0.9rem;
+  }
+
+  .banner-carousel--mid2 {
+    height: 140px;
+    padding: 0 12px;
+    margin: 12px 0;
+  }
+
+  .banner-carousel--mid2 .banner-slide__title {
+    font-size: 1.2rem;
+  }
+
+  .banner-carousel--bottom {
+    height: 160px;
+  }
+}
+
+@media (max-width: 480px) {
+  .banner-carousel--mid {
+    height: 170px;
+  }
+
+  .banner-carousel--mid .banner-slide__title {
+    font-size: 1.25rem;
+  }
+}
+
+.banner-carousel--hero2{
+  max-width: 2500px;
+  height: 100%;
+  width: 95%;
+  margin: auto;
+  gap: 10px;
+  margin-top: 1vh;
+}
+
+.banner-carousel--hero2 .banner-slide{
+  position: relative;
+  width: 45%;
+  overflow: hidden;
+  border-radius: 2rem;
+}
+
+.banner-carousel--hero2 .banner-slide__image{
+  border-radius: 10px;
+width: 100%;
+  object-fit: cover;
+  object-position: center;
+  aspect-ratio: 41/20;
 }

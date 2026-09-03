@@ -6,7 +6,7 @@ const redisClient = require("../config/redis");
 // ================= CREATE =================
 exports.createBanner = async (req, res) => {
   try {
-    console.log('running creating banner')
+    // console.log('running creating banner')
     const {
       title,
       description,
@@ -157,7 +157,7 @@ exports.getBanners = async (req, res) => {
       "targeting.userSegments": { $in: [userSegment, "all"] },
       "targeting.device": { $in: [device, "all"] },
     })
-      .sort({ displayOrder: -1, priority: -1 })
+      .sort({ displayOrder: -1, priority: -1 }) 
       .limit(position === "hero" ? 5 : 3)
       .lean();
 
@@ -172,6 +172,8 @@ exports.getBanners = async (req, res) => {
       ctaUrl: b.ctaUrl,
       position: b.position,
       themeColor:b.themeColor,
+      startDate:b.startDate,
+      endDate:b.endDate
     }));
 
     await redisClient.setEx(cacheKey, 60, JSON.stringify(response));

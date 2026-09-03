@@ -222,6 +222,8 @@ const AddBanner = () => {
                 <option value="mid2">Mid Page 2</option>
                 <option value="bottom">Bottom</option>
                 <option value="sidebar">Sidebar</option>
+                <option value="promotion">Braand promotion</option>
+                <option value="hero2">product Hero</option>
               </select>
             </div>
             <div className="form-group">
@@ -360,6 +362,7 @@ const AddBanner = () => {
 
         </div>
         <div className="form-group">
+          {/* color picker for matching  */}
   <label>Header Theme Color</label>
   <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
     <input

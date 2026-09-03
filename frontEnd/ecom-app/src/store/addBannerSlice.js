@@ -20,7 +20,20 @@ const bannerSlice = createSlice({
   },
   reducers: {
     setBanners(state, action) {
-      state.banners = action.payload;
+      const payload = action.payload || [];
+      
+      // Merge: update existing, add new ones
+      const merged = [...state.banners];
+      payload.forEach(newBanner => {
+        const index = merged.findIndex(b => b._id === newBanner._id);
+        if (index >= 0) {
+          merged[index] = newBanner; // update existing
+        } else {
+          merged.push(newBanner);    // add new
+        }
+      });
+      
+      state.banners = merged;
     },
     setStatus(state, action) {
       state.status = action.payload;
@@ -65,7 +78,7 @@ export const getBanners = (position = "hero") => {
       const data = await res.json();
       // console.log(data, 'banner-data')
 
-      dispatch(setBanners(data.data)); // ✅ correct structure
+      dispatch(setBanners(data.data)); 
       dispatch(setStatus(STATUSES.IDLE));
 
 

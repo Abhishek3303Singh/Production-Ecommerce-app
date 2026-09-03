@@ -6,7 +6,8 @@
     text-align: start;
     overflow: hidden;
     background-color: rgba(0,0,0,0.9);
-    left: 40%;
+    right: 0px;
+    top: 50px;
     
 }
 .drop-sub-menu li{

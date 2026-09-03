@@ -30,6 +30,7 @@ import RecommendationSlider from '../components/productDetails/RecommendationSli
 import { STATUSES } from '../store/productDetailsSlice';
 import RecentlyViewedSlider from './RecentlyViewedSlider';
 import BannerCarousel from './BannerCarousel';
+import MultiBannerCarousel from '../BannerCarousel/MultiBannerCarousel';
 
 const ProdDet = () => {
     // const [imgIndex, setImageIndex] = useState(0)
@@ -158,7 +159,7 @@ const ProdDet = () => {
                 <div className='sticker'>
                     <h3> Flat 50% OFF <BiRightArrow /></h3></div>
 
-                    <BannerCarousel position="hero" />
+                <BannerCarousel position="hero" />
 
                 <div className='prod-card-container'>
                     <div className='pro-card1' >
@@ -212,9 +213,11 @@ const ProdDet = () => {
                         </div>
                     </div>
                 </div>
+                
                 <div className="recently-viewed-container">
 
                 </div>
+                
                 {
                     hasRecentlyViewed && (<RecentlyViewedSlider />)
                 }
@@ -222,6 +225,7 @@ const ProdDet = () => {
                     <div className="spacer-for-no-recent" style={{ height: '80px' }} />
                 )}
                 {/* Lazy Rendering Slider */}
+                <BannerCarousel position="mid" />
                 <div ref={desktopRef}>
                     {!isMobile &&
                         desktopInView && (
@@ -240,6 +244,10 @@ const ProdDet = () => {
                                     <button className='left-shift' onClick={handlePrev}>&lt;</button>
                                     <button className='right-shift' onClick={handleNext}>&gt;</button>
                                 </div>
+
+                               
+                               
+
                                 <RecommendationSlider products={bestSellers?.bestSeller} heading={'Bestsellers'} />
                             </>
 
@@ -248,6 +256,7 @@ const ProdDet = () => {
                     }
 
                 </div>
+                
 
                 <div ref={mobileRef}>
                     {isMobile &&
@@ -289,6 +298,7 @@ const ProdDet = () => {
                 </div>
 
             </div>
+            <MultiBannerCarousel position='mid2' autoPlay={true} interval={4000}/>
 
             <div className="homepage-card" >
                 <div className="homeleft-card" onClick={() => { navigate(`/products?productName=Headphone`) }}>

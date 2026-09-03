@@ -85,4 +85,8 @@
     .rv-card {
       min-width: 45%;
     }
+    .rv-container{
+      margin: 3vmax auto 0;
+
+    }
   }

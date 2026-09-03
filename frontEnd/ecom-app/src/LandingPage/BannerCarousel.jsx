@@ -1,8 +1,7 @@
-import React, { useEffect, useState, useCallback, useRef } from 'react';
+import React, { useEffect, useState, useCallback, useRef, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getBanners } from '../store/addBannerSlice';
-import { setHeaderThemeColor } from '../store/addBannerSlice';
-import './BannerCarousel.css'
+import { getBanners, setHeaderThemeColor } from '../store/addBannerSlice';
+import './BannerCarousel.css';
 
 const BannerCarousel = ({ position = 'hero', autoPlay = true, interval = 5000 }) => {
   const dispatch = useDispatch();
@@ -10,53 +9,64 @@ const BannerCarousel = ({ position = 'hero', autoPlay = true, interval = 5000 })
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const hasFetched = useRef(false);
-  const isFetching = useRef(false)
+  const isFetching = useRef(false);
 
-  useEffect(()=>{
-    const activeBanner = banners?.[currentIndex]
-    if(activeBanner?.themeColor){
-      dispatch(setHeaderThemeColor(activeBanner.themeColor))
-    }else{
-      // fallback to default one 
+  // Filter banners by position + active date
+  const filteredBanners = useMemo(() => {
+    const now = new Date();
+    return banners?.filter((b) => {
+      const isPositionMatch = b.position === position;
+      const isActive = new Date(b.startDate) <= now && new Date(b.endDate) >= now;
+      return isPositionMatch && isActive;
+    }) || [];
+  }, [banners, position]);
+
+  // Reset index when filtered list changes (prevents out-of-bounds)
+  useEffect(() => {
+    setCurrentIndex(0);
+  }, [filteredBanners.length, position]);
+
+  // Update header theme based on ACTIVE filtered banner
+  useEffect(() => {
+    if(position !== 'hero') return;
+    const activeBanner = filteredBanners?.[currentIndex];
+    if (activeBanner?.themeColor) {
+      dispatch(setHeaderThemeColor(activeBanner.themeColor));
+    } else {
       dispatch(setHeaderThemeColor('#131921'));
     }
-  },[currentIndex, banners, dispatch])
+  }, [currentIndex, filteredBanners, dispatch, position]);
 
+  // Fetch banners (only once)
   useEffect(() => {
-    // returning if fetching ofr fetched 
-    if(hasFetched.current || isFetching.current){
-      return
+    if (hasFetched.current || isFetching.current) return;
+    if (banners && banners.length > 0) {
+      hasFetched.current = true;
+      return;
     }
-    // if already fetched and we have data then simply return
-    if(banners && banners.length>0){
-      hasFetched.current = true
-      return
-    }
+    if (status === 'loading') return;
 
-    // if loading dont make api call 
-    if(status === 'loading'){return}
-
-
-// our actual fetching 
-isFetching.current = true
-    if (!banners || banners.length === 0) {
-      dispatch(getBanners(position)).then(()=>{
-        hasFetched.current = true
-      }).catch(()=>{
-        hasFetched.current = true
-      }).finally(()=>{
-        isFetching.current = false
+    isFetching.current = true;
+    dispatch(getBanners(position))
+      .then(() => {
+        hasFetched.current = true;
+      })
+      .catch(() => {
+        hasFetched.current = true;
+      })
+      .finally(() => {
+        isFetching.current = false;
       });
-    }
-  }, []);
+  }, [dispatch, position, banners, status]);
 
+  // Auto-play using FILTERED banners
   useEffect(() => {
-    if (!autoPlay || !banners || banners.length <= 1) return;
+    if (!autoPlay || filteredBanners.length <= 1) return;
     const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % banners.length);
+      setCurrentIndex((prev) => (prev + 1) % filteredBanners.length);
     }, interval);
     return () => clearInterval(timer);
-  }, [autoPlay, banners, interval]);
+  }, [autoPlay, filteredBanners, interval]);
 
   const handleBannerClick = useCallback(async (bannerId, ctaUrl) => {
     try {
@@ -71,18 +81,22 @@ isFetching.current = true
     if (ctaUrl) window.location.href = ctaUrl;
   }, []);
 
+  // Error state FIRST
   if (status === 'error') {
     return (
-      <div className="banner-error" style={{ 
-        height: '400px', 
-        display: 'flex', 
-        alignItems: 'center', 
-        justifyContent: 'center',
-        background: '#f5f5f5'
-      }}>
+      <div
+        className="banner-error"
+        style={{
+          height: '400px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          background: '#f5f5f5',
+        }}
+      >
         <div style={{ textAlign: 'center' }}>
           <p>Unable to load banner</p>
-          <button 
+          <button
             onClick={() => {
               hasFetched.current = false;
               dispatch(getBanners(position));
@@ -92,7 +106,7 @@ isFetching.current = true
               background: '#febd69',
               border: 'none',
               borderRadius: '4px',
-              cursor: 'pointer'
+              cursor: 'pointer',
             }}
           >
             Retry
@@ -103,28 +117,26 @@ isFetching.current = true
   }
 
   if (status === 'loading') return <div className="banner-skeleton">Loading...</div>;
-  if (!banners || banners.length === 0) return null;
 
-  const currentBanner = banners[currentIndex];
+  // Now safe to check filtered results
+  if (!filteredBanners.length) return null;
+
+  const currentBanner = filteredBanners[currentIndex];
 
   return (
     <div className={`banner-carousel banner-carousel--${position}`}>
-      
-      {/* SLIDE - Contains image + text + arrows */}
+      {/* SLIDE */}
       <div className="banner-slide">
-        
-        {/* Image */}
-        <img 
-          src={currentBanner.image || currentBanner.Image?.[0]?.url} 
+        <img
+          src={currentBanner.image || currentBanner.Image?.[0]?.url}
           alt={currentBanner.title}
           className="banner-slide__image"
         />
-        
-        {/* Text Content - Positioned on image */}
+
         <div className="banner-slide__content">
           <h2 className="banner-slide__title">{currentBanner.title}</h2>
           <p className="banner-slide__desc">{currentBanner.description}</p>
-          <button 
+          <button
             className="banner-slide__cta"
             onClick={() => handleBannerClick(currentBanner._id, currentBanner.ctaUrl)}
           >
@@ -132,23 +144,22 @@ isFetching.current = true
           </button>
         </div>
 
-        {/* Arrows - Inside slide, positioned absolutely */}
-        {banners.length > 1 && (
+        {filteredBanners.length > 1 && (
           <>
-            <button 
+            <button
               className="banner-arrow banner-arrow--prev"
               onClick={(e) => {
                 e.stopPropagation();
-                setCurrentIndex((prev) => prev === 0 ? banners.length - 1 : prev - 1);
+                setCurrentIndex((prev) => (prev === 0 ? filteredBanners.length - 1 : prev - 1));
               }}
             >
               ‹
             </button>
-            <button 
+            <button
               className="banner-arrow banner-arrow--next"
               onClick={(e) => {
                 e.stopPropagation();
-                setCurrentIndex((prev) => (prev + 1) % banners.length);
+                setCurrentIndex((prev) => (prev + 1) % filteredBanners.length);
               }}
             >
               ›
@@ -157,10 +168,10 @@ isFetching.current = true
         )}
       </div>
 
-      {/* Dots - Below slide */}
-      {banners.length > 1 && (
+      {/* DOTS */}
+      {filteredBanners.length > 1 && (
         <div className="banner-dots">
-          {banners.map((_, index) => (
+          {filteredBanners.map((_, index) => (
             <button
               key={index}
               className={`banner-dot ${index === currentIndex ? 'active' : ''}`}
