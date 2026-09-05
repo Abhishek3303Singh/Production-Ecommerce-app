@@ -46,7 +46,7 @@ const MultiBannerCarousel = ({ position = 'hero2', autoPlay = true, interval = 4
   // Fetch
   useEffect(() => {
     if (hasFetched.current || isFetching.current) return;
-    if (banners?.length > 0) { hasFetched.current = true; return; }
+    // if (banners?.length > 0) { hasFetched.current = true; return; }
     if (status === 'loading') return;
 
     isFetching.current = true;

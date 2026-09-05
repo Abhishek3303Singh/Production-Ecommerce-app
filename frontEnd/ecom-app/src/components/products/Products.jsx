@@ -10,13 +10,13 @@ import FiltersPanel from "./FiltersPanel";
 
 import MetaData from '../routes/MetaData';
 import { useLocation } from "react-router-dom";
-import ProductsBanner from "./ProductsBanner";
+
 import ProductGrid from "./ProductGrid";
 import PaginationBar from "./PaginationBar";
 import CategoryStrip from "./CategoryStrip";
 // import useDebounce from "../hooks/useDebounce";
 import { useMemo } from "react";
-import BannerCarousel from "../../LandingPage/BannerCarousel";
+
 import MultiBannerCarousel from "../../BannerCarousel/MultiBannerCarousel";
 
 

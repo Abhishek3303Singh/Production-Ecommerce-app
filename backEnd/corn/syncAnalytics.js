@@ -3,7 +3,7 @@ const { syncAnalyticsToDB } = require('../routeResponse/bannerResponse');
 
 // Run every hour
 cron.schedule('0 * * * *', async () => {
-  console.log('[CRON] Syncing banner analytics...');
+  // console.log('[CRON] Syncing banner analytics...');
   
   try {
     // Mock req/res for the function

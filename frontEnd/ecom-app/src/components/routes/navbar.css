@@ -5,6 +5,7 @@
   z-index: 1000;
   color: #fff;
   padding: 10px 16px;
+  background: #131921;
 }
 
 .header-inner {
@@ -20,14 +21,23 @@
   flex-shrink: 0;
 }
 
-.header-logo a {
+/* .header-logo a {
   font-size: 24px;
   font-weight: 800;
   color: #febd69;
   text-decoration: none;
   letter-spacing: -0.5px;
-}
+} */
+.logo-img{
+  height: 40px;
+  width: auto;
+  max-width: 180px;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
+  cursor: pointer;
 
+}
 /* ============================================
      CENTER GROUP: Location + Search
      ============================================ */

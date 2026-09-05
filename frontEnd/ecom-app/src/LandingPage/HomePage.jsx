@@ -72,7 +72,7 @@ const ProdDet = () => {
 
     useEffect(() => {
         dispatch(getAllProducts())
-        dispatch(getBanners())
+        
 
     }, [dispatch])
     useEffect(() => {
@@ -145,7 +145,7 @@ const ProdDet = () => {
     //    recentlyViewed  = JSON.parse(localStorage.getItem("recentlyViewed")) || []
     // },[recentlyViewed])
     const hasRecentlyViewed = recentlyViewed && recentlyViewed.length > 0;
-    if (bannerStatus === 'loading' || status === 'loading') {
+    if (status === 'loading') {
         return <Loader />
     }
 

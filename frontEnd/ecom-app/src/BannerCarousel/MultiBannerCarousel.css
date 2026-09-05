@@ -149,10 +149,10 @@
   /* Mobile: full width, no arrows, smaller gaps */
   @media (max-width: 639px) {
     .multi-banner-card { padding: 0 4px; }
-    .multi-banner-card__image { height: 160px; }
+    .multi-banner-card__image { height: 100%; }
     .multi-banner-card__content { padding: 10px; }
     .multi-banner-arrow { display: none; }
-    .multi-banner-card__title { font-size: 14px; }
+    .multi-banner-card__title { font-size: 20px; }
   }
   
   /* Tablet */

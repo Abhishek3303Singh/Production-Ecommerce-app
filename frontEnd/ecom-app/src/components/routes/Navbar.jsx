@@ -10,8 +10,11 @@ import Dropdown from "./Dropdown";
 import cartIcon from "../../images/cart1.png";
 import MatchHighlight from "../../utils/MatchHighlight";
 import './navbar.css'
+import useIsMobileOrTablet from "../hooks/useIsMobileOrTablet ";
+import logo from '../../images/logo.png'
+const apiUrl = process.env.REACT_APP_API_BASE_UR;
 
-const apiUrl = process.env.REACT_APP_API_BASE_URL;
+
 
 const Navbar = () => {
   const [openMenu, setOpenMenu] = useState(false);
@@ -28,6 +31,8 @@ const Navbar = () => {
   const { cartItems } = useSelector((state) => state.cart);
   const { user, isAuthenticated } = useSelector((state) => state.user);
   const themeColor = useSelector((state) => state.createBanner.headerThemeColor);
+
+  const isMobileOrTablet = useIsMobileOrTablet(1024);
 
   // Load shipping info from localStorage
   useEffect(() => {
@@ -131,6 +136,8 @@ const Navbar = () => {
     return () => clearTimeout(timer);
   }, [keyword]);
 
+  
+
   // Location display text
   const locationText = shippingInfo
     ? `Deliver to ${shippingInfo.name || 'You'}`
@@ -144,7 +151,9 @@ const Navbar = () => {
     <header
       className="header"
       style={{
-        backgroundImage:`linear-gradient(${themeColor}, white)`,
+        backgroundImage: isMobileOrTablet
+          ? `linear-gradient(${themeColor}, white)`
+          : undefined, // falls back to whatever your CSS class defines for desktop
         transition: 'background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
         willChange: 'background-color',
       }}
@@ -153,7 +162,9 @@ const Navbar = () => {
         
         {/* Logo */}
         <div className="header-logo">
-          <Link to="/">FunHub</Link>
+          <Link to="/">
+            <img className="logo-img" src={logo} alt="FunHub" srcset="" />
+          </Link>
         </div>
 
         {/* Center: Location + Search (wraps below on mobile) */}
