@@ -213,6 +213,9 @@
   margin: auto;
   border-radius: 15px;
 }
+.banner-carousel--mid .banner-slide__image{
+  width: 100%;
+}
   /* If you want the "card in feed" look instead, swap to this: */
   /*
   .banner-slide {
@@ -295,7 +298,7 @@
   }
 }
 
-/* ================= MID BANNER (Big E-com Style) ================= */
+/* ================= MID BANNER ================= */
 
 .banner-carousel--mid {
   height: 300px;
@@ -356,12 +359,7 @@
 /* Gradient overlay for mid — stronger center focus */
 .banner-carousel--mid .banner-slide::after {
   height: 100%;
-  background: linear-gradient(
-    to right,
-    rgba(0,0,0,0.5) 0%,
-    rgba(0,0,0,0.1) 50%,
-    rgba(0,0,0,0.5) 100%
-  );
+ 
 }
 
 /* Hide arrows on mid banner (cleaner look) */

@@ -1,7 +1,7 @@
 import HomeProductImageCard from "./HomeProductImageCard";
 import React from "react";
 const ProductSlider = React.memo(({ products }) => {
-    console.log("Product slider rendered");
+    // console.log("Product slider rendered");
 
     return (
        <>

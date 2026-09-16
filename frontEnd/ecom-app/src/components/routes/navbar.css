@@ -19,6 +19,8 @@
 
 .header-logo {
   flex-shrink: 0;
+  border: 2px solid orangered;
+  border-radius: 15px;
 }
 
 /* .header-logo a {
@@ -70,7 +72,7 @@
 
 .location-pill>svg {
   font-size: 18px;
-  color: #febd69;
+  color: orangered;
   flex-shrink: 0;
 }
 
@@ -83,7 +85,7 @@
 .location-main {
   font-size: 12px;
   font-weight: 600;
-  color: #febd69;
+  color: orangered;
 }
 
 .location-sub {
@@ -332,11 +334,17 @@
 @media (max-width: 768px) {
   .header {
     padding: 10px 12px;
+    background: white;
   }
 
   .header-inner {
     flex-wrap: wrap;
     gap: 12px;
+  }
+  .header-logo{
+    background: #131921bd;
+    border-radius: 10px;
+    height: 50px;
   }
 
   /* Push location + search below logo/nav/toggle */
@@ -355,10 +363,15 @@
   .location-pill {
     align-self: flex-start;
     width: fit-content;
+    width: 100%;
+    border: 1px solid gray;
+    
+    background: rgba(255, 255, 255, 0.1);
   }
 
   .location-sub {
     max-width: 240px;
+    color: gray;
   }
 
   .search-wrapper {
@@ -369,6 +382,12 @@
   .search-wrapper input {
     padding: 11px 14px;
     font-size: 15px;
+    border: 1px solid gray;
+    border-right: none;
+  }
+  .search-wrapper button{
+    border: 1px solid gray;
+    border-left: none;
   }
 
   .header-nav-desktop {
@@ -397,6 +416,7 @@
 
   .location-sub {
     max-width: 120px;
+    color: gray;
   }
 
   .header-nav-desktop {

@@ -149,15 +149,16 @@ const Navbar = () => {
 
   return (
     <header
-      className="header"
-      style={{
-        backgroundImage: isMobileOrTablet
-          ? `linear-gradient(${themeColor}, white)`
-          : undefined, // falls back to whatever your CSS class defines for desktop
-        transition: 'background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
-        willChange: 'background-color',
-      }}
-    >
+    className="header"
+    style={{
+      backgroundImage: isMobileOrTablet
+        ? `linear-gradient(180deg, color-mix(in srgb, ${themeColor} 30%, white) 0%, white 60%)`
+        : undefined,
+      transition: 'background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
+      willChange: 'background-color',
+    }}
+  >
+  
       <div className="header-inner">
         
         {/* Logo */}
@@ -211,7 +212,7 @@ const Navbar = () => {
         {/* Desktop Nav */}
         <nav className="header-nav-desktop">
           <Link to="/products">Products</Link>
-          <Link to="/orders">Orders & Returns</Link>
+          <Link to="/my/orders">Orders & Returns</Link>
           <Link to="/cart" className="cart-link">
             <span>{cartItems.length}</span>
             <img src={cartIcon} alt="cart" width="24" />

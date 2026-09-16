@@ -24,7 +24,7 @@ import { useInView } from 'react-intersection-observer'
 import { fetchProductLists } from '../store/recommndedProdSlice';
 import './homePage.css'
 import ProductSlider from './ProductSlider';
-import { getBanners } from '../store/addBannerSlice';
+
 import { useNavigate } from 'react-router-dom';
 import RecommendationSlider from '../components/productDetails/RecommendationSlider';
 import { STATUSES } from '../store/productDetailsSlice';
@@ -72,7 +72,7 @@ const ProdDet = () => {
 
     useEffect(() => {
         dispatch(getAllProducts())
-        
+
 
     }, [dispatch])
     useEffect(() => {
@@ -83,8 +83,10 @@ const ProdDet = () => {
         const viewed = JSON.parse(localStorage.getItem("recentlyViewed")) || [];
         setRecentlyViewed(viewed);
     }, []);
-    const maxDesktopIndex = Math.max(products?.length - 5, 0);
-    const maxMobileIndex = Math.max(products?.length - 1, 0)
+    // const maxDesktopIndex = Math.max(products?.length - 5, 0);
+    // const maxMobileIndex = Math.max(products?.length - 1, 0)
+    const maxDesktopIndex = Math.max((trending?.tendingProd?.length || 0) - 5, 0);
+    const maxMobileIndex = Math.max((trending?.tendingProd?.length || 0) - 1, 0);
     const handlePrev = useCallback(() => {
 
         setCurrentIndex(prevIndex => (prevIndex <= 0 ? maxDesktopIndex : prevIndex - 1));
@@ -134,11 +136,11 @@ const ProdDet = () => {
     // }
     const desktopProducts = useMemo(() => {
         return trending?.tendingProd?.slice(currentIndex, currentIndex + 5);
-    }, [products, currentIndex]);
+    }, [trending, currentIndex]);
 
     const mobileProduct = useMemo(() => {
         return trending?.tendingProd?.slice(currentIndex, currentIndex + 1);
-    }, [products, currentIndex]);
+    }, [trending, currentIndex]);
 
     // let recentlyViewed =[]
     // useEffect(()=>{
@@ -213,11 +215,11 @@ const ProdDet = () => {
                         </div>
                     </div>
                 </div>
-                
+
                 <div className="recently-viewed-container">
 
                 </div>
-                
+
                 {
                     hasRecentlyViewed && (<RecentlyViewedSlider />)
                 }
@@ -238,15 +240,20 @@ const ProdDet = () => {
                                     <div className='display-product-container'>
                                         <div className="product-cont">
 
-                                            {recomStatus === STATUSES.LOADING ? <h1>LOADING...</h1> : <ProductSlider products={desktopProducts} />}
+                                            {recomStatus === STATUSES.LOADING
+                                                ? Array.from({ length: 5 }).map((_, i) => (
+                                                    <div key={i} className="product-skeleton" />
+                                                ))
+                                                : <ProductSlider products={desktopProducts} />
+                                            }
                                         </div>
                                     </div>
                                     <button className='left-shift' onClick={handlePrev}>&lt;</button>
                                     <button className='right-shift' onClick={handleNext}>&gt;</button>
                                 </div>
 
-                               
-                               
+
+
 
                                 <RecommendationSlider products={bestSellers?.bestSeller} heading={'Bestsellers'} />
                             </>
@@ -256,7 +263,7 @@ const ProdDet = () => {
                     }
 
                 </div>
-                
+
 
                 <div ref={mobileRef}>
                     {isMobile &&
@@ -277,7 +284,12 @@ const ProdDet = () => {
 
                                             ))
                                         } */}
-                                            {recomStatus === STATUSES.LOADING ? <h1>LOADING...</h1> : <ProductSlider products={mobileProduct} />}
+                                            {recomStatus === STATUSES.LOADING
+                                                ? Array.from({ length: 5 }).map((_, i) => (
+                                                    <div key={i} className="product-skeleton" />
+                                                ))
+                                                : <ProductSlider products={mobileProduct} />
+                                            }
 
                                         </div>
 
@@ -298,7 +310,7 @@ const ProdDet = () => {
                 </div>
 
             </div>
-            <MultiBannerCarousel position='mid2' autoPlay={true} interval={4000}/>
+            <MultiBannerCarousel position='mid2' autoPlay={true} interval={4000} />
 
             <div className="homepage-card" >
                 <div className="homeleft-card" onClick={() => { navigate(`/products?productName=Headphone`) }}>
