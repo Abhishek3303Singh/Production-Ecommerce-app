@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import './bottomNav.css';
 import MobileCategorySideBar from '../products/MobileCategorySideBar';
+import { createPortal } from 'react-dom';
 
 const BottomNav = () => {
     const location = useLocation();
@@ -41,6 +42,7 @@ const BottomNav = () => {
     }
 
     return (
+        <>
         <div className="bottom-nav">
             <div className="bottom-nav-icons">
                 {/* Home Link */}
@@ -93,11 +95,22 @@ const BottomNav = () => {
                 </button>
             </div>
 
-            <MobileCategorySideBar 
+            {/* <MobileCategorySideBar 
             isOpen={isSidebarOpen}
             onClose={()=>setIsSidebarOpen(false)}
-            />
+            /> */}
         </div>
+        {
+            createPortal(
+                <MobileCategorySideBar
+                isOpen={isSidebarOpen}
+                onClose={()=>setIsSidebarOpen(false)}
+                />,
+                document.body
+            )
+        }
+        
+        </>
     );
 };
 

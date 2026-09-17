@@ -19,7 +19,7 @@
 
 .header-logo {
   flex-shrink: 0;
-  border: 2px solid orangered;
+  /* border: 2px solid orangered; */
   border-radius: 15px;
 }
 
@@ -342,9 +342,12 @@
     gap: 12px;
   }
   .header-logo{
-    background: #131921bd;
+    /* background: #131921bd; */
     border-radius: 10px;
-    height: 50px;
+    height: 70px;
+  }
+  .logo-img{
+    height: 40px;
   }
 
   /* Push location + search below logo/nav/toggle */
@@ -384,6 +387,18 @@
     font-size: 15px;
     border: 1px solid gray;
     border-right: none;
+    
+  }
+  .search-wrapper input {
+    flex: 1;
+    min-width: 0;           /* ← the actual fix: allows shrinking below intrinsic content width */
+    padding: 9px 14px;
+    border-radius: 6px 0 0 6px;
+    font-size: 14px;
+    outline: none;
+    background: #fff;
+    color: #333;
+    box-sizing: border-box; /* ← safety: keeps padding inside the computed width */
   }
   .search-wrapper button{
     border: 1px solid gray;

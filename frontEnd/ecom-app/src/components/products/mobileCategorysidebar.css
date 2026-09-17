@@ -42,7 +42,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: linear-gradient(135deg, #010716 0%, #2d0354 100%);
+    background: #131921;
     color: white;
 }
 
@@ -260,7 +260,7 @@
 }
 
 .apply-btn {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: #131921;
     color: white;
 }
 
