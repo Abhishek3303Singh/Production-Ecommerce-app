@@ -466,7 +466,7 @@ exports.productReview = async (req, res) => {
     totalRating += parseInt(cusReview.rating);
   });
   // console.log('totalRating',totalRating)
-  avRating = parseFloat(totalRating / numOfRating);
+  avRating = parseFloat((totalRating / numOfRating).toFixed(2));
   // console.log("rating", avRating)
   product.ratings = avRating;
   await product.save({ validateBeforeSave: false });

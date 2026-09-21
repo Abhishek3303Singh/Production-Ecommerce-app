@@ -21,7 +21,7 @@ const OrderDetails = () => {
             dispatch(clearError())
         }
         dispatch(getOrderDetails(id))
-    }, [dispatch, id, order && order?.orderStatus])
+    }, [dispatch, id])
     // console.log(id, 'order id')
 
     let ordStatus=0
@@ -78,7 +78,7 @@ const OrderDetails = () => {
                         </div>
                         <div className="orderDetails-status">
                             <h3>Order-Status</h3>
-                            <p>Ordered-Date:&#160; {order?.order.paidAtDate.split('T')[0]}</p>
+                            <p>Ordered-Date:&#160; {order?.order?.paidAtDate?.split('T')[0] || 'Pending'}</p>
                             {/* <p>Status:&#160; <span style={order?.order.orderStatus === 'Delivered'?{color:'#16bd03'}:{color:'rgb(255, 64, 0)'}}>{order?.order.orderStatus} </span> </p> */}
                             <p>Status:&#160; <span className={cls}>{order?.order.orderStatus} </span> </p>
 
@@ -91,7 +91,7 @@ const OrderDetails = () => {
                         </div>
                         <div className="orderDetails-payment-status">
                             <h3>Payment-Status</h3>
-                            <p style={order?.order.paymentInformation.status=='succeeded'? {color:'#16bd03'}:{color:'rgb(255, 64, 0)'}}>{order?.order.paymentInformation.status}</p>
+                            <p className={order?.order?.paymentInformation?.status === 'succeeded' ? 'payment-success' : 'payment-pending'}>{order?.order.paymentInformation.status}</p>
                             <p>Paid-Date:&#160; {order?.order?.paidAtDate.split('T')[0]}</p>
                             
                         </div>
@@ -103,10 +103,10 @@ const OrderDetails = () => {
                     </div>
                     {
                         order?.order.orderProduct.map((item) => (
-                            <div className='ordersDetails-img-container' key={item.product} >
-                                <img src={item.image} alt="Product Image" />
-                                <p>Smart Watch</p>
-                                <p>Total: {item.quantity} x {item.offerPrice}=&#8377;{item.quantity * item.offerPrice} </p>
+                            <div className='ordersDetails-img-container' key={item?.product} >
+                                <img src={item?.image} alt="Product Image" />
+                                <p>{item.title || item.name}</p>
+                                <p>Total: {item?.quantity} x {item?.offerPrice}=&#8377;{item?.quantity * item.offerPrice} </p>
                                 {/* <p>Total: 2 x 10000=&#8377;20000 </p> */}
 
                             </div>
@@ -120,7 +120,7 @@ const OrderDetails = () => {
                         <div className="orderDetails-price-details">
                             <div className='orderDetails-price-txt'>
                                 {/* <p>Price(Items:{cartItems.length})</p> */}
-                                <p>Price(Items-{order?.order.orderProduct.length})</p>
+                                <p>Price(Items-{order?.order?.orderProduct?.length})</p>
 
                                 <p>Tax</p>
                                 <p>Delivery Charges</p>
@@ -129,12 +129,12 @@ const OrderDetails = () => {
                             </div>
                             <div className='orderDetails-amount'>
                                 {/* <p>&#8377;{subTotalAmmount}</p> */}
-                                <p>&#8377;{order?.order.productPrice}</p>
+                                <p>&#8377;{order?.order?.productPrice}</p>
 
                                 {/* <p>&#8377; {gst.toFixed(2)}</p> */}
                                 <p>&#8377; {order?.order.vatPrice.toFixed(2)}</p>
 
-                                <p style={{ color: 'green' }}>{order?.order.shippingPrice>0?order?.order.shippingPrice:'Free'}</p>
+                                <p style={{ color: 'green' }}>{order?.order?.shippingPrice>0?order?.order?.shippingPrice:'Free'}</p>
                                 {/* <p style={{ color: 'green' }}>Free</p> */}
 
                             </div>
@@ -143,7 +143,7 @@ const OrderDetails = () => {
                         <div className='orderDetails-cart-total'>
                             <div className='orderDdetails-Total-Amount'><h2>Payable Amount</h2></div>
                             {/* <div className='Total-Amount'><h2>&#8377; {Math.round(PayableAmount)}</h2></div> */}
-                            <div className='orderDdetails-Total-Amount'><h2>&#8377; {order?.order.totalPrice}</h2></div>
+                            <div className='orderDdetails-Total-Amount'><h2>&#8377; {order?.order?.totalPrice}</h2></div>
 
                         </div>
                         {/* <p className='orderDetails-offer-text-cart'>Your Total Savings on this order &#8377; 1000</p> */}
@@ -159,6 +159,7 @@ const OrderDetails = () => {
 
 
             </div>
+            
 
             <OrderStatus activeStep={ordStatus}/>
 

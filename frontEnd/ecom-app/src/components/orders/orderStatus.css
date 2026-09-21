@@ -1,82 +1,77 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,700;1,400&family=Libre+Franklin:ital,wght@0,400;0,500;1,300&family=Poppins:ital,wght@0,300;0,500;0,700;1,400;1,500&family=Roboto+Slab:wght@300;400;500;700&family=Ysabeau+SC:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
-.MuiStepConnector-alternativeLabel-line {
-    display: none !important;
+.order-stepper {
+    padding: 2vmax 0 !important;
 }
 
-.MuiStepConnector-root {
-    /* height: 2px; */
-    background-color: rgb(248, 74, 0);
-}
-.MuiStepConnector-active,
-.MuiStepConnector-completed {
-    background-color: rgb(9, 211, 9);
-    height: 0.3vmax;
-}
-.MuiStepConnector-horizontal, .MuiStepConnector-alternativeLabel, .Mui-disabled{
-    height: 0.3vmax;
+/* Connector line */
+.MuiStepConnector-line {
+    border-color: #e0e0e0 !important;
+    border-top-width: 2px !important;
 }
 
-.activeIcon {
-    color: rgb(9, 211, 9);
-    font: 500 1vmax 'Ysabeau SC', sans-serif;
-
+.MuiStepConnector-active .MuiStepConnector-line,
+.MuiStepConnector-completed .MuiStepConnector-line {
+    border-color: var(--brand-green) !important;
 }
 
-.inActiveIcon {
-    color: rgb(248, 74, 0);
-    font: 500 1vmax 'Ysabeau SC', sans-serif;
-    ;
+/* Step label text */
+.step-pending {
+    color: #9e9e9e;
+    font: 500 0.85vmax 'Poppins', sans-serif;
 }
 
-.activeIcon1 {
-    color: rgb(9, 211, 9);
-    font: 500 2vmax 'Ysabeau SC', sans-serif;
-
+.step-current {
+    color: var(--brand-navy);
+    font: 700 0.9vmax 'Poppins', sans-serif;
 }
 
-.inActiveIcon1 {
-    color: rgb(248, 74, 0);
-    font: 500 2vmax 'Roboto Slab', serif;
+.step-completed {
+    color: var(--brand-green);
+    font: 500 0.85vmax 'Poppins', sans-serif;
 }
 
-@media screen and (max-width:768px) {
-    .MuiStepConnector-root {
-        height: 1px;
-        background-color: rgb(248, 74, 0);
+/* Step icons */
+.MuiStepLabel-iconContainer svg {
+    font-size: 1.6vmax;
+}
+
+.step-pending svg,
+.MuiStepLabel-iconContainer .step-pending {
+    color: #c4c4c4;
+}
+
+.step-completed svg,
+.MuiStepLabel-iconContainer .step-completed {
+    color: var(--brand-green);
+}
+
+.step-current svg,
+.MuiStepLabel-iconContainer .step-current {
+    color: var(--brand-orange);
+    animation: pulse-step 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse-step {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+}
+
+@media screen and (max-width: 768px) {
+    .order-stepper {
+        padding: 3vmax 0 !important;
     }
 
-    .MuiStepConnector-active,
-    .MuiStepConnector-completed {
-        background-color: rgb(18, 230, 3);
+    .step-pending,
+    .step-completed {
+        font-size: 1.5vmax;
     }
 
-    .activeIcon {
-        color: rgb(9, 211, 9);
-        font: 500 1.5vmax 'Ysabeau SC', sans-serif;
-
+    .step-current {
+        font-size: 1.6vmax;
     }
 
-    .inActiveIcon {
-        color: rgb(248, 74, 0);
-        font: 400 1.5vmax 'Roboto Slab', serif;
-        ;
-    }
-
-    .activeIcon1 {
-        color: rgb(9, 211, 9);
-        font: 500 3vmax 'Ysabeau SC', sans-serif;
-    
-    }
-    
-    .inActiveIcon1 {
-        color: rgb(248, 74, 0);
-        font: 500 3vmax 'Roboto Slab', serif;
-    }
-
-
-    .MuiPaper-root, .MuiStepper-root, 
-    .MuiStepper-horizontal, .MuiStepper-alternativeLabel, .MuiPaper-elevation0{
-        padding: 2vmax 0;
+    .MuiStepLabel-iconContainer svg {
+        font-size: 2.8vmax;
     }
 }

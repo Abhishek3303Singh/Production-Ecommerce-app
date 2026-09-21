@@ -177,7 +177,11 @@ useEffect(() => {
       <MetaData title={`${product.name}FunHub`}></MetaData>
       <div className='prdDetailsCard'>
         <div className='img-container'>
-          <ProductGallery image={image} />
+        <ProductGallery
+    image={image}
+    images={product.Image}
+    onImageChange={setImage}
+/>
 
           <div className='img-list'>
             {
@@ -204,12 +208,15 @@ useEffect(() => {
           <div className='prdDetailsCard__detailsBlock1__2'>
             <ReactStars {...options} />
 
-            <span>{product.ratings} Ratings &amp; {product.reviewsCount} Reviews</span>
+            <span>{parseFloat( product?.ratings?.toFixed(1))} Ratings &amp; {product.reviewsCount} Reviews</span>
 
           </div>
           <div className='prdDetailsCard__detailsBlock1__3'>
-            <h1>Price: &#x20B9;{product.offerPrice}{" "} <span>&#x20B9;{product.price}</span> </h1>
-            <h3>{offerPercentage}% off</h3>
+          <div className="price-row">
+  <span className="offer-price">&#x20B9;{product.offerPrice}</span>
+  <span className="mrp-price">&#x20B9;{product.price}</span>
+  <span className="discount-badge">{offerPercentage}% off</span>
+</div>
             <div className='proDetailsCard__detailsBlock1__3__image'>
 
               {/* {
@@ -225,7 +232,7 @@ useEffect(() => {
               <AddToCart id={id} product={product} />
 
             </div>
-            <p>
+            <p className='stock-status'>
               status:{""}
               <b className={product.Stock > 1 ? 'inStock' : 'OutOfStock'}>
                 {product.Stock > 1 ? "InStock" : "OutOfStock"}

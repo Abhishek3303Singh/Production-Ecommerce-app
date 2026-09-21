@@ -32,6 +32,7 @@ import RecentlyViewedSlider from './RecentlyViewedSlider';
 import BannerCarousel from './BannerCarousel';
 import MultiBannerCarousel from '../BannerCarousel/MultiBannerCarousel';
 
+
 const ProdDet = () => {
     // const [imgIndex, setImageIndex] = useState(0)
     const [recentlyViewed, setRecentlyViewed] = useState([]);
@@ -49,6 +50,7 @@ const ProdDet = () => {
     // ]), [])
 
     const isMobile = window.innerWidth <= 768;
+    const sliderRef = useRef()
 
 
 
@@ -99,9 +101,11 @@ const ProdDet = () => {
     const handlePrevMobile = useCallback(() => {
 
         setCurrentIndex(prevIndex => (prevIndex <= 0 ? maxMobileIndex : prevIndex - 1));
+        
     }, [maxMobileIndex]);
     const handleNextMobile = useCallback(() => {
         setCurrentIndex(prev => (prev >= maxMobileIndex ? 0 : prev + 1))
+       
     }, [maxMobileIndex])
 
 
@@ -135,11 +139,11 @@ const ProdDet = () => {
     //     )
     // }
     const desktopProducts = useMemo(() => {
-        return trending?.tendingProd?.slice(currentIndex, currentIndex + 5);
+        return trending?.tendingProd?.slice(currentIndex, currentIndex + 6);
     }, [trending, currentIndex]);
 
     const mobileProduct = useMemo(() => {
-        return trending?.tendingProd?.slice(currentIndex, currentIndex + 1);
+        return trending?.tendingProd?.slice(currentIndex, currentIndex + 2);
     }, [trending, currentIndex]);
 
     // let recentlyViewed =[]
@@ -251,7 +255,7 @@ const ProdDet = () => {
                                     <button className='left-shift' onClick={handlePrev}>&lt;</button>
                                     <button className='right-shift' onClick={handleNext}>&gt;</button>
                                 </div>
-
+                          
 
 
 
@@ -275,7 +279,7 @@ const ProdDet = () => {
                                     <h2>Trends you may like</h2>
                                     <div className='display-product-mobile-container'>
 
-                                        <div className="product-mobile-cont">
+                                        {/* <div className="product-mobile-cont"> */}
                                             {/* {console.log("mobile card is running!!")} */}
 
                                             {/* {
@@ -284,14 +288,17 @@ const ProdDet = () => {
 
                                             ))
                                         } */}
+
                                             {recomStatus === STATUSES.LOADING
                                                 ? Array.from({ length: 5 }).map((_, i) => (
                                                     <div key={i} className="product-skeleton" />
                                                 ))
-                                                : <ProductSlider products={mobileProduct} />
+                                                : 
+                                                    <ProductSlider products={trending?.tendingProd} />
+                                                
                                             }
 
-                                        </div>
+                                        {/* </div> */}
 
 
                                     </div>
@@ -302,6 +309,7 @@ const ProdDet = () => {
                                     </div>
 
                                 </div>
+                             
                             </>
 
                         )

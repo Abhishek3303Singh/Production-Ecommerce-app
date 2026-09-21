@@ -30,6 +30,7 @@ width:50px
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
+    height: 100%;
 }
 .ratings >p:last-child{
     /* padding: 1vmax 0; */
@@ -84,6 +85,7 @@ width:50px
 }
 .rev-comment{
     color: rgb(58, 58, 58);
+    text-align: start;
 }
 .pending {
     font-size: 14px;
@@ -109,9 +111,27 @@ width:50px
 
   @media screen and (max-width: 800px){
     .rev-container{
-        display: block;
+        display: flex;
+        flex-direction: row;
+        gap: 12px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        white-space: nowrap;
+        
+        /* Smooth touch scrolling on mobile */
+        -webkit-overflow-scrolling: touch;
+        scroll-behavior: smooth;
 
 
+    }
+    .rev-container::-webkit-scrollbar{
+        display: none;
+    }
+    .review-card-container{
+        flex: 0 0 80%;
+        max-width: 300px;
+        scroll-snap-align: start;
+        flex-shrink: 0;
     }
   }
   

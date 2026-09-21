@@ -26,12 +26,14 @@
   
   /* Title */
   .prdDetailsCard__detailsBlock1__1 h2 {
-    font: 600 2.5vmax 'Libre Franklin', sans-serif;
+    font: 600 2.2vmax 'Poppins', sans-serif;
+  color: var(--brand-navy);
     
   }
   
   .prdDetailsCard__detailsBlock1__1 p {
-    font: 500 1vmax 'Libre Franklin', sans-serif ;
+    font: 400 0.9vmax 'Poppins', sans-serif;
+    color: var(--text-muted);
   }
   
   /* Rating section */
@@ -57,8 +59,14 @@
     opacity: 0.6;
   }
   
-  .prdDetailsCard__detailsBlock1__3 h3 {
+  /* .prdDetailsCard__detailsBlock1__3 h3 {
     color: green;
+  } */
+
+  .prdDetailsCard__detailsBlock1__3 h3 {
+    color: var(--brand-green);
+    font-size: 1vmax;
+    font-weight: 600;
   }
   
   /* Thumbnail images */
@@ -86,7 +94,7 @@
     display: flex;
   }
 
-  .inc-Qty{
+  /* .inc-Qty{
     padding: 4px;
     background-color: red;
     min-width: 1.5vmax;
@@ -107,7 +115,7 @@
   }
   .Qty-text{
     color: #2d2d2d;
-    /* font-family: 'Times New Roman', Times, serif; */
+  
     font: 800 1.8vmax "Franklin Gothic Medium"
   }
   .Qty{
@@ -117,15 +125,51 @@
     text-align: center;
     font-size: medium;
     font-weight: 500;
+  } */
+  .inc-Qty, .dec-Qty {
+    background: #f5f5f5 !important;
+    color: var(--brand-navy) !important;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    min-width: 32px;
+    height: 32px;
+    padding: 0;
+    font-size: 16px;
+    font-weight: 600;
+    transition: background 0.15s ease;
   }
-  
+  .inc-Qty:hover, .dec-Qty:hover {
+    background: #eaeaea;
+  }
+  .Qty {
+    text-align: center;
+    width: 20px;
+    height: 32px;
+    border: 1px solid #ddd;
+    border-left: none;
+    border-right: none;
+  }
+  .Qty-text {
+    color: var(--brand-navy);
+    font: 500 1.2vmax "Franklin Gothic Medium";
+  }
   .prdDetailsCard__detailsBlock1__3__1__add {
-    background: red;
+    background: var(--brand-orange);
     color: #fff;
     padding: 0.75vmax 1vmax;
     border: none;
+    border-radius: 8px;
     cursor: pointer;
-    font: 400 1vmax sans-serif
+    font: 600 0.95vmax 'Poppins', sans-serif;
+    box-shadow: 0 2px 8px rgba(255, 159, 0, 0.3);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .prdDetailsCard__detailsBlock1__3__1__add:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(255, 159, 0, 0.4);
+  }
+  .prdDetailsCard__detailsBlock1__3__1__add:active {
+    transform: translateY(0);
   }
   .cat-btn-cont{
     display: flex;
@@ -133,20 +177,42 @@
   }
   
   .prdDetailsCard__detailsBlock1__3__1__buy {
-    background: rgb(2, 197, 2);
+    background: var(--brand-green);;
     color: #fff;
     padding: 0.75vmax 1vmax;
     border: none;
     cursor: pointer;
-    font: 400 1vmax sans-serif
+    border-radius: 8px;
+  font: 600 0.95vmax 'Poppins', sans-serif;
+  box-shadow: 0 2px 8px rgba(56, 142, 60, 0.3);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
     
   }
-  
+  .prdDetailsCard__detailsBlock1__3__1__buy:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(56, 142, 60, 0.4);
+  }
+  .inStock, .OutOfStock {
+    display: inline-block;
+    padding: 3px 12px;
+    border-radius: 20px;
+    font: 600 0.75vmax 'Poppins', sans-serif;
+    margin-left: 6px;
+  }
+  .inStock {
+    background: var(--brand-green-bg);
+    color: var(--brand-green);
+  }
+  .OutOfStock {
+    background: var(--brand-red-bg);
+    color: #c62828;
+  }
   /* Description */
   .prdDetailsCard__detailsBlock1__4 {
     
-    font: 400 1.2vmax "Franklin Gothic Medium";
-    color: #2d2d2d;
+    font: 400 1vmax 'Poppins', sans-serif;
+    color: #444;
+    line-height: 1.6;
   }
   
   .prdDetailsCard__detailsBlock1__4 span {
@@ -159,8 +225,13 @@
     
     width: 90%;
     margin: auto;
+    animation: fadeSlideIn 0.3s ease;
     
    
+  }
+  @keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
   }
   .AddReviews__textArea{
     width: 100%;
@@ -221,7 +292,24 @@
   .img-list{
     display: flex;
     flex-direction: column;
+    gap:8px;
+    max-height: 420px;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    padding-right: 4px;
+
   }
+  .img-list::-webkit-scrollbar {
+    width: 5px;
+}
+.img-list::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 10px;
+}
+.img-list::-webkit-scrollbar-thumb:hover {
+    background: #aaa;
+}
   .char-count {
     font-size: 12px;
     color: #777;
@@ -238,10 +326,29 @@
     }
     .img-list{
       flex-direction: row;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      gap: 8px;
+      padding-bottom:  4px;
+      max-height: none;
+    
     }
+    .img-list::-webkit-scrollbar{
+      display: none;
+
+    }
+    .prdDetailsCard__detailsBlock1__3__image__slide {
+      scroll-snap-align: start;
+      flex-shrink: 0;
+  }
     .prdDetailsCard__detailsBlock1{
       width: 100%;
       margin-left: 0px;
+      margin-right: 0px !important;
+      padding: 1px !important;
     }
     .prdDetailsCard__detailsBlock1__1 p{
         font: 500 1.75vmax 'Libre Franklin', sans-serif;
@@ -249,8 +356,8 @@
     .prdDetailsCard__detailsBlock1__2{
         width: 100%;
         display: flex;
-        flex-direction: column;
-        align-items: center;
+        flex-direction: column-reverse;
+        align-content: flex-start;
     }
     
 
@@ -258,7 +365,7 @@
     
     .prdDetailsCard__detailsBlock1__2>div{
         display: flex;
-        justify-content: center
+        
     }
     .prdDetailsCard__detailsBlock1__2 span{
        font: 400 2.2vmax "Franklin Gothic Medium";
@@ -290,11 +397,11 @@
     }
     .prdDetailsCard__detailsBlock1__3__1__1{
       display: flex;
-      align-items: center;
+      align-content: flex-start;
       width: 100%;
-      justify-content: center;
+      justify-content: flex-start;
     }
-    .inc-Qty {
+    /* .inc-Qty {
       min-width: 3vmax;
       padding: 4px 8px;
     }
@@ -304,6 +411,9 @@
     }
     .Qty{
       min-width: 3.5vmax;
+    } */
+    .Qty{
+      width: 40px;
     }
     .cat-btn-cont{
       width: 100%;
@@ -311,12 +421,37 @@
       justify-content: center;
       align-items: center;
       gap: 2vmax;
+      flex-direction: column;
     }
     .prdDetailsCard__detailsBlock1__3__1__add {
-      font: 400 2vmax sans-serif;
+      font: 600 2vmax 'Poppins', sans-serif;
+      padding: 12px 28px;
+      width: 100%;
+      max-width: 250px;
     }
     .prdDetailsCard__detailsBlock1__3__1__buy{
-      font: 400 2vmax sans-serif;
+      font: 600 2vmax 'Poppins', sans-serif;
+      padding: 12px 20px;
+      width: 100%;
+      max-width: 250px;
+
+    }
+    .stock-status{
+      font: 600 2vmax 'Poppins', sans-serif;
+    }
+    .inStock, .OutOfStock {
+      
+      font: 600 2vmax 'Poppins', sans-serif;
+      margin-left: 6px;
+      margin-top: 1vmax;
+    }
+    .inStock {
+      background: var(--brand-green-bg);
+      color: var(--brand-green);
+    }
+    .OutOfStock {
+      background: var(--brand-red-bg);
+      color: #c62828;
     }
     .prdDetailsCard__detailsBlock1__3 h1{
         text-align: center;
@@ -324,123 +459,49 @@
     }
     .prdDetailsCard__detailsBlock1__3 h3{
         text-align: center;
+        color: var(--brand-green);
+        font-size: 2vmax;
+        font-weight: 600;
     }
     .prdDetailsCard__detailsBlock1__4{
       font: 404 3.2vmax "Franklin Gothic Medium";
     }
     .prdDetailsCard__detailsBlock1__4>p{
-      font: 404 2.2vmax sans-serif;
+      font: 404 2.2vmax 'Poppins', sans-serif;
     }
     .prdDetailsCard__detailsBlock1__4 span{
       font: 404 2.2vmax sans-serif;
     }
+    .offer-price{
+      font: 600 2.8vmax sans-serif !important;
+    }
+    .mrp-price{
+      font: 600 2vmax sans-serif !important;
+
+    }
+    .discount-badge{
+      font: 600 2vmax sans-serif !important;
+
+    }
   }
 
-  /* =========================
-   MOBILE & TABLET (PDP)
-========================= */
-
-/* @media screen and (max-width: 768px) {
-
-   
-    .prdDetailsCard {
-      flex-direction: column;
-      width: 100%;
-      padding: 1rem;
-      box-sizing: border-box;
-    }
-  
-  
-    .prdDetailsCard__imgcontainer {
-      width: 100%;
-      height: auto;
-      margin-bottom: 1rem;
-    }
-  
-    .prdDetailsCard__imgcontainer img {
-      width: 100%;
-      height: auto;
-      object-fit: contain;
-    }
-  
-   
-    .prdDetailsCard__detailsBlock1 {
-      width: 100%;
-      padding: 0;
-    }
-  
-    .prdDetailsCard__detailsBlock1__1 h2 {
-      font-size: 1.2rem;
-      line-height: 1.4;
-    }
-  
-    .prdDetailsCard__detailsBlock1__1 p {
-      font-size: 0.8rem;
-    }
-  
-   
-    .prdDetailsCard__detailsBlock1__2 {
-      font-size: 0.9rem;
-      margin: 0.5rem 0;
-    }
-  
- 
-    .prdDetailsCard__detailsBlock1__3 h1 {
-      font-size: 1.4rem;
-    }
-  
-    .prdDetailsCard__detailsBlock1__3 h1 span {
-      font-size: 0.9rem;
-    }
-  
-    
-    .prdDetailsCard__detailsBlock1__3__image {
-      display: flex;
-      overflow-x: auto;
-      gap: 0.5rem;
-      padding-bottom: 0.5rem;
-    }
-  
-    .prdDetailsCard__detailsBlock1__3__image::-webkit-scrollbar {
-      display: none;
-    }
-  
-    .prdDetailsCard__detailsBlock1__3__image__slide {
-      min-width: 60px;
-      height: 60px;
-      object-fit: cover;
-      border-radius: 6px;
-    }
-  
-   
-    .prdDetailsCard__detailsBlock1__3__1 {
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-top: 1rem;
-    }
-  
-    .prdDetailsCard__detailsBlock1__3__1 input {
-      width: 40px;
-      text-align: center;
-    }
-  
-    .prdDetailsCard__detailsBlock1__3__1__buy {
-      width: 100%;
-      padding: 0.8rem;
-      font-size: 1rem;
-    }
-  
-    
-    .prdDetailsCard__detailsBlock1__4 {
-      font-size: 0.9rem;
-      margin-top: 1rem;
-    }
-  
-    
-    .AddReviews {
-      width: 90%;
-      padding: 1rem;
-      left: 5%;
-    }
+  .price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 0.5vmax 0;
   }
-   */
+  .offer-price {
+    font: 800 1.8vmax "Franklin Gothic Medium";
+    color: var(--brand-navy);
+  }
+  .mrp-price {
+    font: 400 1.2vmax 'Poppins', sans-serif;
+    color: var(--text-muted);
+    text-decoration: line-through;
+  }
+  .discount-badge {
+    font: 600 1.2vmax 'Poppins', sans-serif;
+    color: var(--brand-green);
+  }

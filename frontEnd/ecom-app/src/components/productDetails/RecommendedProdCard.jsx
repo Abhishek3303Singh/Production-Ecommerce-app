@@ -18,7 +18,7 @@ const RecommendedProdCard = ({ product }) => {
 
                     <div className="rec-rating">
                         <span className="rating-box">
-                            {product?.ratings || 0} ★
+                            {parseFloat(product?.ratings.toFixed(1)) || 0} ★
                         </span>
                         <span className="review-count">
                             ({product?.reviewsCount || 0})

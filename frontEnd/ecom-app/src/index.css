@@ -74,3 +74,13 @@ code {
   *, *::before, *::after {
     box-sizing: border-box;
   }
+
+  :root {
+    --brand-navy: #131921;
+    --brand-red: #fd4444;
+    --brand-orange: #ff9f00;
+    --brand-green: #388e3c;
+    --brand-green-bg: #e6f7e6;
+    --brand-red-bg: #fdecea;
+    --text-muted: #878787;
+  }
