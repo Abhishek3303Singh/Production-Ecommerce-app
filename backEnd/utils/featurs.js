@@ -33,6 +33,12 @@ class Featurs{
        const arrOfremoveFields = ["keyword", 'page', 'limit'];
         arrOfremoveFields.forEach(key=>delete copyQuery[key])
         // console.log(copyQuery)
+        Object.keys(copyQuery).forEach(key => {
+            const val = copyQuery[key];
+            if (typeof val === 'string' && val.includes(',')) {
+                copyQuery[key] = { $in: val.split(',') };
+            }
+        });
 
         // price filter
         let queryString = JSON.stringify(copyQuery)

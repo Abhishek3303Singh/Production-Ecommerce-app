@@ -242,6 +242,9 @@
     margin-top: 6px;
     width: 200px !important;
   }
+  .leaflet-top, .leaflet-bottom{
+    z-index: 500;
+  }
   
   @media (max-width: 768px) {
     .shipping-map-container {

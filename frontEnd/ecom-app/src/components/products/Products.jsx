@@ -30,6 +30,9 @@ const Products = () => {
             price: [0, 10000],
             category: "",
             ratings: 0,
+            productType:"",
+            brand:"",
+            attributes:{}
         }
     )
     const { keyword } = useParams();
@@ -47,16 +50,30 @@ const Products = () => {
         const maxPrice = Number(searchParams.get('price[lte]')) || 10000;
         const ratings = Number(searchParams.get('ratings[gte]')) || 0;
         const categoryParam = searchParams.get('category') || '';
+        const productTypeParam = searchParams.get('productType') || '';
+        const brandParam = searchParams.get('brand') || ''
+
+        const attributes = {}
+        for(const [key , value] of searchParams.entries()){
+            if(key.startsWith('attributes.')){
+                const attrKey = key.replace('attributes.',  '')
+                attributes[attrKey] = value
+            }
+        }
+
         setCategory(categoryParam)
 
         setFilters({
             price: [minPrice, maxPrice],
             category: categoryParam,
-            ratings: ratings
+            ratings: ratings,
+            productType:productTypeParam,
+            brand:brandParam,
+            attributes
         });
         setCurrPage(1);
     }, [location.search])
-    console.log(filters, 'filters data')
+    // console.log(filters, 'filters data')
     const updateURL = useCallback((newFilters, page) => {
         const params = new URLSearchParams();
         
@@ -69,8 +86,21 @@ const Products = () => {
         if (newFilters.ratings > 0) {
             params.append('ratings[gte]', newFilters.ratings);
         }
-        if (newFilters.category) {
+        if (newFilters.category && newFilters.category !== 'All') {
             params.append('category', newFilters.category);
+        }
+        if(newFilters.productType){
+            params.append('productType', newFilters.productType)
+        }
+        if(newFilters.brand){
+            params.append('brand', newFilters.brand)
+        }
+        if(newFilters.attributes){
+            Object.entries(newFilters.attributes).forEach(([key, value])=>{
+                if(value){
+                    params.append(`attributes.${key}`, value)
+                }
+            })
         }
         if (page > 1) {
             params.append('page', page);
@@ -104,12 +134,12 @@ const Products = () => {
     }, []);
 
 
-    console.log('keyword', category)
+    // console.log('keyword', category)
 
     useEffect(() => {
-        dispatch(getAllProducts(keyword || '', currPage, filters.price, filters.category, filters.ratings))
+        dispatch(getAllProducts(keyword || '', currPage, filters.price, filters.category, filters.ratings, filters.productType, filters.brand, filters.attributes))
         updateURL(filters, currPage);
-    }, [dispatch, keyword, currPage, filters.price, filters.category, filters.ratings])
+    }, [dispatch, keyword, currPage, filters.price, filters.category, filters.ratings, filters.productType, filters.brand, filters.attributes])
 
     // let count = filterProductcount
     const visibleProducts = useMemo(() => {
@@ -157,7 +187,7 @@ const Products = () => {
                 })
             }} />
         </div>
-            <MultiBannerCarousel position="hero2" autoPlay={true} interval={4000}/>
+            <MultiBannerCarousel position="hero2" autoPlay={true} interval={4000} bannerLimit={8}/>
             
 
 

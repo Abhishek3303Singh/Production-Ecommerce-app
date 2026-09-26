@@ -8,9 +8,11 @@ import beauty from '../../images/categoryStrip/beauty.png'
 import ToysBaby from '../../images/categoryStrip/ToysBaby.png'
 import HomeKitchen from '../../images/categoryStrip/HomeKitchen.png'
 import sports from '../../images/categoryStrip/cateSports.png'
+import allprod from '../../images/categoryStrip/allprod.png'
 const CategoryStrip = ({ onCategorySelect }) => {
 
     const categoryStripData = [
+        {url:allprod, title:"All"},
                 {url:sports, title:"Sports"},
                 {url:electronicsicon, title:"Electronics"},
                 {url:fashion, title:"Fashion"},
@@ -19,6 +21,7 @@ const CategoryStrip = ({ onCategorySelect }) => {
                 {url:beauty, title:"Beauty"},
                 {url:ToysBaby, title:"Toys&Baby"},
                 {url:HomeKitchen, title:"Home&Kitchen"},
+               
     ]
     return (
         <>

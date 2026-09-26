@@ -88,14 +88,7 @@ body {
     text-decoration: none;
     transition: all 0.5s ease;
     overflow: hidden;
-    /* box-shadow:
-    0 2.8px 2.2px rgba(162, 165, 165, 0.034),
-    0 6.7px 5.3px rgba(171, 215, 215, 0.048),
-    0 12.5px 10px rgba(147, 155, 161, 0.06),
-    0 22.3px 17.9px rgba(176, 161, 182, 0.072),
-    0 41.8px 33.4px rgba(174, 221, 189, 0.086),
-    0 100px 80px rgba(122, 127, 128, 0.12)
-  ; */
+    min-height: 100%;    
 
 
 
@@ -105,7 +98,8 @@ body {
 .product-card>img {
     width: 70%;
     margin: auto;
-    height: 40%;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
     mix-blend-mode: darken;
 
 }
@@ -178,17 +172,15 @@ body {
 .char-limit {
     overflow: hidden;
     width: 50ch;
-    font: 300 0.8vmax 'Lato', sans-serif;
+    font: 300 0.9vmax 'Lato', sans-serif;
     margin: 0.2vmax 0.5vmax;
     max-width: 100%;
     text-overflow: ellipsis;
     width: fit-content;
     white-space: nowrap;
+    min-height: 1.2em; 
 }
 
-.char-limit:hover {
-    color: rgb(55, 55, 253);
-}
 
 .starVal {
     position: absolute;
@@ -201,9 +193,13 @@ body {
 .product-cart-btn {
     border: none;
     color: white;
-    height: 2.5vmax;
-    letter-spacing: 2px;
+    width: calc(100% - 0vmax);
+    min-height: 2.5vmax;
+    flex-shrink: 0;   
+    letter-spacing: 1px;
     background-color: rgb(6, 189, 189);
+    border-radius: 4px;
+    margin: 0vmax auto;
     transition: all 0.5s;
     cursor: pointer;
 
@@ -223,8 +219,9 @@ body {
 .product-title {
     text-align: center;
     letter-spacing: 0.5px;
-    font: 600 1vmax 'Libre Franklin', sans-serif;
-    ;
+    font: 600 1.2vmax 'Libre Franklin', sans-serif;
+    min-height: 2.4em;
+    line-height: 1.2em;
     margin: 0.5vmax 0.5vmax;
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -323,14 +320,17 @@ body {
 
     .product-title {
         text-align: center;
-        letter-spacing: 2px;
-        font: 600 2vmax sans-serif;
+        
+        font: 600 2vmax "Poppins", sans-serif;
         margin: 0.5vmax 0.5vmax;
-        min-height: 2em;
+        min-height: 2.4em;
+        line-height: 2.1em;
+        
     }
 
     .char-limit {
-        font: 500 2vmax 'sans-serif';
+        font: 500 2vmax "Poppins", 'sans-serif';
+        min-height: 2.2em;
     }
 
     .ProductHeading {

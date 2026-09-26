@@ -252,7 +252,7 @@ const Navbar = () => {
           </div>
           <ul>
             <li><Link to="/products" onClick={() => setOpenMenu(false)}>Products</Link></li>
-            <li><Link to="/orders" onClick={() => setOpenMenu(false)}>Orders & Returns</Link></li>
+            <li><Link to="/my/orders" onClick={() => setOpenMenu(false)}>Orders & Returns</Link></li>
             <li>
               <Link to="/cart" onClick={() => setOpenMenu(false)}>
                 Cart <span className="mobile-cart-count">({cartItems.length})</span>

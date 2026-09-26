@@ -1,4 +1,4 @@
-import './homeproduct.css'
+// import './homeproduct.css'
 import React, {memo} from 'react'
 import { useDispatch } from 'react-redux'
 import {Link} from 'react-router-dom'

@@ -310,3 +310,10 @@
         text-align: center;
     }
 }
+
+.filter-hint {
+    font-size: 0.8rem;
+    color: #999;
+    padding: 8px 20px;
+    margin: 0;
+}

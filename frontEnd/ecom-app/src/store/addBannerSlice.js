@@ -1,3 +1,4 @@
+import { light } from "@material-ui/core/styles/createPalette";
 import { createSlice } from "@reduxjs/toolkit";
 
 const apiUrl = process.env.REACT_APP_API_BASE_URL;
@@ -65,13 +66,17 @@ export const {
 
 export default bannerSlice.reducer;
 
-export const getBanners = (position = "hero") => {
+export const getBanners = (position = "hero", limit) => {
   return async (dispatch) => {
     dispatch(setStatus(STATUSES.LOADING));
 
     try {
+      const params = new URLSearchParams({position})
+      if(light){
+        params.append("limit", limit)
+      }
       const res = await fetch(
-        `${apiUrl}/api/v1/banners?position=${position}`,
+        `${apiUrl}/api/v1/banners?${params.toString()}`,
         { credentials: "include" }
       );
 

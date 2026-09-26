@@ -1,5 +1,5 @@
 const express = require("express");
-const {updateProduct, allProducts, addProduct, deleteProduct, productDetails, searchItem, productReview, getAllReviews, deleteReview, adminAllProducts, searchSuggestion, recommendedProduct, trendingProducts, bestSeller, getProductsByIds} = require('../routeResponse/productResponse');
+const {updateProduct, allProducts, addProduct, deleteProduct, productDetails, searchItem, productReview, getAllReviews, deleteReview, adminAllProducts, searchSuggestion, recommendedProduct, trendingProducts, bestSeller, getProductsByIds, getAvailableFilters} = require('../routeResponse/productResponse');
 const { isAuthenticated, checkAdminAuthorize } = require("../middleware/checkAuthUser");
 const relaxedLimiter = require('../middleware/relaxedLimiter')
 
@@ -7,6 +7,7 @@ const relaxedLimiter = require('../middleware/relaxedLimiter')
 
 const router = express.Router();
 router.route("/products").get(relaxedLimiter, allProducts)
+router.route('/products/filters').get(relaxedLimiter, getAvailableFilters)
 router.route('/admin/products').get(isAuthenticated, checkAdminAuthorize('Admin'),relaxedLimiter,  adminAllProducts)
 router.route("/product/:id").put(isAuthenticated,checkAdminAuthorize('Admin'),relaxedLimiter, updateProduct)
 router.route('/product/add').post(isAuthenticated, checkAdminAuthorize('Admin') ,relaxedLimiter, addProduct)

@@ -125,7 +125,8 @@ exports.deleteBanner = async (req, res) => {
 // ================= GET (MAIN API) =================
 exports.getBanners = async (req, res) => {
   try {
-    const { position = "hero" } = req.query;
+    const { position = "hero", limit } = req.query;
+    const parsedLimit = Math.min(parseInt(limit) || 5, 20);
 
     const device = /mobile|android|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(req.headers["user-agent"] || "") 
         ? "mobile" 
@@ -158,7 +159,7 @@ exports.getBanners = async (req, res) => {
       "targeting.device": { $in: [device, "all"] },
     })
       .sort({ displayOrder: -1, priority: -1 }) 
-      .limit(position === "hero" ? 5 : 3)
+      .limit(parsedLimit)
       .lean();
 
     const response = banners.map((b) => ({

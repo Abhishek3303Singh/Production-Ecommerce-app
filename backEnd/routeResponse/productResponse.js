@@ -79,6 +79,64 @@ exports.updateProduct = async (req, res) => {
     });
   }
 };
+exports.getAvailableFilters = async (req, res) => {
+  try {
+    const { category, productType } = req.query;
+
+    if (!category || category === 'All') {
+      return res.json({ status: 'success', data: { productTypes: [], brands: [], attributes: {} } });
+    }
+
+    const cacheKey = `filters:${category}:${productType || 'none'}`;
+    let cached = null;
+    try {
+      cached = await redisClient.get(cacheKey);
+    } catch (e) { console.log('Redis get error:', e.message); }
+
+    if (cached) {
+      return res.json({ status: 'success', source: 'redis', data: JSON.parse(cached) });
+    }
+
+    let responseData;
+
+    if (!productType) {
+      // Stage 1: only category chosen — return the product types within it
+      const productTypes = await ProductModels.distinct('productType', { category });
+      responseData = { productTypes: productTypes.sort(), brands: [], attributes: {} };
+    } else {
+      // Stage 2: category + productType chosen — return brands/attributes scoped to BOTH
+      const productTypeArray = productType.split(',');
+      const match = {
+        category,
+        productType: productTypeArray.length === 1 ? productTypeArray[0] : { $in: productTypeArray }
+      };
+
+      const brands = await ProductModels.distinct('brand', match);
+
+      const attributeAgg = await ProductModels.aggregate([
+        { $match: match },
+        { $project: { attributesArray: { $objectToArray: '$attributes' } } },
+        { $unwind: '$attributesArray' },
+        { $group: { _id: '$attributesArray.k', values: { $addToSet: '$attributesArray.v' } } }
+      ]);
+
+      const attributes = attributeAgg.reduce((acc, item) => {
+        acc[item._id] = item.values.sort();
+        return acc;
+      }, {});
+
+      responseData = { productTypes: [], brands: brands.sort(), attributes };
+    }
+
+    try {
+      await redisClient.setEx(cacheKey, 300, JSON.stringify(responseData));
+    } catch (e) { console.log('Redis set error:', e.message); }
+
+    res.json({ status: 'success', source: 'db', data: responseData });
+  } catch (e) {
+    res.status(400).json({ status: 'failed', message: e.message });
+  }
+};
 
 // read Product
 exports.allProducts = async (req, res) => {

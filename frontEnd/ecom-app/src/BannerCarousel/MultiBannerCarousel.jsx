@@ -3,17 +3,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getBanners } from '../store/addBannerSlice';
 import './MultiBannerCarousel.css';
 
-const MultiBannerCarousel = ({ position = 'hero2', autoPlay = true, interval = 4000 }) => {
+const MultiBannerCarousel = ({ position = 'hero2', autoPlay = true, interval = 4000, bannerLimit }) => {
   const dispatch = useDispatch();
   const { banners, status } = useSelector((state) => state.createBanner);
-  const [currentIndex, setCurrentIndex] = useState(0);
   const [itemsPerView, setItemsPerView] = useState(3);
-  
+  const [currentIndex, setCurrentIndex] = useState(0); // index into the CLONED track
+  const [isTransitioning, setIsTransitioning] = useState(true);
+
   const hasFetched = useRef(false);
   const isFetching = useRef(false);
   const touchStartX = useRef(0);
 
-  // Responsive breakpoint logic
   useEffect(() => {
     const handleResize = () => {
       const w = window.innerWidth;
@@ -26,7 +26,6 @@ const MultiBannerCarousel = ({ position = 'hero2', autoPlay = true, interval = 4
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Filter by position + active date
   const filteredBanners = useMemo(() => {
     const now = new Date();
     return banners?.filter((b) => {
@@ -36,43 +35,75 @@ const MultiBannerCarousel = ({ position = 'hero2', autoPlay = true, interval = 4
     }) || [];
   }, [banners, position]);
 
-  const maxIndex = Math.max(0, filteredBanners.length - itemsPerView);
+  const totalReal = filteredBanners.length;
+  const canLoop = totalReal > itemsPerView;
 
-  // Keep index in bounds when screen resizes
+  // Build a cloned track: [last N clones] + [real banners] + [first N clones]
+  const trackBanners = useMemo(() => {
+    if (!canLoop) return filteredBanners;
+    const headClones = filteredBanners.slice(-itemsPerView);
+    const tailClones = filteredBanners.slice(0, itemsPerView);
+    return [...headClones, ...filteredBanners, ...tailClones];
+  }, [filteredBanners, itemsPerView, canLoop]);
+
+  // Start the view at the first REAL slide (past the head clones)
   useEffect(() => {
-    setCurrentIndex((prev) => Math.min(prev, maxIndex));
-  }, [itemsPerView, maxIndex]);
+    setCurrentIndex(canLoop ? itemsPerView : 0);
+    setIsTransitioning(false);
+    const t = setTimeout(() => setIsTransitioning(true), 50);
+    return () => clearTimeout(t);
+  }, [itemsPerView, canLoop, totalReal]);
 
-  // Fetch
   useEffect(() => {
     if (hasFetched.current || isFetching.current) return;
-    // if (banners?.length > 0) { hasFetched.current = true; return; }
     if (status === 'loading') return;
-
     isFetching.current = true;
-    dispatch(getBanners(position))
+    dispatch(getBanners(position, bannerLimit))
       .then(() => { hasFetched.current = true; })
       .catch(() => { hasFetched.current = true; })
       .finally(() => { isFetching.current = false; });
-  }, [dispatch, position, banners, status]);
+  }, [dispatch, position, banners, status, bannerLimit]);
 
-  // Auto-play
+  const goNext = useCallback(() => {
+    setCurrentIndex((prev) => prev + 1);
+  }, []);
+
+  const goPrev = useCallback(() => {
+    setCurrentIndex((prev) => prev - 1);
+  }, []);
+
+  // Auto-play — always moves forward, real looping handled by clones
   useEffect(() => {
-    if (!autoPlay || filteredBanners.length <= itemsPerView) return;
-    const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
-    }, interval);
+    if (!autoPlay || !canLoop) return;
+    const timer = setInterval(goNext, interval);
     return () => clearInterval(timer);
-  }, [autoPlay, filteredBanners, itemsPerView, maxIndex, interval]);
+  }, [autoPlay, canLoop, interval, goNext]);
 
-  const handlePrev = () => setCurrentIndex((p) => (p === 0 ? maxIndex : p - 1));
-  const handleNext = () => setCurrentIndex((p) => (p >= maxIndex ? 0 : p + 1));
+  // After the transition finishes, snap invisibly if we've entered clone territory
+  const handleTransitionEnd = () => {
+    if (!canLoop) return;
 
-  // Touch swipe
+    if (currentIndex >= totalReal + itemsPerView) {
+      setIsTransitioning(false);
+      setCurrentIndex(itemsPerView); // snap back to real start
+    } else if (currentIndex < itemsPerView) {
+      setIsTransitioning(false);
+      setCurrentIndex(totalReal + itemsPerView - itemsPerView); // snap to real end area
+    }
+  };
+
+  // Re-enable transition on next frame after a silent snap
+  useEffect(() => {
+    if (!isTransitioning) {
+      const t = requestAnimationFrame(() => setIsTransitioning(true));
+      return () => cancelAnimationFrame(t);
+    }
+  }, [isTransitioning]);
+
   const onTouchStart = (e) => { touchStartX.current = e.touches[0].clientX; };
   const onTouchEnd = (e) => {
     const diff = touchStartX.current - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 50) diff > 0 ? handleNext() : handlePrev();
+    if (Math.abs(diff) > 50) diff > 0 ? goNext() : goPrev();
   };
 
   const handleClick = useCallback(async (id, url) => {
@@ -91,6 +122,11 @@ const MultiBannerCarousel = ({ position = 'hero2', autoPlay = true, interval = 4
 
   const translateX = currentIndex * (100 / itemsPerView);
 
+  // Dots map back to real indices only
+  const activeDot = canLoop
+    ? ((currentIndex - itemsPerView) % totalReal + totalReal) % totalReal
+    : 0;
+
   return (
     <div className={`multi-banner-carousel multi-banner-carousel--${position}`}>
       <div className="multi-banner-viewport">
@@ -98,14 +134,15 @@ const MultiBannerCarousel = ({ position = 'hero2', autoPlay = true, interval = 4
           className="multi-banner-track"
           style={{
             transform: `translateX(-${translateX}%)`,
-            transition: 'transform 0.45s cubic-bezier(0.4, 0, 0.2, 1)',
+            transition: isTransitioning ? 'transform 0.45s cubic-bezier(0.4, 0, 0.2, 1)' : 'none',
           }}
+          onTransitionEnd={handleTransitionEnd}
           onTouchStart={onTouchStart}
           onTouchEnd={onTouchEnd}
         >
-          {filteredBanners.map((b, i) => (
+          {trackBanners.map((b, i) => (
             <div
-              key={b._id || i}
+              key={`${b._id || i}-${i}`}
               className="multi-banner-card"
               style={{ flex: `0 0 ${100 / itemsPerView}%` }}
               onClick={() => handleClick(b._id, b.ctaUrl)}
@@ -130,22 +167,20 @@ const MultiBannerCarousel = ({ position = 'hero2', autoPlay = true, interval = 4
         </div>
       </div>
 
-      {/* Arrows - hidden on mobile */}
-      {filteredBanners.length > itemsPerView && (
+      {canLoop && (
         <>
-          <button className="multi-banner-arrow multi-banner-arrow--prev" onClick={handlePrev}>‹</button>
-          <button className="multi-banner-arrow multi-banner-arrow--next" onClick={handleNext}>›</button>
+          <button className="multi-banner-arrow multi-banner-arrow--prev" onClick={goPrev}>‹</button>
+          <button className="multi-banner-arrow multi-banner-arrow--next" onClick={goNext}>›</button>
         </>
       )}
 
-      {/* Dots */}
-      {filteredBanners.length > itemsPerView && (
+      {canLoop && (
         <div className="multi-banner-dots">
-          {Array.from({ length: maxIndex + 1 }).map((_, i) => (
+          {Array.from({ length: totalReal }).map((_, i) => (
             <button
               key={i}
-              className={`multi-banner-dot ${i === currentIndex ? 'active' : ''}`}
-              onClick={() => setCurrentIndex(i)}
+              className={`multi-banner-dot ${i === activeDot ? 'active' : ''}`}
+              onClick={() => setCurrentIndex(i + itemsPerView)}
             />
           ))}
         </div>

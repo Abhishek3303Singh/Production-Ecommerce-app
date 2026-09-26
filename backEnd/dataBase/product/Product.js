@@ -26,6 +26,15 @@ const productSchema = mongoose.Schema({
         type:String,
         required:[true, "Please Add Product Category"]
     },
+    productType:{
+        type:String,
+        required:[true, 'Please Add Product-Type']
+    },
+    attributes:{
+        type:Map,
+        of:String,
+        default:{}
+    },
 
     price:{
         type:Number,
