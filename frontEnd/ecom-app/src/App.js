@@ -49,6 +49,7 @@ import UPIPayment from "./components/cart/UPIPayment";
 import RazorpayPayment from "./components/cart/RazorpayPayment";
 import PaymentSuccess from "./components/cart/PaymentSuccess";
 import AllBanners from "./Admin/AdminBanner/AllBanners";
+import { FilterProvider } from "./components/products/FilterContext";
 const apiUrl = process.env.REACT_APP_API_BASE_URL;
 const App = () => {
   const [stripeApiKey, setStripeApiKey] = useState("");
@@ -85,6 +86,7 @@ const App = () => {
         /> */}
 
       <BrowserRouter>
+      <FilterProvider>
         <Navbar />
        
 
@@ -211,6 +213,7 @@ const App = () => {
 
         <Footer />
         <BottomNav />
+        </FilterProvider>
       </BrowserRouter>
     </>
   );

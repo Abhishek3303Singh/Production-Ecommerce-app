@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './mobileCategorysidebar.css';
+import { useFilters } from './FilterContext';
 
 const apiUrl = process.env.REACT_APP_API_BASE_URL;
 
@@ -32,6 +33,7 @@ const MobileCategorySideBar = ({ isOpen, onClose }) => {
         { id: 9, name: 'GenZTrends', count: 33 },
         { id: 10, name: 'Lifestyle', count: 18 },
     ];
+    const {filters} = useFilters()
 
     const activeCategory = (selectedCategories.length === 1 && selectedCategories[0] !== 'All')
         ? selectedCategories[0]
@@ -40,7 +42,15 @@ const MobileCategorySideBar = ({ isOpen, onClose }) => {
     useEffect(() => {
         document.body.style.overflow = isOpen ? 'hidden' : 'unset';
         return () => { document.body.style.overflow = 'unset'; };
+
     }, [isOpen]);
+    useEffect(()=>{
+        if(!isOpen) return
+        const categoryFromParent = filters.category ? [filters.category] : [];
+        setSelectedCategories(categoryFromParent)
+        setPriceRange({min: filters.price[0], max: filters.price[1]})
+        setSelectedRatings(filters.ratings)
+    }, [isOpen, filters])
 
     // STAGE 1 -> 2: category changes -> fetch product types
     useEffect(() => {

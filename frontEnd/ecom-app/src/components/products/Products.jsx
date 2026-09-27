@@ -18,6 +18,7 @@ import CategoryStrip from "./CategoryStrip";
 import { useMemo } from "react";
 
 import MultiBannerCarousel from "../../BannerCarousel/MultiBannerCarousel";
+import { useFilters } from "./FilterContext";
 
 
 const Products = () => {
@@ -25,16 +26,19 @@ const Products = () => {
     // const [price, setPrice] = useState([0, 10000])
     const [category, setCategory] = useState("")
     // const [ratings, setRatings] = useState(0)
-    const [filters, setFilters] = useState(
-        {
-            price: [0, 10000],
-            category: "",
-            ratings: 0,
-            productType:"",
-            brand:"",
-            attributes:{}
-        }
-    )
+    // const [filters, setFilters] = useState(
+    //     {
+    //         price: [0, 10000],
+    //         category: "",
+    //         ratings: 0,
+    //         productType:"",
+    //         brand:"",
+    //         attributes:{}
+    //     }
+    // )
+
+    const {filters, setFilters} = useFilters()
+
     const { keyword } = useParams();
     const location = useLocation()
     const navigate = useNavigate()
@@ -180,7 +184,9 @@ const Products = () => {
             {/* <ProductsBanner /> */}
             <div ref={categoryRef} className="category-container">
             
-            <CategoryStrip onCategorySelect={(category) => {
+            <CategoryStrip
+             activeCategory={filters.category}
+            onCategorySelect={(category) => {
                 handleFilterChange({
                     ...filters,
                     category

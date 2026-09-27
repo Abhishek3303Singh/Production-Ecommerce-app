@@ -9,7 +9,7 @@ import ToysBaby from '../../images/categoryStrip/ToysBaby.png'
 import HomeKitchen from '../../images/categoryStrip/HomeKitchen.png'
 import sports from '../../images/categoryStrip/cateSports.png'
 import allprod from '../../images/categoryStrip/allprod.png'
-const CategoryStrip = ({ onCategorySelect }) => {
+const CategoryStrip = ({ onCategorySelect, activeCategory  }) => {
 
     const categoryStripData = [
         {url:allprod, title:"All"},
@@ -23,13 +23,15 @@ const CategoryStrip = ({ onCategorySelect }) => {
                 {url:HomeKitchen, title:"Home&Kitchen"},
                
     ]
+    const normalizedActive = activeCategory || 'All'
+
     return (
         <>
         {
             categoryStripData.map((categ)=>(
-                <div onClick={()=>onCategorySelect(categ.title)} className="category-card ">
+                <div key={categ.title} onClick={()=>onCategorySelect(categ.title=='All' ? '':categ.title)} className={`category-card ${normalizedActive===categ.title ? 'active-category':''}`}>
                 <div  className="imgCategory">
-                    <img src={categ.url} alt="" />
+                    <img src={categ.url} alt={categ.tit} />
                 </div>
                 <div className="text-category">
                     <h3>{categ.title}</h3>

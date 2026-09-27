@@ -107,7 +107,8 @@ html {
 }
 
 .login-card {
-    height: 30%;
+    height: auto;
+    min-height: fit-content;
     background-color: #fff;
     display: flex;
     flex-direction: column;

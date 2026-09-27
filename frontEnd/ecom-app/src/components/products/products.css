@@ -187,11 +187,17 @@
     flex-wrap: wrap;
 
 }
+.imgCategory{
+    overflow: hidden;
+    border-radius: 5px;
+    padding: 2px;
+}
 
 .imgCategory>img {
     width: 8vmax;
     align-items: center;
     justify-content: center;
+    border-radius: 5px;
 }
 
 .imgCategory>img:hover {
@@ -406,6 +412,16 @@
 }
 fieldset{
 width: 80%;
+}
+.category-card.active-category {
+    border: 2px solid #fd4444;
+    border-radius: 12px;
+}
+
+.category-card.active-category .text-category h3 {
+    color: #fd4444;
+    font-weight: 700;
+    padding: 2px;
 }
 
 @media screen and (max-width: 800px) {

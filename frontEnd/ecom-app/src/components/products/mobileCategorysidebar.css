@@ -93,7 +93,7 @@
 .filter-section h4 {
     margin: 0 0 15px 0;
     font-size: 1rem;
-    color: #333;
+    color: #fd4444;
     font-weight: 600;
 }
 
@@ -120,7 +120,7 @@
     height: 18px;
     margin-right: 12px;
     cursor: pointer;
-    accent-color: #667eea;
+    accent-color: rgb(6, 189, 189);
 }
 
 .category-name {
