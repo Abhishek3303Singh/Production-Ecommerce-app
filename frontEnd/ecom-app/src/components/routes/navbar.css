@@ -72,7 +72,7 @@
 
 .location-pill>svg {
   font-size: 18px;
-  color: orangered;
+  color: #fd4444;
   flex-shrink: 0;
 }
 
@@ -85,7 +85,7 @@
 .location-main {
   font-size: 12px;
   font-weight: 600;
-  color: orangered;
+  color: #fd4444;
 }
 
 .location-sub {
@@ -134,7 +134,7 @@
 }
 
 .search-wrapper button:hover {
-  background: #f3a847;
+  background: rgb(4, 193, 133);
 }
 
 /* Suggestions */
