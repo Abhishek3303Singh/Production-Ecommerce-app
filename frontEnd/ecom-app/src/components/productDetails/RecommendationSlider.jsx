@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import RecommendedProdCard from "./RecommendedProdCard";
 import "./recommended.css";
 
-const RecommendationSlider = ({ products, heading }) => {
+const RecommendationSlider = ({ products, heading, container }) => {
   const navigate = useNavigate();
 
 
@@ -61,7 +61,7 @@ const RecommendationSlider = ({ products, heading }) => {
   );
 
   return (
-    <div className="rec-slider-container">
+    <div className={container}>
       <h2 className="rec-heading">{heading}</h2>
 
       <div

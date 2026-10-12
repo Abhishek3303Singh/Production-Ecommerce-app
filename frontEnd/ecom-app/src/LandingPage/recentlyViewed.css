@@ -1,7 +1,12 @@
 .rv-container {
     width: 95%;
     margin: 8.5vmax auto 0;
-    border: 10px solid rgba(3, 141, 148, 0.979);
+    /* border: 10px solid rgba(3, 141, 148, 0.979); */
+    border: 10px solid transparent;
+    border-radius: 12px;
+    background-image: linear-gradient(#fff, #fff), linear-gradient(to right, #0fdbbe, #06b65d);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
     position: relative;
     border-radius: 1vmax;
   }
@@ -10,7 +15,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(3, 141, 148, 0.979);
+    background: linear-gradient(to right, #0fdbbe, #06b65d);
     color: #f5f5f5;
     padding: 1vmax 0.2vmax;
   }

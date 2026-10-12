@@ -152,7 +152,7 @@ const Navbar = () => {
     className="header"
     style={{
       backgroundImage: isMobileOrTablet
-        ? `linear-gradient(180deg, color-mix(in srgb, ${themeColor} 30%, white) 0%, white 60%)`
+        ? `linear-gradient(180deg, color-mix(in srgb, ${themeColor} 40%, white) 0%, white 60%)`
         : undefined,
       transition: 'background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
       willChange: 'background-color',

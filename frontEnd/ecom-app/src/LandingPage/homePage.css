@@ -338,11 +338,23 @@ html {
 
 .left-shift,
 .right-shift {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 45px;
+    height: 100px;
+    background: rgba(255, 255, 255, 0.25);
     border: none;
-    font-size: 50px;
-    color: rgba(14, 14, 15, 0.623);
-    background-color: #f8f2f219;
+    font-weight: 500;
+    color: white;
+    font-size: 3vmax;
     cursor: pointer;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    
 }
 
 .display-main-product-container>h2 {
@@ -445,7 +457,7 @@ html {
 }
 
 .recently-viewed-container {
-    margin-top: 9rem !important;
+    margin-top: 18rem !important;
 }
 
 

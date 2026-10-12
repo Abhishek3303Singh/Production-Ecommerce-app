@@ -189,7 +189,10 @@ const Products = () => {
             onCategorySelect={(category) => {
                 handleFilterChange({
                     ...filters,
-                    category
+                    category,
+                    productType:'',
+                    brand:'',
+                    attributes:{}
                 })
             }} />
         </div>
@@ -212,8 +215,7 @@ const Products = () => {
 
                 <div className="filter-container">
                     <FiltersPanel
-                        onFilterChange={handleFilterChange}
-                        initialFilters={filters}
+                     
                     />
 
                 </div>

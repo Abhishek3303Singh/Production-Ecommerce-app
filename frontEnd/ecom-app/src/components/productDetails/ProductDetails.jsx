@@ -299,7 +299,7 @@ useEffect(() => {
         <p className="noReview">No Reviews Yet 😔</p>
       )}
 
-      <RecommendationSlider products={recommended?.recomnededProduct} heading={"Recommended For You"} />
+      <RecommendationSlider products={recommended?.recomnededProduct} heading={"Recommended For You"} container={"rec-slider-container"} />
 
     </>
 

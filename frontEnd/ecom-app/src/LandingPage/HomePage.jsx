@@ -15,10 +15,8 @@ import offerProd from "../images/prod_offer.png"
 import offerProd2 from "../images/offr_prod.png"
 import offerProd3 from "../images/offer_prod3.png"
 import offerProd4 from "../images/off_prd4.jpeg"
-import promotionbnr from "../images/promotion_img.jpg"
-// import mobilebnr1 from '../images/mobilebanner.jpg'
-// import mobilebnr3 from '../images/yogabanner.jpg'
-// import mobilebnr4 from '../images/moblehandband.jpg'
+import promotionbnr from "../images/promotion_img1.jpg"
+
 
 import { useInView } from 'react-intersection-observer'
 import { fetchProductLists } from '../store/recommndedProdSlice';
@@ -256,10 +254,9 @@ const ProdDet = () => {
                                     <button className='right-shift' onClick={handleNext}>&gt;</button>
                                 </div>
                           
+<RecommendationSlider products={bestSellers?.bestSeller} heading={'Bestsellers'} container = {"bestseller-slider-container"} />
 
 
-
-                                <RecommendationSlider products={bestSellers?.bestSeller} heading={'Bestsellers'} />
                             </>
 
 
@@ -273,7 +270,7 @@ const ProdDet = () => {
                     {isMobile &&
                         mobileInView && (
                             <>
-                                <RecommendationSlider products={bestSellers?.bestSeller} heading={"Bestsellers"} />
+                                <RecommendationSlider products={bestSellers?.bestSeller} heading={"Bestsellers"} container = {"bestseller-slider-container"} />
                                 <div className='display-main-product-mobile-container'>
 
                                     <h2>Trends you may like</h2>
@@ -303,8 +300,8 @@ const ProdDet = () => {
 
                                     </div>
                                     <div className='mobile-shift-buttons'>
-                                        <button className='left-mobile-shift' onClick={handlePrevMobile}>&lt;</button>
-                                        <button className='right-mobile-shift' onClick={handleNextMobile}>&gt;</button>
+                                        <button className='left-mobile-shift' onClick={handlePrevMobile}> ‹ </button>
+                                        <button className='right-mobile-shift' onClick={handleNextMobile}>›</button>
 
                                     </div>
 

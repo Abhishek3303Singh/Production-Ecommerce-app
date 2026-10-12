@@ -124,7 +124,7 @@
   padding: 0 16px;
   border: none;
   background: #ffff;
-  color: blue;
+  color: rgb(4, 206, 189);
   border-radius: 0 6px 6px 0;
   cursor: pointer;
   display: flex;
@@ -134,7 +134,8 @@
 }
 
 .search-wrapper button:hover {
-  background: rgb(4, 193, 133);
+  background: #fd4444;
+  color: #131921;
 }
 
 /* Suggestions */

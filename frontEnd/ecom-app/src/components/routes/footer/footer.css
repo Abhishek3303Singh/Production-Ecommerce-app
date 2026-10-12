@@ -264,7 +264,7 @@ body {
 
 /* App Banner */
 .app-banner {
-    background: linear-gradient(135deg, #2d3349 0%, #1a1e2b 100%);
+    background: linear-gradient(96deg, #e3063e, #e20b5c);
     border-radius: 16px;
     padding: 30px;
     margin: 40px 0;
@@ -318,8 +318,8 @@ body {
 }
 
 .app-btn:hover {
-    background: rgba(255, 255, 255, 0.2);
-    border-color: #ff6b6b;
+    background: rgba(5, 181, 225, 0.959);
+    border-color: #06ecfc;
 }
 
 /* Payment Methods */
