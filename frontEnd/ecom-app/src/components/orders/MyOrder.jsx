@@ -5,14 +5,17 @@ import { clearErr, myOrdersDetails } from '../../store/myOrderSlice'
 import { useNavigate, Link } from 'react-router-dom'
 import { useEffect } from 'react'
 import Loader from '../layout/loader/Loader'
-import { STATUSES } from '../../store/myOrderSlice'
+
 import MetaData from '../routes/MetaData'
 
 const statusConfig = {
     Delivered: { color: 'delivered', label: 'Delivered' },
     Shipped: { color: 'shipped', label: 'Shipped' },
-    Processing: { color: 'processing', label: 'Processing' },
+    Processing: { color: 'processing', label: 'In process' },
     Cancelled: { color: 'cancelled', label: 'Cancelled' },
+    OnTheWay:{color:'ontheway', label:'ON the way'},
+    OutForDelivery:{color:'outfordelivery', label:'Out for delivery'}
+
 };
 
 const MyOrder = () => {

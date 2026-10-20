@@ -654,3 +654,15 @@ width: 80%;
     padding: 12px;
     transition: all .3s;
 }
+.css-1gv0vcd-MuiSlider-track{
+    border: 1px solid #fd4444;
+    background-color:#fd4444;
+    -webkit-tap-highlight-color:#F44336;
+    height: 10px !important;
+}
+.MuiSlider-track{
+    background: linear-gradient(to right, #F44336, #F44336) !important;
+}
+.css-14pt78w-MuiSlider-rail{
+    background-color: #F44336 !important;
+}

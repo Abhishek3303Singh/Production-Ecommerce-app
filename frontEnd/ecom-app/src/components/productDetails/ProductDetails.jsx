@@ -29,7 +29,7 @@ import RecommendationSlider from './RecommendationSlider';
 const ProductDetails = () => {
   const { id } = useParams()
   const { product, status, reviewStatus } = useSelector((state) => state.productDetails)
-  const {recommended, status:recomStatus, error} = useSelector((state)=>state.recommendedProd)
+  const { recommended, status: recomStatus, error } = useSelector((state) => state.recommendedProd)
   const { order, resError } = useSelector((state) => state.orderDetails)
   const { user, isAuthenticated } = useSelector((state) => state.user)
   const alert = useAlert();
@@ -78,44 +78,44 @@ const ProductDetails = () => {
       setImage(product.Image[0]);
     }
   }, [product?.Image]);
-useEffect(()=>{
-  // dispatch(fetchProductLists('recentlyViewed'))
-  dispatch(fetchProductLists('recommended',id))
-  
-},[id])
-useEffect(()=>{
-  window.scrollTo(0,0)
-},[id])
-// set ids to local storage
-useEffect(() => {
-  if (!product?._id) return;
+  useEffect(() => {
+    // dispatch(fetchProductLists('recentlyViewed'))
+    dispatch(fetchProductLists('recommended', id))
 
-  const snapshot = {
-    _id: product._id,
-    title: product.title,
-    thumbnail: product?.Image[0]?.url || "",
-  };
+  }, [id])
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [id])
+  // set ids to local storage
+  useEffect(() => {
+    if (!product?._id) return;
 
-  let viewed =
-    JSON.parse(localStorage.getItem("recentlyViewed")) || [];
+    const snapshot = {
+      _id: product._id,
+      title: product.title,
+      thumbnail: product?.Image[0]?.url || "",
+    };
 
-  // Remove duplicate (object comparison by _id)
-  viewed = viewed.filter(
-    (item) => item._id !== product._id
-  );
+    let viewed =
+      JSON.parse(localStorage.getItem("recentlyViewed")) || [];
 
-  // Add to beginning
-  viewed.unshift(snapshot);
+    // Remove duplicate (object comparison by _id)
+    viewed = viewed.filter(
+      (item) => item._id !== product._id
+    );
 
-  // Keep only 10
-  viewed = viewed.slice(0, 10);
+    // Add to beginning
+    viewed.unshift(snapshot);
 
-  localStorage.setItem(
-    "recentlyViewed",
-    JSON.stringify(viewed)
-  );
+    // Keep only 10
+    viewed = viewed.slice(0, 10);
 
-}, [product?._id, product?.Image]);
+    localStorage.setItem(
+      "recentlyViewed",
+      JSON.stringify(viewed)
+    );
+
+  }, [product?._id, product?.Image]);
 
 
   if (status == STATUSES.LOADING) {
@@ -177,11 +177,11 @@ useEffect(() => {
       <MetaData title={`${product.name}FunHub`}></MetaData>
       <div className='prdDetailsCard'>
         <div className='img-container'>
-        <ProductGallery
-    image={image}
-    images={product.Image}
-    onImageChange={setImage}
-/>
+          <ProductGallery
+            image={image}
+            images={product.Image}
+            onImageChange={setImage}
+          />
 
           <div className='img-list'>
             {
@@ -208,15 +208,15 @@ useEffect(() => {
           <div className='prdDetailsCard__detailsBlock1__2'>
             <ReactStars {...options} />
 
-            <span>{parseFloat( product?.ratings?.toFixed(1))} Ratings &amp; {product.reviewsCount} Reviews</span>
+            <span>{parseFloat(product?.ratings?.toFixed(1))} Ratings &amp; {product.reviewsCount} Reviews</span>
 
           </div>
           <div className='prdDetailsCard__detailsBlock1__3'>
-          <div className="price-row">
-  <span className="offer-price">&#x20B9;{product.offerPrice}</span>
-  <span className="mrp-price">&#x20B9;{product.price}</span>
-  <span className="discount-badge">{offerPercentage}% off</span>
-</div>
+            <div className="price-row">
+              <span className="offer-price">&#x20B9;{product.offerPrice}</span>
+              <span className="mrp-price">&#x20B9;{product.price}</span>
+              <span className="discount-badge">{offerPercentage}% off</span>
+            </div>
             <div className='proDetailsCard__detailsBlock1__3__image'>
 
               {/* {

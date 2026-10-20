@@ -69,13 +69,13 @@ const AllOrders = () => {
                   
                                     <tr key={key} className='order-table-row'>
                               
-                                        <td >{val._id}</td>
-                                        <td >{val.orderStatus}</td>
-                                        <td >{val.orderProduct.length}</td>
-                                        <td>{val.totalPrice}</td>
-                                        <td>{val.deliveredDate.split('T')[0]}</td>
-                                        <td> <button className='edit-admin-btn' onClick={() => handleEdit(val._id)}> <EditIcon /> Edit</button> </td>
-                                        <td> <button onClick={()=>handleDelete(val._id)}><DeleteIcon /> Delete</button> </td>
+                                        <td >{val?._id}</td>
+                                        <td >{val?.orderStatus}</td>
+                                        <td >{val?.orderProduct?.length}</td>
+                                        <td>{val?.totalPrice}</td>
+                                        <td>{val?.deliveredDate?.split('T')[0]}</td>
+                                        <td> <button className='edit-admin-btn' onClick={() => handleEdit(val?._id)}> <EditIcon /> Edit</button> </td>
+                                        <td> <button onClick={()=>handleDelete(val?._id)}><DeleteIcon /> Delete</button> </td>
                                     </tr>
                                    
 

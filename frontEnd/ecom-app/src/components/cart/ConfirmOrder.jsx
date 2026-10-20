@@ -21,8 +21,8 @@ const ConfirmOrder = () => {
     }
     let subTotalAmmount = subTotal(TotalAmmount)
     // Include 28% GST
-    const gst = (subTotalAmmount * 0.28)
-    const shippingCharges = subTotalAmmount >= 999 ? 0 : 49
+    const gst = (subTotalAmmount * 0.18)
+    const shippingCharges = subTotalAmmount >= 499 ? 0 : 40
     const PayableAmount = subTotalAmmount + gst + shippingCharges
 
     function handleMakePayment() {
@@ -35,7 +35,7 @@ const ConfirmOrder = () => {
         }
         sessionStorage.setItem('orderInfo', JSON.stringify(data))
         // navigate('/process/payment')
-        navigate('/payment/mode')
+        navigate('/payment/razorpay')
     }
 
     return (

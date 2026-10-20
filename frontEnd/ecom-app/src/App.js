@@ -115,9 +115,9 @@ const App = () => {
               path="/order/confirm"
               element={<ConfirmOrder />}
             ></Route>
-            <Route exact path="/payment/mode" element={<PaymentMode />}></Route>
+            {/* <Route exact path="/payment/mode" element={<PaymentMode />}></Route> */}
             {/* <Route path="/process/payment" element={<Elements stripe={loadStripe(stripeApiKey)}> <Payment /> </Elements } ></Route>  */}
-            {stripeApiKey && (
+            {/* {stripeApiKey && (
               <Route
                 exact
                 path="/process/payment"
@@ -128,14 +128,14 @@ const App = () => {
                   </Elements>
                 }
               ></Route>
-            )}
-            <Route path="/payment/upi" element={<UPIPayment />} />
-            <Route path="/payment/qr" element={<QRPayment />} />
+            )} */}
+            {/* <Route path="/payment/upi" element={<UPIPayment />} /> */}
+            {/* <Route path="/payment/qr" element={<QRPayment />} /> */}
             <Route path="/payment/razorpay" element={<RazorpayPayment />} />
-            <Route
+            {/* <Route
               path="/payment/razorpay/upi"
               element={<RazorpayPayment method="upi" />}
-            />
+            /> */}
             <Route path="/payment/success" element={<PaymentSuccess/>}></Route>
 
             <Route exact path="/success" element={<Success />}></Route>

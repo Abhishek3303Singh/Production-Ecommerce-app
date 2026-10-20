@@ -496,3 +496,41 @@ color: red;
     }
 
 }
+.status-pill {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: 600;
+    background: #f0f0f0;
+}
+.status-pill.delivered   { background: #e6f7e6; color: #2e7d32; }
+.status-pill.shipped,
+.status-pill.onWay       { background: #e8f0fe; color: #1a56db; }
+.status-pill.outDelivery { background: #fff4e5; color: #b76e00; }
+.status-pill.inprocess   { background: #f0f0f0; color: #555; }
+.status-pill.cancelled   { background: #fdecea; color: #c62828; }
+
+.status-pill.pay-ok   { background: #e6f7e6; color: #2e7d32; }
+.status-pill.pay-wait { background: #fff4e5; color: #b76e00; }
+.status-pill.pay-bad  { background: #fdecea; color: #c62828; }
+
+.pay-id { font-size: 0.8em; color: #777; word-break: break-all; }
+
+.refund-banner {
+    margin: 12px 16px;
+    padding: 12px 16px;
+    background: #fdecea;
+    border: 1px solid #f5c2c0;
+    border-radius: 8px;
+    color: #8a1c1c;
+    font-size: 0.9rem;
+}
+
+.status-note { color: #777; font-size: 0.9rem; }
+.status-update-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.sr-only {
+    position: absolute; width: 1px; height: 1px;
+    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+}

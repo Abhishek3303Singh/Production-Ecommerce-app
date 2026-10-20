@@ -142,6 +142,17 @@
     background: #e8f0fe;
     color: #1a56db;
 }
+.order-status-badge.ontheway{
+    background: #e8f0fe;
+    color: #fab907;
+}
+
+.order-status-badge.outfordelivery{
+    background-color: #e6f7e6;
+    color: #03ce9f;
+}
+.order-status-badge.ontheway .status-dot{background: #03ce9f;}
+.order-status-badge.ontheway .status-dot{background: #fab907;}
 .order-status-badge.shipped .status-dot { background: #1a56db; }
 
 .order-status-badge.processing {

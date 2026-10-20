@@ -17,36 +17,48 @@ const cartSlice = createSlice({
   },
 
   reducers: {
-    add(state, action) {
-      // console.log(action.payload, "payload");
-      // core redux method was
-      // return [...state, action.payload]
+    // add(state, action) {
+    //   // console.log(action.payload, "payload");
+    //   // core redux method was
+    //   // return [...state, action.payload]
 
-      // buth tollkit allows us to manupulating state;
+    //   // buth tollkit allows us to manupulating state;
 
-      // // check if product is already in cart
+    //   // // check if product is already in cart
+    //   const item = action.payload;
+    //   const isItemExist = state.cartItems.find(
+    //     (i) => i.product === item.product
+    //   );
+    //   if (isItemExist) {
+    //     return {
+    //       cartItems: state.cartItems.map((i) =>
+    //         i.product === action.payload.product ? item : i
+    //       ),
+    //     };
+    //   } else {
+    //    state.cartItems.push(item);
+    //   }
+    // },
+
+
+    add(state, action){
       const item = action.payload;
-      const isItemExist = state.cartItems.find(
-        (i) => i.product === item.product
-      );
-      if (isItemExist) {
-        return {
-          cartItems: state.cartItems.map((i) =>
-            i.product === action.payload.product ? item : i
-          ),
-        };
-      } else {
-       state.cartItems.push(item);
+      const idx = state.cartItems.findIndex((index)=>index.product === item.product)
+      if(idx !== -1){
+        state.cartItems[idx] = item;
       }
+      else state.cartItems.push(item)
     },
     setStatus(state, action) {
       state.status = action.payload;
     },
   
-    remove(state, action){
-        return {
-          cartItems:state.cartItems.filter((item)=>item.product !== action.payload.product)
-        }
+    remove(state, action) {
+      state.cartItems = state.cartItems.filter((i) => i.product !== action.payload.product);
+    },
+
+    clearCart(state){
+      state.cartItems = []
     },
 
     setShippingInfo(state, action){
@@ -57,7 +69,7 @@ const cartSlice = createSlice({
   },
 });
 
-export const { add,setStatus,remove,setShippingInfo } = cartSlice.actions;
+export const { add,setStatus,remove,setShippingInfo, clearCart } = cartSlice.actions;
 export default cartSlice.reducer;
 
 // Thunk
@@ -104,6 +116,10 @@ export const removeToCart =(id)=>{
   }
 }
 
+export const clearCartItems = ()=>(dispatch)=>{
+  dispatch(clearCart());
+  localStorage.removeItem('cartItems')
+}
 // Thunk For shipping Information
 
 export const shippingDetails=(data)=>{

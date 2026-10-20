@@ -17,12 +17,12 @@ const OrderDetails = () => {
     // console.log(order, 'order')
     useEffect(() => {
         if(resError){
-            alert.error(order?.order.message)
+            alert.error(order?.order?.message)
             dispatch(clearError())
         }
         dispatch(getOrderDetails(id))
     }, [dispatch, id])
-    // console.log(id, 'order id')
+    // console.log(id, 'order id')?
 
     let ordStatus=0
 
@@ -35,15 +35,15 @@ const OrderDetails = () => {
         cls='shipped'
         ordStatus = 1
     }
-    else if(order?.order?.orderStatus === 'Out for Delivery'){
+    else if(order?.order?.orderStatus === 'Out for delivery'){
         cls='outDelivery'
         ordStatus = 3
     }
-    else if(order?.order?.orderStatus === 'On The Way'){
+    else if(order?.order?.orderStatus === 'On the way'){
         cls='onWay'
         ordStatus = 2
     }
-    if (order.status == undefined) {
+    if (order?.status == undefined) {
         return (
             <Loader/>
         )
@@ -73,17 +73,17 @@ const OrderDetails = () => {
 
                         <div className="help">
                             <h3>Contact Help</h3>
-                            <p>+91 80876653303</p>
+                            <p>+91 8521343533</p>
                             <p>funnnhub@gmail.com</p>
                         </div>
                         <div className="orderDetails-status">
                             <h3>Order-Status</h3>
                             <p>Ordered-Date:&#160; {order?.order?.paidAtDate?.split('T')[0] || 'Pending'}</p>
                             {/* <p>Status:&#160; <span style={order?.order.orderStatus === 'Delivered'?{color:'#16bd03'}:{color:'rgb(255, 64, 0)'}}>{order?.order.orderStatus} </span> </p> */}
-                            <p>Status:&#160; <span className={cls}>{order?.order.orderStatus} </span> </p>
+                            <p>Status:&#160; <span className={cls}>{order?.order?.orderStatus} </span> </p>
 
                             {
-                                        order?.order.orderStatus === 'Delivered' && (
+                                        order?.order?.orderStatus === 'Delivered' && (
                                             <p>Delivered on {new Date().toLocaleString("en-US", { month: "long" }).substring(0,3)}-
                                             {new Date().toLocaleString("en-US", { day : '2-digit'})}-{new Date().getFullYear()}</p>
                                         )
@@ -91,8 +91,8 @@ const OrderDetails = () => {
                         </div>
                         <div className="orderDetails-payment-status">
                             <h3>Payment-Status</h3>
-                            <p className={order?.order?.paymentInformation?.status === 'succeeded' ? 'payment-success' : 'payment-pending'}>{order?.order.paymentInformation.status}</p>
-                            <p>Paid-Date:&#160; {order?.order?.paidAtDate.split('T')[0]}</p>
+                            <p className={order?.order?.paymentInformation?.status === 'succeeded' ? 'payment-success' : 'payment-pending'}>{order?.order?.paymentInformation?.status}</p>
+                            <p>Paid-Date:&#160; {order?.order?.paidAtDate?.split('T')[0]}</p>
                             
                         </div>
 
@@ -102,11 +102,11 @@ const OrderDetails = () => {
 
                     </div>
                     {
-                        order?.order.orderProduct.map((item) => (
+                        order?.order?.orderProduct?.map((item) => (
                             <div className='ordersDetails-img-container' key={item?.product} >
                                 <img src={item?.image} alt="Product Image" />
-                                <p>{item.title || item.name}</p>
-                                <p>Total: {item?.quantity} x {item?.offerPrice}=&#8377;{item?.quantity * item.offerPrice} </p>
+                                <p>{item?.title || item?.name}</p>
+                                <p>Total: {item?.quantity} x {item?.offerPrice}=&#8377;{item?.quantity * item?.offerPrice} </p>
                                 {/* <p>Total: 2 x 10000=&#8377;20000 </p> */}
 
                             </div>
@@ -132,7 +132,7 @@ const OrderDetails = () => {
                                 <p>&#8377;{order?.order?.productPrice}</p>
 
                                 {/* <p>&#8377; {gst.toFixed(2)}</p> */}
-                                <p>&#8377; {order?.order.vatPrice.toFixed(2)}</p>
+                                <p>&#8377; {order?.order?.vatPrice.toFixed(2)}</p>
 
                                 <p style={{ color: 'green' }}>{order?.order?.shippingPrice>0?order?.order?.shippingPrice:'Free'}</p>
                                 {/* <p style={{ color: 'green' }}>Free</p> */}

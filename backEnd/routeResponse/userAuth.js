@@ -112,7 +112,7 @@ exports.login = async (req, res) => {
   try {
     // console.log(secretKey, 'secret-key')
     const { email, password } = req.body;
-    // console.log(req.body)
+    console.log(req.body)
     let loginData = await UserModel.findOne({ email }).select("+password");
     // console.log(loginData)
     if (loginData) {

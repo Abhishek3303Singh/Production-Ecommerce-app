@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const {ORDER_STATUS } = require('../../utils/orderStatus')
 const orderSchema = new mongoose.Schema({
   shippingAddress: {
     name: { type: String, required: true },
@@ -10,7 +11,7 @@ const orderSchema = new mongoose.Schema({
     country: { type: String, required: true, default: "India" },
     phoneNo: { type: Number, required: true },
     lat:{type:Number},
-    lag:{type:Number},
+    lng:{type:Number},
      // GeoJSON for geospatial querie
      location:{
       type:{
@@ -46,18 +47,25 @@ const orderSchema = new mongoose.Schema({
     required: true,
   },
   paymentInformation: {
-    id: { type: String, required: true },
-    status: { type: String, required: true },
+    id: { type: String},
+    status: { type: String, default:'pending'},
   },
-  paidAtDate: { type: Date, required: true },
-  productPrice: { type: Number, require: true },
+  razorpayOrderId:{type : String, unique:true, sparse:true}, // i m linking order to Razorpay..
+  paidAtDate: { type: Date},
+  productPrice: { type: Number, required: true },
   vatPrice: { type: Number, required: true },
   shippingPrice: { type: Number, required: true, default: 0 },
   totalPrice: { type: Number, required: true, default: 0 },
-  orderStatus: { type: String, required: true, default: "In process" },
-  deliveredDate: { type: Date, required: true, default: Date.now() },
-});
+  orderStatus: { type: String, required: true, enum: Object.values(ORDER_STATUS), default:ORDER_STATUS.IN_PROCESS},
+  deliveredDate: { type: Date},
+},
+{timestamps:true}
+);
 
 orderSchema.index({"shippingAddress.location": "2dsphere"})
+orderSchema.index(
+  {createdAt: 1},
+  {expireAfterSeconds: 60* 60 * 24, partialFilterExpression:{orderStatus:ORDER_STATUS.PENDING}}
+)
 
 module.exports = mongoose.model("Order", orderSchema);

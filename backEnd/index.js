@@ -18,10 +18,7 @@ const path = require("path");
 const { buildTrieSuggestion } = require("./utils/buildTrie");
 // require('./corn/syncAnalytics')
 
-// const conDB = async ()=>{
-//     mongoose.connect('mongodb://localhost:27017/ecommerce')
-// }
-// app.use(express.json())
+
 
 // dotenv.config({ path: 'backEnd/dataBase/config/config.env' });
 require("dotenv").config({ path: "config/config.env" });
@@ -30,10 +27,21 @@ require("dotenv").config({ path: "config/config.env" });
 //   "http://localhost:3000",
 //   "https://funhubweb.netlify.app/",
 // ];
+
+app.use(express.json({
+  limit: '20mb',
+  verify: (req, res, buf) => {
+    if (req.originalUrl.startsWith('/api/v1/webhook/razorpay')) req.rawBody = buf;
+  },
+}));
+
+
 const allowedOrigins = [
   "http://localhost:3000",
   "https://funhubweb.netlify.app",
 ];
+
+
 
 app.use(
   cors({

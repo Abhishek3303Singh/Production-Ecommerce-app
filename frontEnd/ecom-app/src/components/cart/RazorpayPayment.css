@@ -17,9 +17,10 @@
 }
 
 .amount-display {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    padding: 20px;
+    width: 100%;
+    background: linear-gradient(135deg, #222325, #262229);
+    color: #fd4444;
+    padding: 15px;
     border-radius: 10px;
     text-align: center;
     margin-bottom: 30px;
@@ -65,7 +66,7 @@
 .pay-now-btn {
     width: 100%;
     padding: 15px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #E91E63, #FF5722);
     color: white;
     border: none;
     border-radius: 8px;

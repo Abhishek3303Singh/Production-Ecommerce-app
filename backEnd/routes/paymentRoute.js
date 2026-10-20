@@ -17,5 +17,5 @@ router.route('/razorpay/verify').post(isAuthenticated, strictLimiter, verifyPaym
 router.route('/razorpay/payment/:paymentId').get(isAuthenticated, strictLimiter, getPaymentDetails)
 router.route('/razorpay/upi-collect').post(isAuthenticated, strictLimiter, createUPICollect)
 router.route("/stripekey").get(strictLimiter, stripeKeySend)
-router.route('/webhook/razorpay').post(express.raw({type:'application/json'}), strictLimiter, razorpayWebhook)
+router.route('/webhook/razorpay').post(razorpayWebhook)
 module.exports = router 
