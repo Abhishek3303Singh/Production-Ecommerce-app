@@ -55,7 +55,7 @@ const RazorpayPayment = () => {
             const { data } = await axios.post(
                 `${apiUrl}/api/v1/razorpay/order`,
                 {
-                    items: cartItems.map((i) => ({ product: i.product, quantity: i.quantity })),
+                    items: cartItems.map((i) => ({ product: i.product, variantId:i.variantId, quantity: i.quantity })),
                     shippingAddress: {
                         name: shippingInfo?.name || user?.name,
                         address: shippingInfo?.address,

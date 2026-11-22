@@ -1,0 +1,55 @@
+.pf { display: flex; flex-direction: column; gap: 18px; }
+.pf-section { background: #fff; border: 1px solid #ececec; border-radius: 12px; padding: 16px; }
+.pf-section h3 { margin: 0 0 12px; font-size: 1rem; color: #131921; }
+.pf-section h3 small { font-weight: 400; color: #878787; margin-left: 8px; font-size: 0.78rem; }
+
+.pf-field { display: flex; flex-direction: column; gap: 4px; margin-bottom: 10px; flex: 1; min-width: 0; }
+.pf-field label { font-size: 0.82rem; font-weight: 600; color: #444; }
+.pf input, .pf select, .pf textarea {
+    width: 100%; padding: 9px 10px; border: 1px solid #d5d5d5; border-radius: 8px; font-size: 0.9rem; background: #fff;
+}
+.pf .has-error input, .pf .has-error select, .pf .has-error textarea, .pf tr.has-error input { border-color: #fd4444; }
+.pf-error { color: #c62828; font-size: 0.78rem; }
+.pf-banner { background: #fff4e5; border: 1px solid #f3d3a2; color: #8a5200; padding: 10px 12px; border-radius: 8px; font-size: 0.88rem; }
+.pf-note { padding: 16px; color: #666; }
+
+.pf-btn { padding: 8px 14px; border: none; border-radius: 8px; background: #131921; color: #fff; font-size: 0.85rem; cursor: pointer; }
+.pf-btn.ghost { background: #fff; color: #131921; border: 1px solid #d5d5d5; margin-top: 8px; }
+
+.pf-gen { display: flex; flex-direction: column; gap: 8px; background: #f8f8f8; border-radius: 10px; padding: 12px; margin-bottom: 12px; }
+.pf-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.pf-chip { padding: 5px 12px; border: 1px solid #d5d5d5; border-radius: 16px; background: #fff; cursor: pointer; font-size: 0.82rem; }
+.pf-chip.on { background: #131921; border-color: #131921; color: #fff; }
+
+.pf-table-wrap { overflow-x: auto; margin-top: 8px; }
+.pf-table { width: 100%; border-collapse: collapse; }
+.pf-table th { text-align: left; font-size: 0.75rem; color: #878787; padding: 4px; }
+.pf-table td { padding: 4px; }
+.pf-table input[type="color"] { padding: 0; height: 34px; width: 46px; }
+.pf-table input[type="number"] { min-width: 70px; }
+.pf-x { background: none; border: none; color: #c62828; cursor: pointer; font-size: 1rem; }
+
+.pf-attrs { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 0 12px; }
+
+.pf-images { display: flex; flex-wrap: wrap; gap: 10px; }
+.pf-images figure { position: relative; margin: 0; width: 96px; height: 96px; border: 1px solid #e3e3e3; border-radius: 8px; overflow: hidden; background: #fafafa; }
+.pf-images figure.new { border-color: #fd4444; }
+.pf-images img { width: 100%; height: 100%; object-fit: contain; }
+.pf-images figure button { position: absolute; top: 3px; right: 3px; width: 22px; height: 22px; border: none; border-radius: 50%; background: rgba(0,0,0,.65); color: #fff; cursor: pointer; font-size: 0.7rem; }
+.pf-add-img { 
+    display: flex; 
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center; 
+    width: 96px; 
+    height: 96px; 
+    border: 2px dashed #bbb; 
+    border-radius: 8px; 
+    color: #666; font-size: 0.8rem; 
+    text-align: center; 
+    cursor: pointer; 
+}
+
+#submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+@media (max-width: 640px) { .pf .half-input-container { flex-direction: column; } }

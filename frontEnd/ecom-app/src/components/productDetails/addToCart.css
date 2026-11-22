@@ -1,0 +1,110 @@
+.inc-Qty:disabled,
+.dec-Qty:disabled,
+.prdDetailsCard__detailsBlock1__3__1__add:disabled,
+.prdDetailsCard__detailsBlock1__3__1__buy:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.buy-bar {
+    display: none;
+}
+
+.buy-bar-spacer {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .buy-bar-spacer {
+        display: block;
+        height: 72px;
+    }
+
+    .buy-bar {
+        --bottom-nav-h: 80px;
+        /* the height of your bottom nav; measure it in DevTools and adjust */
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: calc(var(--bottom-nav-h) + env(safe-area-inset-bottom, 0px));
+        z-index: 990;
+        /* above the page, below the header, bottom nav and the filter sidebar */
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 10px;
+        background: #fff;
+        border-top: 1px solid #eee;
+        box-shadow: 0 -4px 14px rgba(0, 0, 0, 0.08);
+        transform: translateY(120%);
+        opacity: 0;
+        pointer-events: none;
+        transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+
+    .buy-bar.show {
+        transform: none;
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .buy-bar-info {
+        flex: 1;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        background: none;
+        border: none;
+        padding: 0;
+        text-align: left;
+        cursor: pointer;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .buy-bar-price {
+        font-weight: 700;
+        font-size: 1rem;
+        color: #131921;
+    }
+
+    .buy-bar-sel {
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: 0.75rem;
+        color: #666;
+    }
+
+    .buy-bar-sel.warn {
+        color: #c62828;
+        font-weight: 600;
+    }
+
+    .buy-bar-add,
+    .buy-bar-buy {
+        padding: 10px 12px;
+        border-radius: 8px;
+        font: 600 0.85rem 'Poppins', sans-serif;
+        cursor: pointer;
+        white-space: nowrap;
+    }
+
+    .buy-bar-add {
+        background: #fff;
+        color: #131921;
+        border: 1px solid #131921;
+    }
+
+    .buy-bar-buy {
+        background: var(--brand-red);
+        color: #fff;
+        border: 1px solid #fd4444;
+    }
+
+    .buy-bar-add:disabled,
+    .buy-bar-buy:disabled {
+        opacity: 0.6;
+    }
+}

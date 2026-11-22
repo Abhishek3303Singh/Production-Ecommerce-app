@@ -1,10 +1,44 @@
 const mongoose = require('mongoose');
+const variantSchema = mongoose.Schema({
+    sku:{
+        type:String,
+        trim: true,
+    },
+    size:{
+        type:String,
+        trim:true,
+        default:''
+    },
+    color:{
+        type:String,
+        trim:true,
+        default:''
+    },
+    colorHex:{
+        type:String,
+        trim:true,
+        match:[/^#([0-9a-f]{3}|[0-9a-f]{6})$/i, 'Invalid color code']
+    },
+    stock:{
+        
+        type:Number,
+        required:true,
+        min:[0, 'Stock can not be negative'], 
+        default:0
+        
+    }
+});
+variantSchema.pre('validate', function (next){
+    if(!this.size || ! this.color){
+        return next(new Error('color and size reuired for eatch variant'))
+    }
+    next()
+})
 const productSchema = mongoose.Schema({
     title:{
         type:String,
         // require:[true, 'Please Enter The Productg Title']
         required:true,
-        default:"please enter the pro title",
         minLength:2,
         maxLength:200,
 
@@ -24,25 +58,36 @@ const productSchema = mongoose.Schema({
     },
     category:{
         type:String,
-        required:[true, "Please Add Product Category"]
+        required:[true, "Please Add Product Category"],
+        trim:true
     },
     productType:{
         type:String,
-        required:[true, 'Please Add Product-Type']
+        required:[true, 'Please Add Product-Type'],
+        trim:true
+    },
+    gender:{
+        type:String,
+        enum:{values:['Men', 'Women', 'Kids', 'Unisex'], message:'Invalid gender'  }
     },
     attributes:{
         type:Map,
         of:String,
         default:{}
     },
+    variants:{
+        type:[variantSchema], default:[]
+    },
 
     price:{
         type:Number,
-        required:[true]
+        required:[true],
+        min:0
     },
     offerPrice:{
         type:Number,
-        required:[true]
+        required:[true],
+        min:0
     },
     Image:[
         {
@@ -52,7 +97,7 @@ const productSchema = mongoose.Schema({
             },
             url:{
                 type: String,
-                require: true
+                required: true
             }
         }
     ],
@@ -70,11 +115,12 @@ const productSchema = mongoose.Schema({
         type: Number,
         required:[true],
         maxLength:[3],
-        default: 1
+        min:0,
+        default: 0
     },
     ratings:{
         type:Number,
-        default :5
+        default :0
     },
     reviewsCount:{
         type: Number,
@@ -116,11 +162,27 @@ const productSchema = mongoose.Schema({
         default:0
     },              
 
-    createdAt:{
-        type :Date,
-        default: Date.now()
+    
+}, {timestamps:true});
+
+productSchema.pre('validate', function(next){
+    if(this.variants && this.variants.length){
+        const seen = new Set();
+        for(const vari of this.variants){
+            const key = `${(vari.size || '').toLowerCase()} | ${(vari.color || '').toLowerCase()}`
+            if(seen.has(key)) return next(new Error(`Dupicate variant: ${[vari.size, vari.color].filter(Boolean).join(' / ')}`))
+            seen.add(key)
+        }
+        this.Stock = this.variants.reduce((sum, v)=> sum + (v.stock || 0), 0)
     }
-    // userId: String,
-    // password:String
-});
+    // only check price when they changed...
+
+    if((this.isNew || this.isModifield('price') || this.isModifield('offerPrice')) && this.offerPrice> this.price){
+        return next(new Error('Offer price can not be grater then price'))
+    }
+    next()
+})
+productSchema.index({category:1, productType:1, brand:1})
+productSchema.index({category:1, price:1})
+productSchema.index({createdAt:-1})
 module.exports = mongoose.model("products", productSchema)

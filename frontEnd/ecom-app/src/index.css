@@ -6,6 +6,8 @@ html{
   margin: 0;
   /* overflow: hidden; */
 }
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; }
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -76,6 +78,7 @@ code {
   }
 
   :root {
+    --bottom-nav-h:80px;
     --brand-navy: #131921;
     --brand-red: #fd4444;
     --brand-orange: #ff9f00;

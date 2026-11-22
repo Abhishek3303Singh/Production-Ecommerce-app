@@ -1,0 +1,139 @@
+.vp {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin: 12px 0;
+}
+
+.vp-label {
+    margin: 0 0 6px;
+    font: 500 0.9rem 'Poppins', sans-serif;
+    color: #555;
+}
+
+.vp-label b {
+    color: #131921;
+}
+
+.vp-colors,
+.vp-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.vp .vp-color {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 14px 7px 10px;
+    border: 1px solid #cfcfcf;
+    border-radius: 20px;
+    background: #fff;
+    color: #131921;
+    cursor: pointer;
+    font: 500 0.88rem 'Poppins', sans-serif;
+}
+
+.vp .vp-color.on {
+    border-color: #fd4444;
+    background: #fff5f5;
+}
+
+.vp .vp-color:disabled {
+    opacity: 0.5;
+    text-decoration: line-through;
+    cursor: not-allowed;
+}
+
+.vp-dot {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    flex-shrink: 0;
+}
+
+.vp .vp-chip {
+    min-width: 46px;
+    padding: 8px 14px;
+    border: 1px solid #cfcfcf;
+    border-radius: 8px;
+    background: #fff;
+    color: #131921;
+    cursor: pointer;
+    font: 500 0.9rem 'Poppins', sans-serif;
+}
+
+.vp .vp-chip.on {
+    border-color: #fd4444;
+    color: #fd4444;
+    background: #fff5f5;
+}
+
+.vp .vp-chip:disabled {
+    color: #aaa;
+    background: #f6f6f6;
+    border-style: dashed;
+    text-decoration: line-through;
+    cursor: not-allowed;
+}
+
+.vp-error {
+    margin: 6px 0 0;
+    color: #c62828;
+    font-size: 0.82rem;
+}
+
+.vp-low {
+    margin: 0;
+    color: #b76e00;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.vp-chips.shake {
+    animation: vp-shake 0.3s;
+}
+
+@keyframes vp-shake {
+    25% {
+        transform: translateX(-4px);
+    }
+
+    75% {
+        transform: translateX(4px);
+    }
+}
+
+/* Specifications table */
+.pd-specs {
+    margin-top: 18px;
+}
+
+.pd-specs h3 {
+    margin: 0 0 8px;
+    font: 600 1rem 'Poppins', sans-serif;
+}
+
+.pd-specs table {
+    width: 100%;
+    max-width: 520px;
+    border-collapse: collapse;
+}
+
+.pd-specs th,
+.pd-specs td {
+    padding: 8px 10px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+    font: 400 0.9rem 'Poppins', sans-serif;
+}
+
+.pd-specs th {
+    width: 40%;
+    color: #878787;
+    font-weight: 500;
+}

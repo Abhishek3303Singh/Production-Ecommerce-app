@@ -15,7 +15,6 @@
 /* style/sidebar.css */
 
 .sidebar-container {
-    width: 300px;
     height: 100vh;           
     position: fixed;        
     left: 0;

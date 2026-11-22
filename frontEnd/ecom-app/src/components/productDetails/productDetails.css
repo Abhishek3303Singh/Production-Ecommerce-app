@@ -154,7 +154,7 @@
     font: 500 1.2vmax "Franklin Gothic Medium";
   }
   .prdDetailsCard__detailsBlock1__3__1__add {
-    background: var(--brand-orange);
+    background: var(--brand-red);
     color: #fff;
     padding: 0.75vmax 1vmax;
     border: none;

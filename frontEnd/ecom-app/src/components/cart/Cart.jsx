@@ -7,11 +7,12 @@ import MetaData from '../routes/MetaData';
 import { useNavigate } from 'react-router-dom';
 import shield from '../../images/shield.png';
 import cart4 from '../../images/cart4.png'
-
+import { cartTotal, FREE_SHIPPING_ABOVE } from '../../utils/cartPricing';
 const Cart = () => {
     const [emoji, setEmoji] = useState(false)
     const { cartItems } = useSelector((state) => state.cart)
-
+    const t = cartTotal(cartItems)
+    const money = (n) => `₹${Number(n).toLocaleString('en-IN', { minimumFractionDigits: 0, maximumFractionDigits: 2 })}`
     // Calculate Price and offerPrice of CartItems
     let TotalAmount = 0;
     let offerAmount = 0;
@@ -51,7 +52,7 @@ const Cart = () => {
                     ) : (
                         <>
                             <header className='cartHeader'>
-                                My Cart
+                                Shopping Cart
                             </header>
                             <div className="cartMainContainer">
                                 <div className='product-cart-container'>
@@ -69,23 +70,31 @@ const Cart = () => {
                                     <h3>PRICE DETAILS</h3>
                                     <div className="price-details">
                                         <div className='price-txt'>
-                                            <p>Price</p>
+                                            <p>Price ({t.itemCount} item{t.itemCount !== 1 ? 's' : ''})</p>
                                             <p>Discount</p>
+                                            <p>Tax (GST 18%)</p>
                                             <p>Delivery Charges</p>
 
 
                                         </div>
                                         <div className='amount'>
-                                            <p>&#8377; {amt[0]}</p>
-                                            <p>&#8377; {amt[0] - amt[1]}</p>
-                                            <p style={{ color: 'green' }}>{deliveryCharges === 0 ? 'Free' : '49'}</p>
+                                            <p>{money(t.mrp)}</p>
+                                            <p style={{ color: 'green' }}>− {money(t.discount)}</p>
+                                            <p>{money(t.gst)}</p>
+
+                                            <p style={{ color: 'green' }}>{t.shipping === 0 ? 'Free' : money(t.shipping)}</p>
                                         </div>
 
                                     </div>
                                     <div className='cart-total'>
                                         <div className='Total-Amount'><h2>Total Amount</h2></div>
-                                        <div className='Total-Amount'><h2>&#8377; {amt[1] + deliveryCharges}</h2></div>
-                                    </div>                       <p className='offer-text-cart'>You will save ₹ {amt[0] - amt[1]} on this order</p>
+                                        <div className='Total-Amount'><h2>{t.total}</h2></div>
+                                    </div>
+                                    {t.discount > 0 &&
+                                        <p className='offer-text-cart'>You will save {money(t.discount)} on this order</p>}
+                                    {t.shipping > 0 && (
+                                        <p className="offer-text-cart">Add {money(FREE_SHIPPING_ABOVE - t.subTotal)} more for free delivery</p>
+                                    )}
 
                                     <div className='safe-secure'>
                                         <img src={shield} alt="" />
@@ -101,19 +110,19 @@ const Cart = () => {
                             </div>
 
 
-                            <div className='order-place-mobile'>
+                             <div className='order-place-mobile'>
                                 <button className='order-place-mobile-btn' onClick={handlePlaceOrder}>PLACE ORDER</button>
 
-                              
+
 
                             </div>
 
                             <div className='safe-secure-mobile'>
-                                        <img src={shield} alt="" />
+                                <img src={shield} alt="" />
 
-                                        <span>Safe and Secure Payments. Easy returns. 100% Authentic products.</span>
+                                <span>Safe and Secure Payments. Easy returns. 100% Authentic products.</span>
 
-                                    </div>
+                            </div>
                         </>
                     )
                 }

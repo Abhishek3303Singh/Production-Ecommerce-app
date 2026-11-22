@@ -32,6 +32,14 @@ const orderSchema = new mongoose.Schema({
         ref: "products",
         required: true,
       },
+      variantId:{
+        type:mongoose.Schema.ObjectId
+      },
+      size:{
+        type:String,
+      },
+      color:{type:String},
+      sku:{type:String},
       name: { type: String, required: true },
       price: { type: String, required: true },
       offerPrice: { type: String, required: true },

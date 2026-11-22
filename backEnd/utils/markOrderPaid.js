@@ -53,12 +53,13 @@ async function makeOrderPaid(razorpayOrderId, paymentId) {
       }; 
       for (const item of order.orderProduct) {
         const qty = Number(item.quantity);
+        const filter = item.variantId ? {_id:item.product, variant:{$elemMatch:{_id:item.variantId, stock:{$gte:qty}}}}
+        : {_id:item.product, Stock:{$gte:qty}}
 
-        const res = await ProductModel.updateOne(
-          { _id: item.product, Stock: { $gte: qty } },
-          { $inc: { Stock: -qty, sold: qty } },
-          { session }
-        );
+        const update = item.variantId ? {$inc:{'varaints.$.stock':-qty, Stock:-qty, sold:qty}}:
+        {$inc:{Stock:-qty, sold:qty}}
+
+        const res = await ProductModel.updateOne(filter, update, { session });
         if (res.modifiedCount !== 1)
           throw new StockError(`Insufficient stock :${item.title}`);
       }

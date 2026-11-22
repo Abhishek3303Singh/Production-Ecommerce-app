@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react'
+import React, { useEffect, useMemo, useRef } from 'react'
 import './productDetails.css'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux';
@@ -23,6 +23,7 @@ import ProductGallery from './ProductGallery';
 import AddToCart from './AddToCart';
 import { fetchProductLists } from '../../store/recommndedProdSlice';
 import RecommendationSlider from './RecommendationSlider';
+import VariantPicker, { useVariantSelection } from './VariantPicker';
 
 
 
@@ -39,7 +40,8 @@ const ProductDetails = () => {
     if (!product?.price || !product?.offerPrice) return 0;
     return ((1 - product.offerPrice / product.price) * 100).toFixed(2);
   }, [product?.price, product?.offerPrice]);
-  console.log(recommended, 'recom , recommProd')
+  // console.log(recommended, 'recom , recommProd')
+
 
   // // console.log('first url',product.Image[0].url)
   // const [image, setImage] = useState(product.Image ? product.Image[0] : [{ url: " " }])
@@ -53,12 +55,37 @@ const ProductDetails = () => {
   const [ratings, setRatings] = useState(0);
   const [showTextarea, setShowTextarea] = useState(false)
   // console.log('url', status)
+  const sel = useVariantSelection(product?.variants, product?._id)
+  const [showSelectError, setShowSelectError] = useState(false)
+  const pickerRef = useRef(null)
+  const scrollToPicker = () => pickerRef.current?.scrollIntoView({ block: 'center', behavior: 'smooth' })
+  const handleNeedSelection = () => {
+      setShowSelectError(true)
+      scrollToPicker()
+  }
+  
+  useEffect(() => {
+      if (sel.variant) setShowSelectError(false)
+  }, [sel.variant])
+  
+  const totalStock = Number(product?.Stock) || 0
+  const stockLeft = sel.hasVariants && sel.variant ? sel.variant.stock : totalStock
+  const inStock = stockLeft > 0
+  const needsSelection = sel.hasVariants && !sel.variant
+  const maxQty = Math.min(stockLeft, 10)
+  
+  const specs = [
+      product?.brand && ['Brand', product.brand],
+      product?.productType && ['Type', product.productType],
+      product?.gender && ['Gender', product.gender],
+      ...Object.entries(product?.attributes || {}),
+  ].filter(Boolean)
   const options = {
     edit: false,
     color: "rgb(20, 40, 20, 0.5)",
     activeColor: "rgb(250, 76, 2)",
     size: window.innerHeight < 600 ? 20 : 30,
-    value: product.ratings,
+    value: product?.ratings || 0,
     isHalf: true,
   }
 
@@ -130,6 +157,9 @@ const ProductDetails = () => {
     return <h2 style={{ color: "red", width: "40%", margin: "auto" }}>Oops! something went wrong. <span style={{ fontSize: "40px" }}> &#128580;</span> </h2>
   }
 
+  if (!product?._id || String(product._id) !== String(id)) {
+    return <Loader />
+}
 
 
 
@@ -170,6 +200,7 @@ const ProductDetails = () => {
     // }
 
   }
+  
   //  console.log(product, 'product')
   //  console.log(product?.customerReview, 'customer review')
   return (
@@ -206,11 +237,15 @@ const ProductDetails = () => {
             <p>product # {product._id}</p>
           </div>
           <div className='prdDetailsCard__detailsBlock1__2'>
+    {product.reviewsCount > 0 ? (
+        <>
             <ReactStars {...options} />
-
-            <span>{parseFloat(product?.ratings?.toFixed(1))} Ratings &amp; {product.reviewsCount} Reviews</span>
-
-          </div>
+            <span>{parseFloat(Number(product.ratings).toFixed(1))} Ratings &amp; {product.reviewsCount} Reviews</span>
+        </>
+    ) : (
+        <span>No reviews yet</span>
+    )}
+</div>
           <div className='prdDetailsCard__detailsBlock1__3'>
             <div className="price-row">
               <span className="offer-price">&#x20B9;{product.offerPrice}</span>
@@ -227,16 +262,37 @@ const ProductDetails = () => {
               } */}
 
             </div>
+
+            <div ref={pickerRef}>
+            <VariantPicker sel={sel} showError={showSelectError} />
+            </div>
+
+
             <div className='prdDetailsCard__detailsBlock1__3__1'>
 
-              <AddToCart id={id} product={product} />
+              {/* <AddToCart id={id} product={product} /> */}
+               <AddToCart
+        id={id}
+        product={product}
+        variantId={sel.variant?._id || null}
+        disabled={!inStock}
+        maxQty={maxQty}
+        needsSelection={needsSelection}
+        onNeedSelection={handleNeedSelection}
+        onJumpToPicker={scrollToPicker}
+        selectionLabel={[sel.color, sel.size].filter(Boolean).join(', ')}
+    />
 
             </div>
             <p className='stock-status'>
-              status:{""}
-              <b className={product.Stock > 1 ? 'inStock' : 'OutOfStock'}>
+            status:{' '}
+              {/* <b className={product.Stock > 1 ? 'inStock' : 'OutOfStock'}>
                 {product.Stock > 1 ? "InStock" : "OutOfStock"}
+              </b> */}
+              <b className={inStock ? 'inStock' : 'OutOfStock'}>
+                {inStock ? 'In stock' : 'Out of stock'}
               </b>
+              {sel.hasVariants && !sel.variant && inStock && <span className="stock-hint"> · select a size</span>}
 
             </p>
 
@@ -251,7 +307,22 @@ const ProductDetails = () => {
             }
 
 
-          </div>{
+          </div>
+          {
+            specs.length > 0 && (
+              <div className="pd-specs">
+                <h3>Specifications</h3>
+                <table>
+                  <tbody>
+                    {specs.map(([k,v])=><tr key={k}><th>{k}</th> <td>{v}</td></tr>)}
+                  </tbody>
+                </table>
+
+              </div>
+            )
+          }
+          
+          {
             isAuthenticated ? <button className='prdDetailsCard__detailsBlock1__submitReview' onClick={handleShowtextArea}>Add Review</button> : ''
           }
 

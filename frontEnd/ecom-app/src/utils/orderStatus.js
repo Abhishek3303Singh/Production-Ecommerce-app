@@ -1,6 +1,6 @@
 export const ORDER_STATUS = Object.freeze({
     PENDING: 'Pending payment',
-    IN_PROCESS: 'In process',
+    IN_PROCESS: 'In Process',
     SHIPPED: 'Shipped',
     ON_THE_WAY: 'On the way',
     OUT_FOR_DELIVERY: 'Out for delivery',

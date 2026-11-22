@@ -1,5 +1,5 @@
 const express = require("express");
-const {updateProduct, allProducts, addProduct, deleteProduct, productDetails, searchItem, productReview, getAllReviews, deleteReview, adminAllProducts, searchSuggestion, recommendedProduct, trendingProducts, bestSeller, getProductsByIds, getAvailableFilters} = require('../routeResponse/productResponse');
+const {updateProduct, allProducts, addProduct, deleteProduct, productDetails, searchItem, productReview, getAllReviews, deleteReview, adminAllProducts, searchSuggestion, recommendedProduct, trendingProducts, bestSeller, getProductsByIds, getAvailableFilters, getCatalog} = require('../routeResponse/productResponse');
 const { isAuthenticated, checkAdminAuthorize } = require("../middleware/checkAuthUser");
 const relaxedLimiter = require('../middleware/relaxedLimiter')
 
@@ -21,4 +21,5 @@ router.route('/products/recommended/:productId').get(relaxedLimiter, recommended
 router.route('/products/trending').get(relaxedLimiter, trendingProducts)
 router.route('/products/bestseller').get(relaxedLimiter, bestSeller)
 router.route('/products/by-ids').get(relaxedLimiter, getProductsByIds)
+router.route('/catalog').get(relaxedLimiter, getCatalog)
 module.exports = router
