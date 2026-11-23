@@ -4,7 +4,7 @@ import './footer.css';
 import facbook from '../../../images/socialicon/facebook.png';
 import insta from '../../../images/socialicon/insta.png';
 import linkedin from '../../../images/socialicon/in.png';
-import twitter from '../../../images/socialicon/twitter.png';
+import twitter from '../../../images/socialicon/x.png';
 import whatsapp from '../../../images/socialicon/whatsapp.png';
 
 const Footer = () => {

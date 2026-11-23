@@ -203,8 +203,8 @@
   position: absolute;
   top: -6px;
   right: -8px;
-  background: #febd69;
-  color: #131921;
+  background: #fd4444;
+  color: #d7d7d7;
   font-size: 10px;
   font-weight: 700;
   width: 16px;
@@ -340,12 +340,12 @@
 
   .header-inner {
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 5px;
   }
   .header-logo{
     /* background: #131921bd; */
     border-radius: 10px;
-    height: 70px;
+    /* height: 70px; */
   }
   .logo-img{
     height: 40px;
@@ -360,7 +360,7 @@
     align-items: stretch;
     gap: 10px;
     margin-top: 4px;
-    padding-top: 10px;
+    padding-top: 5px;
     border-top: 1px solid rgba(255, 255, 255, 0.08);
   }
 
@@ -423,7 +423,7 @@
      ============================================ */
 @media (min-width: 769px) and (max-width: 1024px) {
   .header-inner {
-    gap: 12px;
+    gap: 5px;
   }
 
   .header-center-group {

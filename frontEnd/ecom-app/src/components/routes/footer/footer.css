@@ -194,7 +194,7 @@ body {
 
 .newsletter-input:focus {
     outline: none;
-    border-color: #ff6b6b;
+    border-color: #fd4444;
     background: rgba(255, 255, 255, 0.15);
 }
 
@@ -204,7 +204,7 @@ body {
 
 .newsletter-btn {
     padding: 12px 24px;
-    background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+    background: linear-gradient(135deg, #06bdbd, #00df99);
     border: none;
     border-radius: 8px;
     color: #fff;
@@ -252,19 +252,19 @@ body {
 
 .social-icon:hover {
     transform: translateY(-3px);
-    background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+    background: linear-gradient(135deg, #fd4444, red);
     border-color: transparent;
 }
 
 .social-icon img {
     width: 20px;
     height: 20px;
-    filter: brightness(0) invert(1);
+    
 }
 
 /* App Banner */
 .app-banner {
-    background: linear-gradient(96deg, #e3063e, #e20b5c);
+    background: linear-gradient(96deg, #fd4444, #e20b5c) !important;
     border-radius: 16px;
     padding: 30px;
     margin: 40px 0;
@@ -307,7 +307,7 @@ body {
 
 .app-btn {
     padding: 10px 20px;
-    background: rgba(255, 255, 255, 0.1);
+    background: #131921;
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 8px;
     color: #fff;
@@ -315,11 +315,12 @@ body {
     font-weight: 500;
     cursor: pointer;
     transition: all 0.3s;
+    
 }
 
 .app-btn:hover {
-    background: rgba(5, 181, 225, 0.959);
-    border-color: #06ecfc;
+    background: #06bdbd;
+    border-color: #06bdbd;
 }
 
 /* Payment Methods */
@@ -359,9 +360,9 @@ body {
 }
 
 .payment-icon:hover {
-    background: #ff6b6b;
+    background: #fd4444;
     color: #fff;
-    border-color: #ff6b6b;
+    border-color: #fd4444;
 }
 
 /* Footer Bottom */
@@ -395,7 +396,7 @@ body {
 }
 
 .footer-bottom-links a:hover {
-    color: #ff6b6b;
+    color: #fd4444;
 }
 
 /* Mobile Responsive */
