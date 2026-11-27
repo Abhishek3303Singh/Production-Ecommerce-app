@@ -1,46 +1,92 @@
+/* ================= BASE ================= */
+
 .banner-carousel {
   position: relative;
   width: 100%;
   max-width: 1500px;
   margin: 0 auto;
+  box-sizing: border-box;
 }
 
-/* Hero - Desktop */
+/* Per-position slide height. Arrows and dots read these. */
 .banner-carousel--hero {
-  height: 475px;
+  --slide-h: 475px;
 }
 
-/* Mid - Desktop */
 .banner-carousel--mid {
-  height: 300px;
+  --slide-h: 300px;
+  --track-pad: 8px;
+  margin: 30px auto;
+  padding: 0 20px;
+}
+
+.banner-carousel--mid2 {
+  --slide-h: 180px;
+  --track-pad: 8px;
   margin: 20px auto;
+  padding: 0 20px;
+}
+
+.banner-carousel--bottom {
+  --slide-h: 200px;
+  margin: 40px 0 0;
+  max-width: 100%;
+}
+
+/* Track: native scrolling with snapping. On desktop each slide is full width. */
+.banner-track {
+  position: relative;
+  /* slide offsets are measured from here */
+  display: flex;
+  align-items: flex-start;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.banner-track::-webkit-scrollbar {
+  display: none;
+}
+
+/* Room for the slide shadows (the track would otherwise clip them) */
+.banner-carousel--mid .banner-track,
+.banner-carousel--mid2 .banner-track {
+  padding-block: var(--track-pad);
 }
 
 /* ================= SLIDE ================= */
 
 .banner-slide {
   position: relative;
+  flex: 0 0 100%;
   width: 100%;
-  height: 100%;
+  height: var(--slide-h, 300px);
   overflow: hidden;
-  background: #eaeded; /* placeholder bg while loading */
-  transition: filter 0.5s ease-in-out, opacity 0.5s ease-in-out;
+  background: #eaeded;
+  /* placeholder while the image loads */
+  scroll-snap-align: center;
+  cursor: pointer;
 }
 
 .banner-slide__image {
+  display: block;
   width: 100%;
   height: 100%;
-
-  object-position: center; /* KEY: was "center top", now centered */
-  display: block;
-  transition: filter 0.5s ease-in-out, opacity 0.5s ease-in-out;
+  object-fit: cover;
+  object-position: center;
+  user-select: none;
 }
 
 /* ================= CONTENT OVERLAY ================= */
 
 .banner-slide__content {
   position: absolute;
-  top: 40px;      /* Amazon puts promos at bottom */
+  top: 40px;
   left: 40px;
   z-index: 10;
   max-width: 600px;
@@ -51,16 +97,16 @@
   font-size: 3rem;
   font-weight: 700;
   color: #ffffff;
-  margin-bottom: 12px;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+  margin: 0 0 12px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
   line-height: 1.15;
 }
 
 .banner-slide__desc {
   font-size: 1.2rem;
   color: #ffffff;
-  margin-bottom: 20px;
-  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  margin: 0 0 20px;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
 }
 
 .banner-slide__cta {
@@ -79,33 +125,28 @@
   background: #f3a847;
 }
 
-/*  graidien5t overlay  */
-
+/* gradient overlay */
 .banner-slide::after {
   content: '';
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  height: 60%;        
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0) 0%,
-    rgba(0, 0, 0, 0.4) 50%,
-    rgba(0, 0, 0, 0.75) 100%
-  );
+  height: 60%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.75) 100%);
   z-index: 0;
   pointer-events: none;
 }
 
-
+/* ================= ARROWS ================= */
 
 .banner-arrow {
   position: absolute;
-  top: 50%;
+  top: calc(var(--slide-h, 300px) / 2 + var(--track-pad, 0px));
   transform: translateY(-50%);
   width: 45px;
   height: 100px;
+  padding: 0;
   background: rgba(255, 255, 255, 0.25);
   border: none;
   color: white;
@@ -145,6 +186,7 @@
 .banner-dot {
   width: 10px;
   height: 10px;
+  padding: 0;
   border-radius: 50%;
   border: 2px solid #888;
   background: transparent;
@@ -152,175 +194,73 @@
 }
 
 .banner-dot.active {
-  background: #febd69;
-  border-color: #febd69;
+  background: #fd4444;
+  border-color: #fd4444;
 }
 
-/* ================= SKELETON ================= */
+/* ================= SKELETON / ERROR ================= */
 
 .banner-skeleton {
-  height: 600px;
+  height: 475px;
   background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
 }
 
+.banner-skeleton--mid {
+  height: 300px;
+}
+
+.banner-skeleton--mid2 {
+  height: 180px;
+}
+
+.banner-skeleton--bottom {
+  height: 200px;
+}
+
 @keyframes shimmer {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
-}
-
-/* ================= TABLET ================= */
-
-@media (max-width: 1024px) {
-  .banner-carousel--hero { height: 420px; }
-  .banner-slide__title { font-size: 2.4rem; }
-  .banner-slide__content { left: 30px; bottom: 30px; max-width: 450px; }
-}
-
-/* ================= MOBILE (Amazon Style) ================= */
-
-@media (max-width: 768px) {
-  
-  /* Full-bleed like Amazon India app */
-  .banner-carousel {
-    max-width: 100%;
-    padding: 0;
-    margin: 0;
+  0% {
+    background-position: 200% 0;
   }
 
-  /* KEY FIX: Portrait aspect ratio for mobile banners */
-  .banner-carousel--hero {
-    height: auto;
-    aspect-ratio: 3 / 4;      /* Portrait (taller than wide) */
-    max-height: 520px;       /* Cap so it doesn't eat the whole screen */
-    min-height: 320px;
-  }
-
-  .banner-carousel--mid {
-    height: auto;
-    aspect-ratio: 16 / 9;
-    max-height: 240px;
-    margin: 12px 0;
-  }
-
-  /* No rounded corners for hero — Amazon uses full-bleed */
-  .banner-slide {
-    border-radius: 0;
-  }
-.banner-slide__image{
-  width: 95%;
-  margin: auto;
-  border-radius: 15px;
-}
-.banner-carousel--mid .banner-slide__image{
-  width: 100%;
-}
-  /* If you want the "card in feed" look instead, swap to this: */
-  /*
-  .banner-slide {
-    border-radius: 12px;
-    margin: 0 10px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
-  }
-  */
-
-  /* Stronger gradient for mobile */
-  .banner-slide::after {
-    height: 70%;
-    background: transparent;
-  
-  }
-
-  /* Content at bottom-left like Amazon promos */
-  .banner-slide__content {
-    top: 50px;
-    left: 25px;
-    max-width: 80%;
-  }
-
-  .banner-slide__title {
-    font-size: 1.5rem;
-    margin-bottom: 8px;
-    text-shadow: 0 2px 6px rgba(0,0,0,0.8);
-  }
-
-  .banner-slide__desc {
-    font-size: 0.9rem;
-    margin-bottom: 14px;
-  }
-
-  .banner-slide__cta {
-    padding: 10px 22px;
-    font-size: 0.9rem;
-    border-radius: 6px;
-    margin-left: 25px;
-  }
-
-  /* Smaller arrows */
-  .banner-arrow {
-    width: 32px;
-    height: 64px;
-    font-size: 1.3rem;
-  }
-
-  .banner-dots {
-    padding: 10px 0;
-    gap: 6px;
-  }
-
-  .banner-skeleton {
-    height: auto;
-    aspect-ratio: 3 / 4;
-    max-height: 520px;
+  100% {
+    background-position: -200% 0;
   }
 }
 
-/* ================= SMALL PHONES ================= */
+.banner-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 240px;
+  background: #f5f5f5;
+  text-align: center;
+}
 
-@media (max-width: 480px) {
-  .banner-carousel--hero {
-    aspect-ratio: 3 / 4;
-    max-height: 460px;
-  }
-
-  .banner-slide__content {
-    top: 50px;
-    left: 25px;
-  }
-
-  .banner-slide__title {
-    font-size: 2.5rem;
-  }
-
-  .banner-slide__desc {
-    font-size: 1.85rem;
-  }
+.banner-error button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  background: #febd69;
+  cursor: pointer;
 }
 
 /* ================= MID BANNER ================= */
 
-.banner-carousel--mid {
-  height: 300px;
-  max-width: 1500px;
- 
-  margin: 30px auto;
-  padding: 0 20px;
-}
-
 .banner-carousel--mid .banner-slide {
   border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.12);
-  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
 }
 
-/* Mid banner image — focus on center for product shots */
 .banner-carousel--mid .banner-slide__image {
   object-position: center;
   object-fit: cover;
 }
 
-/* Mid banner content — centered, larger CTA */
+/* centered content, larger CTA */
 .banner-carousel--mid .banner-slide__content {
   top: 50%;
   left: 50%;
@@ -333,13 +273,13 @@
 .banner-carousel--mid .banner-slide__title {
   font-size: 2.4rem;
   margin-bottom: 8px;
-  text-shadow: 0 2px 12px rgba(0,0,0,0.7);
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.7);
 }
 
 .banner-carousel--mid .banner-slide__desc {
   font-size: 1.1rem;
   margin-bottom: 24px;
-  text-shadow: 0 1px 6px rgba(0,0,0,0.6);
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
 }
 
 .banner-carousel--mid .banner-slide__cta {
@@ -348,7 +288,7 @@
   border-radius: 8px;
   background: #ffffff;
   color: #131921;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .banner-carousel--mid .banner-slide__cta:hover {
@@ -356,21 +296,18 @@
   transform: translateY(-2px);
 }
 
-/* Gradient overlay for mid — stronger center focus */
 .banner-carousel--mid .banner-slide::after {
   height: 100%;
- 
 }
 
-/* Hide arrows on mid banner (cleaner look) */
 .banner-carousel--mid .banner-arrow {
   display: none;
 }
 
-/* Dots at bottom inside the banner */
+/* dots inside the banner */
 .banner-carousel--mid .banner-dots {
   position: absolute;
-  bottom: 12px;
+  bottom: calc(var(--track-pad, 0px) + 12px);
   left: 0;
   right: 0;
   z-index: 20;
@@ -379,7 +316,7 @@
 }
 
 .banner-carousel--mid .banner-dot {
-  background: rgba(255,255,255,0.5);
+  background: rgba(255, 255, 255, 0.5);
   border-color: transparent;
 }
 
@@ -387,18 +324,11 @@
   background: #ffffff;
 }
 
-/* ================= MID2 BANNER (Smaller promo strip) ================= */
-
-.banner-carousel--mid2 {
-  height: 180px;
-  max-width: 1500px;
-  margin: 20px auto;
-  padding: 0 20px;
-}
+/* ================= MID2 (smaller promo strip) ================= */
 
 .banner-carousel--mid2 .banner-slide {
   border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
 }
 
 .banner-carousel--mid2 .banner-slide__content {
@@ -423,31 +353,168 @@
   font-size: 0.9rem;
 }
 
-/* ================= BOTTOM BANNER (Footer promo) ================= */
-
-.banner-carousel--bottom {
-  height: 200px;
-  margin: 40px 0 0 0;
-  max-width: 100%;
-  border-radius: 0;
-}
+/* ================= BOTTOM (footer promo) ================= */
 
 .banner-carousel--bottom .banner-slide {
   border-radius: 0;
   box-shadow: none;
 }
 
-/* ================= RESPONSIVE MID BANNER ================= */
+/* ================= HERO2 (kept from your file) ================= */
+
+.banner-carousel--hero2 {
+  max-width: 2500px;
+  width: 95%;
+  margin: 1vh auto 0;
+}
+
+.banner-carousel--hero2 .banner-track {
+  gap: 10px;
+}
+
+.banner-carousel--hero2 .banner-slide {
+  flex: 0 0 45%;
+  width: 45%;
+  height: auto;
+  border-radius: 2rem;
+}
+
+.banner-carousel--hero2 .banner-slide__image {
+  border-radius: 10px;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  object-position: center;
+  aspect-ratio: 41/20;
+}
+
+/* ================= TABLET ================= */
+
+@media (max-width: 1024px) {
+  .banner-carousel--hero {
+    --slide-h: 420px;
+  }
+
+  .banner-slide__title {
+    font-size: 2.4rem;
+  }
+
+  .banner-slide__content {
+    left: 30px;
+    max-width: 450px;
+  }
+}
+
+/* ================= MOBILE ================= */
 
 @media (max-width: 768px) {
-  .banner-carousel--mid {
+
+  .banner-carousel {
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .banner-arrow {
+    display: none;
+  }
+
+  /* swipe instead */
+  .banner-slide::after {
+    background: transparent;
+  }
+
+  /* ---- hero: Amazon-style peek carousel ---- */
+  .banner-carousel--hero .banner-track {
+    gap: 10px;
+    padding: 4px 6%;
+    /* the 6% each side lets the neighbours peek */
+    scroll-padding-inline: 6%;
+  }
+
+  .banner-carousel--hero .banner-slide {
+    height: auto;
+    aspect-ratio: 3 / 4;
+    /* change this if your banners are another shape */
+    min-height: 320px;
+    max-height: 520px;
+    border-radius: 16px;
+  }
+
+  .banner-carousel--hero .banner-dots {
+    background: transparent;
+    padding: 8px 0 4px;
+    gap: 6px;
+  }
+
+  .banner-skeleton {
+    margin: 4px 6%;
+    height: auto;
+    aspect-ratio: 3 / 4;
+    max-height: 520px;
+    border-radius: 16px;
+  }
+
+  .banner-skeleton--mid {
+    margin: 0 12px;
     height: 200px;
+    aspect-ratio: auto;
+    border-radius: 12px;
+  }
+
+  .banner-skeleton--mid2 {
+    margin: 0 12px;
+    height: 140px;
+    aspect-ratio: auto;
+    border-radius: 12px;
+  }
+
+  .banner-skeleton--bottom {
+    margin: 0;
+    height: 160px;
+    aspect-ratio: auto;
+    border-radius: 0;
+  }
+
+  /* overlay text */
+  .banner-slide__content {
+    top: 50px;
+    left: 25px;
+    max-width: 80%;
+  }
+
+  .banner-slide__title {
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+  }
+
+  .banner-slide__desc {
+    font-size: 0.9rem;
+    margin-bottom: 14px;
+  }
+
+  .banner-slide__cta {
+    padding: 10px 22px;
+    font-size: 0.9rem;
+    border-radius: 6px;
+  }
+
+  /* ---- mid, mid2, bottom: one full-width slide, swipeable ---- */
+  .banner-carousel--mid {
+    --slide-h: 200px;
     margin: 16px 0;
     padding: 0 12px;
   }
 
-  .banner-carousel--mid .banner-slide {
-    border-radius: 12px;
+  .banner-carousel--mid2 {
+    --slide-h: 140px;
+    margin: 12px 0;
+    padding: 0 12px;
+  }
+
+  .banner-carousel--bottom {
+    --slide-h: 160px;
   }
 
   .banner-carousel--mid .banner-slide__title {
@@ -464,51 +531,45 @@
     font-size: 0.9rem;
   }
 
-  .banner-carousel--mid2 {
-    height: 140px;
-    padding: 0 12px;
-    margin: 12px 0;
-  }
-
   .banner-carousel--mid2 .banner-slide__title {
     font-size: 1.2rem;
   }
 
-  .banner-carousel--bottom {
-    height: 160px;
+  .banner-carousel--hero2 .banner-slide {
+    flex-basis: 85%;
+    width: 85%;
   }
 }
 
+/* ================= SMALL PHONES ================= */
+
 @media (max-width: 480px) {
+  .banner-carousel--hero .banner-slide {
+    max-height: 460px;
+  }
+
+  .banner-slide__content {
+    top: 50px;
+    left: 25px;
+  }
+
+  .banner-slide__title {
+    font-size: 2.5rem;
+  }
+
+  .banner-slide__desc {
+    font-size: 1.85rem;
+  }
+
   .banner-carousel--mid {
-    height: 170px;
+    --slide-h: 170px;
   }
 
   .banner-carousel--mid .banner-slide__title {
     font-size: 1.25rem;
   }
-}
 
-.banner-carousel--hero2{
-  max-width: 2500px;
-  height: 100%;
-  width: 95%;
-  margin: auto;
-  gap: 10px;
-  margin-top: 1vh;
-}
-
-.banner-carousel--hero2 .banner-slide{
-  position: relative;
-  width: 45%;
-  overflow: hidden;
-  border-radius: 2rem;
-}
-
-.banner-carousel--hero2 .banner-slide__image{
-  border-radius: 10px;
-width: 100%;
-  object-fit: cover;
-  object-position: center;
-  aspect-ratio: 41/20;
+  .banner-carousel--mid .banner-slide__desc {
+    font-size: 0.85rem;
+  }
 }

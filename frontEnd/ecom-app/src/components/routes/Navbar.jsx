@@ -1,5 +1,5 @@
-import { Link, useNavigate } from "react-router-dom";
-import { useEffect, useState, useRef } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useEffect, useState, useRef, useLayoutEffect } from "react";
 import { useSelector } from "react-redux";
 import { BiMenuAltRight } from "react-icons/bi";
 import { AiOutlineClose } from "react-icons/ai";
@@ -12,6 +12,7 @@ import MatchHighlight from "../../utils/MatchHighlight";
 import './navbar.css'
 import useIsMobileOrTablet from "../hooks/useIsMobileOrTablet ";
 import logo from '../../images/logo.png'
+import { tintFromHex } from "../../utils/tint";
 const apiUrl = process.env.REACT_APP_API_BASE_UR;
 
 
@@ -27,10 +28,38 @@ const Navbar = () => {
   const cacheRef = useRef({});
   const searchRef = useRef(null);
   const navigate = useNavigate();
+  const { pathname } = useLocation()
+  const headerRef = useRef(null)
 
   const { cartItems } = useSelector((state) => state.cart);
   const { user, isAuthenticated } = useSelector((state) => state.user);
   const themeColor = useSelector((state) => state.createBanner.headerThemeColor);
+
+  const hasTint = pathname === '/' && themeColor && themeColor.toLowerCase() !== '#131921';
+  const tint = hasTint ? tintFromHex(themeColor) : '#ffffff';
+
+  //   const tint = pathname === '/' && themeColor ?
+  //    `color-mix(in srgb, ${themeColor} 28% white)` 
+  //    : '#ffffff';
+  useEffect(() => {
+    document.documentElement.style.setProperty('--hero-tint', tint);
+  }, [tint]);
+
+  //only the search row stays pinned rest is side up
+
+  useLayoutEffect(() => {
+    const header = headerRef.current;
+    const search = searchRef.current
+    if (!header || !search) return
+    const measure = () => {
+      const gap = search.getBoundingClientRect().top - header.getBoundingClientRect().top;
+      header.style.setProperty('--header-collapse', `${Math.max(0, Math.round(gap - 8))}px`);
+    };
+    measure();
+    const ro = new ResizeObserver(measure)
+    ro.observe(header)
+    return () => ro.disconnect()
+  }, [])
 
   const isMobileOrTablet = useIsMobileOrTablet(1024);
 
@@ -136,7 +165,7 @@ const Navbar = () => {
     return () => clearTimeout(timer);
   }, [keyword]);
 
-  
+
 
   // Location display text
   const locationText = shippingInfo
@@ -149,18 +178,19 @@ const Navbar = () => {
 
   return (
     <header
-    className="header"
-    style={{
-      backgroundImage: isMobileOrTablet
-        ? `linear-gradient(180deg, color-mix(in srgb, ${themeColor} 40%, white) 0%, white 60%)`
-        : undefined,
-      transition: 'background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
-      willChange: 'background-color',
-    }}
-  >
-  
+      className="header"
+      // style={{
+      //   backgroundImage: isMobileOrTablet
+      //     ? `linear-gradient(180deg, color-mix(in srgb, ${themeColor} 40%, white) 0%, white 60%)`
+      //     : undefined,
+      //   transition: 'background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
+      //   willChange: 'background-color',
+      // }}
+      ref={headerRef}
+    >
+
       <div className="header-inner">
-        
+
         {/* Logo */}
         <div className="header-logo">
           <Link to="/">

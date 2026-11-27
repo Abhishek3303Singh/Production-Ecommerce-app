@@ -334,9 +334,12 @@
 
 @media (max-width: 768px) {
   .header {
-    padding: 10px 12px;
-    background: white;
-  }
+    padding: 10px 12px 8px;
+    background-color: var(--hero-tint, #fff);
+    transition: background-color 0.35s ease;
+    top: calc(-1 * var(--header-collapse, 0px));
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
+}
 
   .header-inner {
     flex-wrap: wrap;
@@ -368,9 +371,10 @@
     align-self: flex-start;
     width: fit-content;
     width: 100%;
-    border: 1px solid gray;
+    /* border: 1px solid gray; */
     
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 30px;
   }
 
   .location-sub {

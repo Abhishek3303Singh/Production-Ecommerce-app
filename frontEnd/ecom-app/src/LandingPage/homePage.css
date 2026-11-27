@@ -463,10 +463,25 @@ html {
 
 @media screen and (max-width:768px) {
     .home-product-main-container {
-        background-color: rgb(213, 227, 235);
-        display: block;
+        position: relative;
+        isolation: isolate;
+        background-color: #f3f4f6;
     }
-
+    .home-product-main-container::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 340px;
+        z-index: -1;
+        pointer-events: none;
+        background-color: var(--hero-tint, #fff);
+        transition: background-color 0.35s ease;
+        -webkit-mask-image: linear-gradient(#000, transparent);
+        mask-image: linear-gradient(#000, transparent);
+    }
+    .sticker {
+         display: none;
+ }
     .image-silder {
         width: 100%;
         position: relative;
